@@ -19,18 +19,33 @@
 
 <style>
   :root{
-    --navy:#123354;
-    --navy-deep:#0A2138;
-    --paper:#FBF8F2;
-    --amber:#E0A458;
-    --amber-deep:#C6873B;
-    --teal:#3E8E82;
-    --ink:#22303C;
-    --muted:#66757F;
-    --line:#E7E1D2;
+    --navy:#1B4368;
+    --navy-deep:#0F2C48;
+    --paper:#FDFAF4;
+    --amber:#F0A94E;
+    --amber-deep:#D6873A;
+    --teal:#4FA79A;
+    --mint:#EAF3EE;
+    --ink:#28343F;
+    --muted:#6B7A85;
+    --line:#EDE6D6;
     --white:#FFFFFF;
-    --radius:14px;
+    --radius:16px;
   }
+  html[data-theme="dark"]{
+    --navy:#4FA0D9;
+    --navy-deep:#0B1622;
+    --paper:#0F1A24;
+    --amber:#F0A94E;
+    --amber-deep:#F5C27E;
+    --teal:#5FC2B3;
+    --mint:#132A24;
+    --ink:#E7EDF2;
+    --muted:#9AAAB6;
+    --line:#22323F;
+    --white:#16232F;
+  }
+  body{transition:background-color .35s ease, color .35s ease;}
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
@@ -43,24 +58,38 @@
     *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
   }
 
-  /* Scroll reveal */
-  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
-  .reveal.in-view{opacity:1; transform:translateY(0);}
-  .reveal-stagger.in-view > *{opacity:1; transform:translateY(0);}
-  .reveal-stagger > *{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  /* Scroll reveal — 3D tilt-in */
+  .reveal{
+    opacity:0; transform:perspective(1000px) translateY(30px) rotateX(6deg);
+    transform-origin:top center;
+    transition:opacity .8s cubic-bezier(.22,.9,.32,1), transform .8s cubic-bezier(.22,.9,.32,1);
+  }
+  .reveal.in-view{opacity:1; transform:perspective(1000px) translateY(0) rotateX(0deg);}
+  .reveal-stagger.in-view > *{opacity:1; transform:perspective(1000px) translateY(0) rotateX(0deg);}
+  .reveal-stagger > *{
+    opacity:0; transform:perspective(1000px) translateY(22px) rotateX(8deg);
+    transition:opacity .7s cubic-bezier(.22,.9,.32,1), transform .7s cubic-bezier(.22,.9,.32,1);
+  }
   .reveal-stagger.in-view > *:nth-child(1){transition-delay:.05s;}
   .reveal-stagger.in-view > *:nth-child(2){transition-delay:.14s;}
   .reveal-stagger.in-view > *:nth-child(3){transition-delay:.23s;}
   .reveal-stagger.in-view > *:nth-child(4){transition-delay:.32s;}
   .reveal-stagger.in-view > *:nth-child(5){transition-delay:.41s;}
 
+  /* 3D tilt on hover for cards */
+  .tilt{transform-style:preserve-3d; will-change:transform;}
+
   @keyframes floatIn{
     from{opacity:0; transform:translateY(18px);}
     to{opacity:1; transform:translateY(0);}
   }
   @keyframes gentlePulse{
-    0%,100%{box-shadow:0 0 0 0 rgba(224,164,88,.45);}
-    50%{box-shadow:0 0 0 10px rgba(224,164,88,0);}
+    0%,100%{box-shadow:0 0 0 0 rgba(240,169,78,.45);}
+    50%{box-shadow:0 0 0 10px rgba(240,169,78,0);}
+  }
+  @keyframes driftBlob{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(-16px,14px) scale(1.06);}
   }
   h1,h2,h3{font-family:'Fraunces', serif;}
   a{color:inherit; text-decoration:none;}
@@ -80,6 +109,12 @@
   .navlinks a:hover{color:var(--navy);}
   .nav-cta{background:var(--navy); color:var(--white); padding:9px 18px; border-radius:8px; font-size:.85rem; font-weight:600; transition:background-color .2s ease, transform .2s ease;}
   .nav-cta:hover{background:var(--amber-deep); transform:translateY(-1px);}
+  .theme-toggle{
+    margin-left:14px; width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
+    background:var(--white); cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center;
+    transition:transform .2s ease, background-color .2s ease;
+  }
+  .theme-toggle:hover{transform:translateY(-1px) rotate(15deg); background:var(--mint);}
   @media (max-width:720px){ .navlinks{display:none;} }
 
   /* Hero */
@@ -93,14 +128,16 @@
   .hero::before{
     content:"";
     position:absolute; top:-120px; right:-120px; width:420px; height:420px; border-radius:50%;
-    background:radial-gradient(circle, rgba(224,164,88,.20) 0%, rgba(224,164,88,0) 70%);
+    background:radial-gradient(circle, rgba(240,169,78,.22) 0%, rgba(240,169,78,0) 70%);
     pointer-events:none;
+    animation:driftBlob 9s ease-in-out infinite;
   }
   .hero::after{
     content:"";
     position:absolute; bottom:-160px; left:-100px; width:360px; height:360px; border-radius:50%;
-    background:radial-gradient(circle, rgba(62,142,130,.18) 0%, rgba(62,142,130,0) 70%);
+    background:radial-gradient(circle, rgba(79,167,154,.20) 0%, rgba(79,167,154,0) 70%);
     pointer-events:none;
+    animation:driftBlob 11s ease-in-out infinite reverse;
   }
   .hero-inner{display:grid; grid-template-columns:1fr 220px; gap:48px; align-items:center; position:relative; z-index:1;}
   @media (max-width:780px){ .hero-inner{grid-template-columns:1fr; text-align:center;} .hero-photo{order:-1; margin:0 auto;} }
@@ -110,8 +147,8 @@
     animation:floatIn .7s ease both;
   }
   .hero h1{font-size:2.5rem; font-weight:600; line-height:1.15; margin-bottom:14px; animation:floatIn .7s ease .08s both;}
-  .hero .role-line{font-size:1.05rem; color:#E8D7B8; font-weight:500; margin-bottom:18px; animation:floatIn .7s ease .16s both;}
-  .hero p.lede{color:#CBD8E1; max-width:560px; margin-bottom:28px; font-size:.98rem; animation:floatIn .7s ease .24s both;}
+  .hero .role-line{font-size:1.05rem; color:#F3DFB8; font-weight:500; margin-bottom:18px; animation:floatIn .7s ease .16s both;}
+  .hero p.lede{color:#D5E1E8; max-width:560px; margin-bottom:28px; font-size:.98rem; animation:floatIn .7s ease .24s both;}
   .btn-row{display:flex; gap:12px; flex-wrap:wrap; animation:floatIn .7s ease .32s both;}
   @media (max-width:780px){ .btn-row{justify-content:center;} }
   .btn{
@@ -206,7 +243,7 @@
   .contact .section-label{color:var(--amber);}
   .contact-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:start;}
   @media (max-width:780px){ .contact-grid{grid-template-columns:1fr;} }
-  .contact p.lede{color:#C7D2DB; max-width:480px; margin-bottom:24px;}
+  .contact p.lede{color:#D5E1E8; max-width:480px; margin-bottom:24px;}
   .contact-list{display:flex; flex-direction:column; gap:14px;}
   .contact-item{display:flex; align-items:center; gap:12px; font-size:.92rem;}
   .contact-item .ico{width:34px; height:34px; border-radius:50%; background:rgba(201,138,59,.18); display:flex; align-items:center; justify-content:center; color:var(--amber); font-size:.85rem; font-weight:700; flex-shrink:0;}
@@ -214,7 +251,7 @@
   .contact-card h3{font-size:1rem; margin-bottom:14px;}
 
   footer{background:var(--navy-deep); color:#8FA0AE; padding:24px 0; text-align:center; font-size:.8rem;}
-  footer a{color:#C7D2DB;}
+  footer a{color:#D5E1E8;}
 </style>
 </head>
 <body>
@@ -230,6 +267,7 @@
       <a href="#contact">Contact</a>
     </nav>
     <a href="#contact" class="nav-cta">Contact Me</a>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle light/dark mode">🌙</button>
   </div>
 </header>
 
@@ -271,7 +309,7 @@
       <p>Ready to contribute actively and available for placement anywhere in Indonesia.</p>
     </div>
     <div>
-      <div class="edu-card">
+      <div class="edu-card tilt">
         <h3>Universitas Mulawarman</h3>
         <div class="edu-meta">Faculty of Engineering · B.Sc. Information Systems (S.Kom)</div>
         <div class="edu-fact"><span>Enrolled</span><span>July 2019</span></div>
@@ -292,7 +330,7 @@
     <div class="section-label">Work Track Record</div>
     <h2 class="section-title">Professional Experience</h2>
 
-    <div class="xp-block">
+    <div class="xp-block tilt">
       <div class="xp-top">
         <div>
           <div class="xp-role">Software Implementation Consultant, Intern</div>
@@ -314,7 +352,7 @@
       </div>
     </div>
 
-    <div class="xp-block">
+    <div class="xp-block tilt">
       <div class="xp-top">
         <div>
           <div class="xp-role">Topography Surveyor, Freelance</div>
@@ -341,7 +379,7 @@
     <div class="section-label">Organization &amp; Management</div>
     <h2 class="section-title">Leadership Experience</h2>
     <div class="lead-grid">
-      <div class="lead-card">
+      <div class="lead-card tilt">
         <span class="xp-date">May 2023 – Present</span>
         <h3>Deputy Secretary</h3>
         <div class="org">Duta Damai Kalimantan Timur</div>
@@ -350,7 +388,7 @@
           <li>Informally coordinated team members and led internal meetings based on team consensus (non-structural role).</li>
         </ul>
       </div>
-      <div class="lead-card">
+      <div class="lead-card tilt">
         <span class="xp-date">Jan 2023 – Dec 2023</span>
         <h3>Chairperson</h3>
         <div class="org">Student Legislative Body (BLM), Universitas Mulawarman</div>
@@ -359,7 +397,7 @@
           <li>Oversaw BEM budget utilization and ensured financial transparency.</li>
         </ul>
       </div>
-      <div class="lead-card">
+      <div class="lead-card tilt">
         <span class="xp-date">Jan 2022 – Dec 2022</span>
         <h3>Deputy Chairperson</h3>
         <div class="org">Student Legislative Body (BLM), Universitas Mulawarman</div>
@@ -368,7 +406,7 @@
           <li>Led periodic performance evaluations of the student executive board (BEM).</li>
         </ul>
       </div>
-      <div class="lead-card">
+      <div class="lead-card tilt">
         <span class="xp-date">Jan 2022 – Jul 2023</span>
         <h3>Head of Cadre Development Bureau</h3>
         <div class="org">MP-MBKM Community, Universitas Mulawarman</div>
@@ -376,7 +414,7 @@
           <li>Ran capacity-building programs for a national education initiative.</li>
         </ul>
       </div>
-      <div class="lead-card">
+      <div class="lead-card tilt">
         <span class="xp-date">Jan 2021 – Dec 2021</span>
         <h3>Head of Public Relations Division</h3>
         <div class="org">Information Systems Student Association (INFORSA)</div>
@@ -394,7 +432,7 @@
     <h2 class="section-title">Skills &amp; Certifications</h2>
 
     <div class="skills-grid">
-      <div class="skill-card">
+      <div class="skill-card tilt">
         <h4>Information Systems &amp; ERP</h4>
         <div class="tag-row">
           <span class="tag">ERP Configuration</span>
@@ -403,7 +441,7 @@
           <span class="tag">FRD &amp; CR Documentation</span>
         </div>
       </div>
-      <div class="skill-card">
+      <div class="skill-card tilt">
         <h4>Research &amp; Data Analysis</h4>
         <div class="tag-row">
           <span class="tag">Quantitative Research</span>
@@ -411,7 +449,7 @@
           <span class="tag">EUCS Satisfaction Model</span>
         </div>
       </div>
-      <div class="skill-card">
+      <div class="skill-card tilt">
         <h4>Field &amp; Specialist Tools</h4>
         <div class="tag-row">
           <span class="tag">Field Data Collection</span>
@@ -467,20 +505,65 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    // Theme toggle (light/dark)
+    var root = document.documentElement;
+    var toggleBtn = document.getElementById('theme-toggle');
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initial = saved || (prefersDark ? 'dark' : 'light');
+    if (initial === 'dark') {
+      root.setAttribute('data-theme', 'dark');
+      if (toggleBtn) toggleBtn.textContent = '☀️';
+    }
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function () {
+        var isDark = root.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          root.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+          toggleBtn.textContent = '🌙';
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+          toggleBtn.textContent = '☀️';
+        }
+      });
+    }
+
     var revealEls = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
       revealEls.forEach(function (el) { el.classList.add('in-view'); });
-      return;
+    } else {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(function (el) { observer.observe(el); });
     }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
+
+    // Lightweight 3D tilt-on-hover for cards (skip on touch devices)
+    var isTouch = window.matchMedia('(hover: none)').matches;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!isTouch && !reduceMotion) {
+      document.querySelectorAll('.tilt').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width;
+          var py = (e.clientY - r.top) / r.height;
+          var rotateY = (px - 0.5) * 8;
+          var rotateX = (0.5 - py) * 8;
+          card.style.transform = 'perspective(900px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', function () {
+          card.style.transform = '';
+        });
       });
-    }, { threshold: 0.15 });
-    revealEls.forEach(function (el) { observer.observe(el); });
+    }
   });
 </script>
 </body>
