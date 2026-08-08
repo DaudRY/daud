@@ -1,676 +1,368 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daud Rio Yurdanus, S.Kom | Information Systems & ERP Specialist</title>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daud Rio Yurdanus | Information Systems & ERP Specialist</title>
+<style>
+  :root{
+    --bg:#0f1720;
+    --bg-alt:#141f2b;
+    --card:#182534;
+    --line:rgba(255,255,255,0.08);
+    --text:#e8edf3;
+    --text-dim:#9fb0c2;
+    --accent:#3fa9f5;
+    --accent-soft:rgba(63,169,245,0.12);
+    --font-display: 'Georgia', 'Times New Roman', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+  }
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .container{max-width:960px; margin:0 auto; padding:0 24px;}
 
-    <!-- Tailwind Custom Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: {
-                            50: '#f0f4f8',
-                            100: '#d9e2ec',
-                            700: '#1e3a8a',
-                            800: '#0f2942',
-                            900: '#0b192c',
-                            950: '#050c18',
-                        },
-                        slateBg: '#f8fafc',
-                        greyBorder: '#e2e8f0'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #0b192c 0%, #1e3a8a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,23,32,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .container{display:flex; align-items:center; justify-content:space-between; padding:14px 24px;}
+  .nav-brand{font-family:var(--font-display); font-size:1.05rem; font-weight:700; letter-spacing:0.3px;}
+  .nav-links{display:flex; gap:24px; list-style:none; font-size:0.92rem;}
+  .nav-links a{color:var(--text-dim);}
+  .nav-links a:hover{color:var(--accent); text-decoration:none;}
+  .nav-cta{
+    background:var(--accent); color:#0b1420; padding:8px 16px; border-radius:6px;
+    font-size:0.88rem; font-weight:600;
+  }
+  .nav-cta:hover{opacity:0.9; text-decoration:none;}
+
+  /* HERO */
+  header.hero{padding:88px 0 64px; border-bottom:1px solid var(--line);}
+  .badge{
+    display:inline-block; font-size:0.78rem; color:var(--accent);
+    background:var(--accent-soft); border:1px solid rgba(63,169,245,0.3);
+    padding:5px 12px; border-radius:20px; margin-bottom:20px;
+  }
+  h1{font-family:var(--font-display); font-size:2.6rem; font-weight:700; line-height:1.15; margin-bottom:14px;}
+  .tagline{font-size:1.1rem; color:var(--text-dim); font-style:italic; margin-bottom:22px; max-width:640px;}
+  .lede{color:var(--text-dim); max-width:640px; margin-bottom:28px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:34px;}
+  .btn-primary{background:var(--accent); color:#0b1420; padding:12px 22px; border-radius:6px; font-weight:600; font-size:0.94rem;}
+  .btn-primary:hover{opacity:0.9; text-decoration:none;}
+  .btn-secondary{border:1px solid var(--line); color:var(--text); padding:12px 22px; border-radius:6px; font-size:0.94rem;}
+  .btn-secondary:hover{border-color:var(--accent); text-decoration:none;}
+  .contact-row{display:flex; gap:22px; flex-wrap:wrap; font-size:0.9rem; color:var(--text-dim);}
+
+  /* STATS */
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin:56px 0;}
+  .stat{background:var(--bg); padding:26px 20px; text-align:center;}
+  .stat .num{font-family:var(--font-display); font-size:2rem; color:var(--accent); font-weight:700;}
+  .stat .label{font-size:0.82rem; color:var(--text-dim); margin-top:4px;}
+
+  section{padding:56px 0;}
+  .section-eyebrow{font-size:0.78rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent); margin-bottom:8px;}
+  .section-title{font-family:var(--font-display); font-size:1.7rem; margin-bottom:32px;}
+
+  /* SUMMARY / EDUCATION */
+  .summary-text{color:var(--text-dim); max-width:700px; margin-bottom:30px;}
+  .edu-card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:26px; margin-bottom:16px;
+  }
+  .edu-card h3{font-family:var(--font-display); font-size:1.15rem; margin-bottom:4px;}
+  .edu-meta{color:var(--text-dim); font-size:0.88rem; margin-bottom:14px;}
+  .thesis-label{font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--accent); margin-top:14px; margin-bottom:4px;}
+  .thesis-text{font-size:0.92rem; color:var(--text-dim);}
+
+  /* EXPERIENCE */
+  .exp-item{
+    border-left:2px solid var(--line); padding-left:24px; margin-bottom:40px; position:relative;
+  }
+  .exp-item::before{
+    content:''; position:absolute; left:-7px; top:4px; width:12px; height:12px;
+    border-radius:50%; background:var(--accent);
+  }
+  .exp-tag{font-size:0.76rem; text-transform:uppercase; letter-spacing:1px; color:var(--accent); margin-bottom:6px;}
+  .exp-item h3{font-family:var(--font-display); font-size:1.2rem;}
+  .exp-org{color:var(--text-dim); font-size:0.92rem; margin-bottom:2px;}
+  .exp-date{color:var(--text-dim); font-size:0.85rem; margin-bottom:14px;}
+  .exp-item ul{list-style:none; margin-bottom:16px;}
+  .exp-item li{position:relative; padding-left:18px; margin-bottom:9px; color:#d3dce5; font-size:0.94rem;}
+  .exp-item li::before{content:'—'; position:absolute; left:0; color:var(--accent);}
+  .pill-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{
+    font-size:0.76rem; background:var(--bg-alt); border:1px solid var(--line);
+    padding:5px 12px; border-radius:14px; color:var(--text-dim);
+  }
+
+  /* LEADERSHIP */
+  .lead-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:640px){.lead-grid{grid-template-columns:1fr;}}
+  .lead-card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:22px;}
+  .lead-date{font-size:0.76rem; color:var(--accent); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;}
+  .lead-card h4{font-family:var(--font-display); font-size:1.05rem; margin-bottom:2px;}
+  .lead-org{color:var(--text-dim); font-size:0.86rem; margin-bottom:10px;}
+  .lead-card ul{list-style:none;}
+  .lead-card li{position:relative; padding-left:16px; margin-bottom:6px; font-size:0.88rem; color:#c7d2dc;}
+  .lead-card li::before{content:'·'; position:absolute; left:0; color:var(--accent); font-weight:700;}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:32px;}
+  @media (max-width:640px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:22px;}
+  .skill-card h4{font-size:0.82rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--accent); margin-bottom:12px;}
+  .skill-card .pill-row .pill{background:var(--bg);}
+  .lang-row{color:var(--text-dim); font-size:0.92rem; margin-bottom:28px;}
+  .lang-row b{color:var(--text);}
+
+  .cert-list{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:640px){.cert-list{grid-template-columns:1fr;}}
+  .cert-item{border:1px solid var(--line); border-radius:8px; padding:18px; background:var(--bg-alt);}
+  .cert-item .org-year{font-size:0.78rem; color:var(--text-dim); margin-bottom:4px;}
+  .cert-item h5{font-size:0.95rem; font-family:var(--font-display);}
+
+  /* CONTACT */
+  footer{border-top:1px solid var(--line); padding:56px 0 32px;}
+  .contact-title{font-family:var(--font-display); font-size:1.8rem; margin-bottom:12px;}
+  .contact-sub{color:var(--text-dim); max-width:560px; margin-bottom:30px;}
+  .contact-cards{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:40px;}
+  .contact-card{
+    flex:1; min-width:200px; background:var(--card); border:1px solid var(--line);
+    border-radius:10px; padding:18px;
+  }
+  .contact-card .k{font-size:0.76rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;}
+  .contact-card .v{font-size:0.94rem;}
+  .footer-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.82rem; color:var(--text-dim); padding-top:24px; border-top:1px solid var(--line);}
+</style>
 </head>
-<body class="bg-slateBg text-slate-800 font-sans antialiased selection:bg-navy-900 selection:text-white">
+<body>
 
-    <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-slate-200 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#hero" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-navy-900 text-white flex items-center justify-center font-bold text-lg shadow-md group-hover:bg-blue-700 transition-colors">
-                    DY
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-bold text-navy-900 text-lg leading-tight tracking-tight">Daud Yurdanus</span>
-                    <span class="text-xs text-slate-500 font-medium">S.Kom | Info Systems</span>
-                </div>
-            </a>
+<nav>
+  <div class="container">
+    <div class="nav-brand">Daud Rio Yurdanus</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Contact Me</a>
+  </div>
+</nav>
 
-            <!-- Desktop Navigation Links -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
-                <a href="#about" class="hover:text-navy-900 transition-colors">About</a>
-                <a href="#experience" class="hover:text-navy-900 transition-colors">Experience</a>
-                <a href="#leadership" class="hover:text-navy-900 transition-colors">Leadership</a>
-                <a href="#skills" class="hover:text-navy-900 transition-colors">Skills</a>
-                <a href="#contact" class="hover:text-navy-900 transition-colors">Contact</a>
-            </nav>
+<header class="hero container" id="hero">
+  <span class="badge">Available for Placement Across Indonesia</span>
+  <h1>Daud Rio Yurdanus</h1>
+  <p class="tagline">"Connecting Business Processes, ERP System Implementation & Data-Driven Strategic Decisions."</p>
+  <p class="lede">Information Systems graduate (GPA 3.80/4.00) from Universitas Mulawarman with ERP implementation and field survey experience, and a proven track record leading university-level student organizations.</p>
+  <div class="hero-actions">
+    <a href="#experience" class="btn-primary">View Experience</a>
+    <a href="#contact" class="btn-secondary">Contact Me</a>
+  </div>
+  <div class="contact-row">
+    <span>📍 Samarinda, East Kalimantan, Indonesia</span>
+    <span>📞 +62 895-1624-7282</span>
+    <a href="https://linkedin.com/in/daudyurdanus-503660229" target="_blank">LinkedIn Profile</a>
+  </div>
+</header>
 
-            <!-- CTA Button & Mobile Toggle -->
-            <div class="flex items-center gap-4">
-                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 bg-navy-900 hover:bg-navy-800 text-white px-5 py-2.5 rounded-lg font-medium text-sm transition-all shadow-sm hover:shadow-md">
-                    <span>Contact Me</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
-                
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-navy-900 hover:bg-slate-100 focus:outline-none">
-                    <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
-                </button>
-            </div>
-        </div>
+<div class="container">
+  <div class="stats">
+    <div class="stat"><div class="num">3.80</div><div class="label">GPA</div></div>
+    <div class="stat"><div class="num">5+</div><div class="label">ERP Modules Configured</div></div>
+    <div class="stat"><div class="num">9</div><div class="label">Client Engagements</div></div>
+    <div class="stat"><div class="num">18+</div><div class="label">Months of Topography Survey</div></div>
+  </div>
+</div>
 
-        <!-- Mobile Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3">
-            <a href="#about" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-navy-900 hover:bg-slate-50">About Me</a>
-            <a href="#experience" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-navy-900 hover:bg-slate-50">Work Experience</a>
-            <a href="#leadership" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-navy-900 hover:bg-slate-50">Organization & Leadership</a>
-            <a href="#skills" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-navy-900 hover:bg-slate-50">Skills & Certifications</a>
-            <a href="#contact" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-navy-900 font-semibold bg-slate-100">Contact Me</a>
-        </div>
-    </header>
+<section id="about" class="container">
+  <div class="section-eyebrow">Professional Profile</div>
+  <h2 class="section-title">About Me & Education</h2>
+  <p class="summary-text">Information Systems graduate (GPA 3.80/4.00) with ERP implementation and field survey experience, and a proven track record of student leadership. Open to placement anywhere in Indonesia.</p>
 
-    <main class="pt-20">
-        <!-- Hero Section -->
-        <section id="hero" class="relative py-20 lg:py-28 bg-gradient-to-b from-white to-slateBg border-b border-slate-200/80 overflow-hidden">
-            <!-- Subtle Decorative Circles -->
-            <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute bottom-0 left-10 w-72 h-72 bg-slate-200/40 rounded-full blur-2xl pointer-events-none"></div>
+  <div class="edu-card">
+    <h3>Universitas Mulawarman</h3>
+    <div class="edu-meta">Faculty of Engineering | Bachelor of Computer Science (S.Kom), Information Systems &nbsp;·&nbsp; Jul 2019 – May 2026 &nbsp;·&nbsp; GPA: 3.80/4.00</div>
+    <div class="thesis-label">Thesis</div>
+    <div class="thesis-text">"A Study of E-OFFICE User Satisfaction Using the EUCS (End-User Computing Satisfaction) Method" — quantitative statistical testing with SPSS across a total of n = 70 active system users.</div>
+  </div>
+</section>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    
-                    <!-- Text Content -->
-                    <div class="lg:col-span-7 space-y-6">
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-navy-50 border border-navy-100 text-navy-900 text-xs font-semibold uppercase tracking-wider">
-                            <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                            Available for Placement Across Indonesia
-                        </div>
-                        
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy-900 tracking-tight leading-none">
-                            Daud Rio Yurdanus, <span class="text-slate-500 font-medium text-3xl sm:text-4xl block mt-2">S.Kom</span>
-                        </h1>
-                        
-                        <p class="text-xl sm:text-2xl font-semibold text-slate-700 leading-snug">
-                            "Connecting Business Processes, ERP System Implementation & Data-Driven Strategic Decisions."
-                        </p>
-                        
-                        <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
-                            Information Systems graduate (awaiting graduation) from Universitas Mulawarman (GPA 3.80/4.00) with experience implementing enterprise ERP modules, quantitative analysis, and field topography mapping. Proven track record leading university-level student organizations.
-                        </p>
+<section id="experience" class="container">
+  <div class="section-eyebrow">Work Track Record</div>
+  <h2 class="section-title">Professional Experience</h2>
 
-                        <!-- CTA Buttons -->
-                        <div class="flex flex-wrap items-center gap-4 pt-2">
-                            <a href="#experience" class="bg-navy-900 hover:bg-navy-800 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-md hover:shadow-lg flex items-center gap-2">
-                                <i data-lucide="briefcase" class="w-4 h-4"></i>
-                                View Experience
-                            </a>
-                            <a href="#contact" class="bg-white border border-slate-300 hover:border-navy-900 hover:text-navy-900 text-slate-700 px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-sm flex items-center gap-2">
-                                <i data-lucide="mail" class="w-4 h-4"></i>
-                                Contact Me
-                            </a>
-                        </div>
+  <div class="exp-item">
+    <div class="exp-tag">ERP & Tech Consulting</div>
+    <h3>Software Implementation Consultant, Intern</h3>
+    <div class="exp-org">PT Hashmicro Solusi Indonesia</div>
+    <div class="exp-date">August – December 2022</div>
+    <ul>
+      <li>Configured 5 ERP modules (Sales, Purchase, Inventory, POS, and Accounting) across 9 client engagements, including leading brands such as Motul and Yokohama, delivering each implementation on time to client satisfaction.</li>
+      <li>Authored FRD (Functional Requirement Document) addenda across 4 modules — Purchase, Accounting, POS, and Inventory — for Jakarta Fruit Market alone, plus Change Request (CR) documentation for other clients.</li>
+      <li>Built and executed UAT (User Acceptance Testing) checklists, flagging an average of 1–3 defects per module for same-day developer escalation.</li>
+      <li>Tested HR Training and Vendor Payment Report features for TheWokPeople, and authored a general Accounting Manual Guide.</li>
+    </ul>
+    <div class="pill-row">
+      <span class="pill">ERP Configuration</span>
+      <span class="pill">UAT Execution</span>
+      <span class="pill">Business Process Mapping</span>
+      <span class="pill">FRD/CR Documentation</span>
+    </div>
+  </div>
 
-                        <!-- Direct Contact Pills -->
-                        <div class="pt-4 flex flex-wrap gap-4 text-xs font-medium text-slate-600">
-                            <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
-                                <i data-lucide="map-pin" class="w-4 h-4 text-blue-600"></i>
-                                Samarinda, East Kalimantan
-                            </div>
-                            <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
-                                <i data-lucide="phone" class="w-4 h-4 text-blue-600"></i>
-                                +62 895-1624-7282
-                            </div>
-                            <a href="https://linkedin.com/in/daudyurdanus-503660229" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200 hover:text-blue-700 transition-colors">
-                                <i data-lucide="linkedin" class="w-4 h-4 text-blue-600"></i>
-                                LinkedIn Profile
-                            </a>
-                        </div>
-                    </div>
+  <div class="exp-item">
+    <div class="exp-tag">Surveying & Spatial Data</div>
+    <h3>Topography Surveyor, Freelance</h3>
+    <div class="exp-org">CV Hanata, Surveying & Mapping Services</div>
+    <div class="exp-date">February 2024 – July 2025</div>
+    <ul>
+      <li>Surveyed infrastructure and mining-concession sites over 18 months.</li>
+      <li>Delivered precision contour maps and technical reports for civil engineering planning use.</li>
+    </ul>
+    <div class="pill-row">
+      <span class="pill">Field Data Collection</span>
+      <span class="pill">Contour Mapping</span>
+      <span class="pill">Technical Reporting</span>
+    </div>
+  </div>
+</section>
 
-                    <!-- Hero Quick Stats Card -->
-                    <div class="lg:col-span-5">
-                        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xl shadow-slate-200/50 space-y-6">
-                            <div class="border-b border-slate-100 pb-4">
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Key Overview</span>
-                                <h2 class="text-xl font-bold text-navy-900 mt-1">Key Qualifications</h2>
-                            </div>
+<section id="leadership" class="container">
+  <div class="section-eyebrow">Organization & Management</div>
+  <h2 class="section-title">Leadership Experience</h2>
 
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                                    <div class="text-3xl font-extrabold text-navy-900">3.80</div>
-                                    <div class="text-xs font-medium text-slate-500 mt-1">GPA (S.Kom)</div>
-                                </div>
-                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                                    <div class="text-3xl font-extrabold text-navy-900">5+</div>
-                                    <div class="text-xs font-medium text-slate-500 mt-1">ERP Modules Configured</div>
-                                </div>
-                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                                    <div class="text-3xl font-extrabold text-navy-900">9</div>
-                                    <div class="text-xs font-medium text-slate-500 mt-1">Enterprise ERP Projects</div>
-                                </div>
-                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                                    <div class="text-3xl font-extrabold text-navy-900">18+</div>
-                                    <div class="text-xs font-medium text-slate-500 mt-1">Months of Topography Survey</div>
-                                </div>
-                            </div>
+  <div class="lead-grid">
+    <div class="lead-card">
+      <div class="lead-date">May 2023 – Present</div>
+      <h4>Deputy Secretary</h4>
+      <div class="lead-org">Duta Damai Kalimantan Timur</div>
+      <ul>
+        <li>Documented meeting minutes, activity permits, and event proposals.</li>
+        <li>Coordinated internal meetings and members as de facto daily chair since 2026.</li>
+      </ul>
+    </div>
 
-                            <div class="p-4 rounded-xl bg-navy-900 text-white space-y-2">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-300">
-                                    <span>Core Competency</span>
-                                    <span class="text-blue-400">ERP & Management</span>
-                                </div>
-                                <p class="text-xs text-slate-300 leading-relaxed">
-                                    Hashmicro ERP (Sales, Purchase, Inventory, POS, Accounting), UAT Checklist, FRD Addenda, SPSS EUCS Analytics.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+    <div class="lead-card">
+      <div class="lead-date">Jan – Dec 2023</div>
+      <h4>Chairperson</h4>
+      <div class="lead-org">Student Legislative Body (BLM), Universitas Mulawarman</div>
+      <ul>
+        <li>Led governance reform for the full student body.</li>
+        <li>Oversaw BEM budget utilization and transparency.</li>
+      </ul>
+    </div>
 
-                </div>
-            </div>
-        </section>
+    <div class="lead-card">
+      <div class="lead-date">Jan – Dec 2022</div>
+      <h4>Deputy Chairperson</h4>
+      <div class="lead-org">Student Legislative Body (BLM), Universitas Mulawarman</div>
+      <ul>
+        <li>Coordinated board members and led BEM performance evaluations.</li>
+      </ul>
+    </div>
 
-        <!-- About Me & Education Section -->
-        <section id="about" class="py-20 bg-white border-b border-slate-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-blue-700 mb-2">Professional Profile</h2>
-                    <p class="text-3xl font-extrabold text-navy-900 sm:text-4xl">About Me & Education</p>
-                    <div class="w-12 h-1 bg-navy-900 mx-auto mt-4 rounded-full"></div>
-                </div>
+    <div class="lead-card">
+      <div class="lead-date">Jan 2022 – Jul 2023</div>
+      <h4>Head of Cadre Development Bureau</h4>
+      <div class="lead-org">MP-MBKM Community, Universitas Mulawarman</div>
+      <ul>
+        <li>Ran capacity-building programs for a national education initiative.</li>
+      </ul>
+    </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                    <!-- Bio Overview -->
-                    <div class="lg:col-span-6 space-y-6">
-                        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 space-y-4">
-                            <h3 class="text-xl font-bold text-navy-900 flex items-center gap-2">
-                                <i data-lucide="user" class="w-5 h-5 text-blue-700"></i>
-                                Executive Summary
-                            </h3>
-                            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-                                I am a Bachelor of Computer Science (S.Kom) candidate majoring in Information Systems at Universitas Mulawarman, currently awaiting graduation. I bring a unique combination of technical expertise in enterprise systems (ERP), quantitative analysis skills, and a deep understanding of operational field surveying.
-                            </p>
-                            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-                                Throughout my academic and early professional career, I have handled multiple ERP implementation cycles for national-scale clients, prepared technical documentation (FRD & CR), led UAT testing, and chaired the university's student legislative body.
-                            </p>
-                            <div class="pt-2 flex items-center gap-2 text-xs font-semibold text-navy-900">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
-                                Ready to contribute actively and available for placement anywhere in Indonesia.
-                            </div>
-                        </div>
-                    </div>
+    <div class="lead-card">
+      <div class="lead-date">Jan – Dec 2021</div>
+      <h4>Head of Public Relations Division</h4>
+      <div class="lead-org">Information System Association (INFORSA)</div>
+      <ul>
+        <li>Directed public communication and external stakeholder liaison.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-                    <!-- Education Details -->
-                    <div class="lg:col-span-6 space-y-6">
-                        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-                            <div class="flex items-start justify-between border-b border-slate-100 pb-4">
-                                <div>
-                                    <span class="text-xs font-bold text-blue-700 uppercase tracking-wider">Formal Education</span>
-                                    <h3 class="text-xl font-bold text-navy-900 mt-1">Universitas Mulawarman</h3>
-                                    <p class="text-sm font-medium text-slate-600">Faculty of Engineering | B.Sc. Information Systems (S.Kom)</p>
-                                </div>
-                                <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">
-                                    Jul 2019 – Awaiting Graduation
-                                </span>
-                            </div>
+<section id="skills" class="container">
+  <div class="section-eyebrow">Technical Competencies</div>
+  <h2 class="section-title">Skills & Certifications</h2>
 
-                            <div class="space-y-3">
-                                <div class="flex items-center justify-between text-sm">
-                                    <span class="text-slate-500 font-medium">Cumulative GPA:</span>
-                                    <span class="font-extrabold text-navy-900 bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg border border-emerald-200">
-                                        3.80 / 4.00
-                                    </span>
-                                </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h4>Information Systems & ERP</h4>
+      <div class="pill-row">
+        <span class="pill">ERP Configuration</span>
+        <span class="pill">Business Process Mapping</span>
+        <span class="pill">UAT Execution</span>
+        <span class="pill">FRD & CR Documentation</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Research & Data Analysis</h4>
+      <div class="pill-row">
+        <span class="pill">Quantitative Research</span>
+        <span class="pill">Statistical Testing (SPSS)</span>
+        <span class="pill">EUCS Satisfaction Model</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Field & Specialist Tools</h4>
+      <div class="pill-row">
+        <span class="pill">Field Data Collection</span>
+        <span class="pill">Topography Surveying</span>
+        <span class="pill">Microsoft Office Suite</span>
+      </div>
+    </div>
+  </div>
 
-                                <!-- Thesis Box -->
-                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2">
-                                    <div class="flex items-center gap-2 text-xs font-bold text-navy-900 uppercase tracking-wider">
-                                        <i data-lucide="file-text" class="w-4 h-4 text-blue-600"></i>
-                                        Thesis / Research Thesis
-                                    </div>
-                                    <p class="text-xs sm:text-sm text-slate-700 font-medium italic">
-                                        "A Study of E-OFFICE User Satisfaction Using the EUCS (End-User Computing Satisfaction) Method"
-                                    </p>
-                                    <p class="text-xs text-slate-500 leading-relaxed">
-                                        • Used quantitative statistical testing with SPSS across a total of n=70 active system users.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="lang-row"><b>Languages:</b> Indonesian (Native) &nbsp;·&nbsp; English</div>
 
-        <!-- Experience & Projects Section -->
-        <section id="experience" class="py-20 bg-slateBg border-b border-slate-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-blue-700 mb-2">Work Track Record</h2>
-                    <p class="text-3xl font-extrabold text-navy-900 sm:text-4xl">Professional Experience</p>
-                    <div class="w-12 h-1 bg-navy-900 mx-auto mt-4 rounded-full"></div>
-                </div>
+  <div class="cert-list">
+    <div class="cert-item">
+      <div class="org-year">Ministry of Communication and Information (Kominfo RI) — 2022</div>
+      <h5>Basic Cyber Security for the Healthcare Sector</h5>
+    </div>
+    <div class="cert-item">
+      <div class="org-year">UPT Language Center, Universitas Mulawarman — 2026</div>
+      <h5>TOEFL Equivalent Test</h5>
+    </div>
+  </div>
+</section>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    
-                    <!-- Card 1: PT Hashmicro Solusi Indonesia -->
-                    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-6">
-                        <div class="space-y-4">
-                            <div class="flex items-start justify-between flex-wrap gap-2">
-                                <div>
-                                    <span class="inline-block px-2.5 py-1 rounded-md bg-blue-50 text-blue-800 font-bold text-xs mb-2">
-                                        ERP & Tech Consulting
-                                    </span>
-                                    <h3 class="text-xl font-bold text-navy-900">Software Implementation Consultant</h3>
-                                    <p class="text-sm font-semibold text-slate-600">PT Hashmicro Solusi Indonesia (Intern)</p>
-                                </div>
-                                <span class="text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                                    August – December 2022
-                                </span>
-                            </div>
+<footer id="contact" class="container">
+  <div class="section-eyebrow">Let's Connect</div>
+  <h2 class="contact-title">Contact Me</h2>
+  <p class="contact-sub">Open to career opportunities, system implementation consulting, and project discussions across Indonesia.</p>
 
-                            <p class="text-sm text-slate-600 leading-relaxed">
-                                Guided enterprise clients through the adoption and customization of an integrated ERP system to optimize business operational efficiency.
-                            </p>
+  <div class="contact-cards">
+    <div class="contact-card">
+      <div class="k">Primary Email</div>
+      <div class="v"><a href="mailto:daudrioyurdanus@gmail.com">daudrioyurdanus@gmail.com</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="k">Phone / WhatsApp</div>
+      <div class="v"><a href="https://wa.me/6289516247282">+62 895-1624-7282</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="k">LinkedIn Profile</div>
+      <div class="v"><a href="https://linkedin.com/in/daudyurdanus-503660229" target="_blank">linkedin.com/in/daudyurdanus-503660229</a></div>
+    </div>
+  </div>
 
-                            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700">
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
-                                    <span>Configured <strong>5 core ERP modules</strong> (Sales, Purchase, Inventory, POS, & Accounting) across 9 client project engagements, including leading brands such as <strong>Motul</strong> and <strong>Yokohama</strong>.</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
-                                    <span>Prepared <strong>FRD (Functional Requirement Document)</strong> addenda and <em>Change Request (CR)</em> documentation per client customization requirements.</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
-                                    <span>Prepared and executed cross-module <strong>UAT (User Acceptance Testing)</strong> checklists ahead of system go-live.</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
-                                    <span>Trained end-users, maintained the manual book, and managed vendor payment reporting.</span>
-                                </li>
-                            </ul>
-                        </div>
+  <div class="footer-bottom">
+    <span>© 2026 Daud Rio Yurdanus. All rights reserved.</span>
+    <span>Samarinda, East Kalimantan, Indonesia</span>
+  </div>
+</footer>
 
-                        <div class="pt-4 border-t border-slate-100 flex flex-wrap gap-2">
-                            <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-600 text-xs font-medium">ERP Configuration</span>
-                            <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-600 text-xs font-medium">UAT Testing</span>
-                            <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-600 text-xs font-medium">Business Process Mapping</span>
-                            <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-600 text-xs font-medium">FRD Documentation</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: CV Hanata -->
-                    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-6">
-                        <div class="space-y-4">
-                            <div class="flex items-start justify-between flex-wrap gap-2">
-                                <div>
-                                    <span class="inline-block px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 font-bold text-xs mb-2">
-                                        Surveying & Spatial Data
-                                    </span>
-                                    <h3 class="text-xl font-bold text-navy-900">Topography Surveyor</h3>
-                                    <p class="text-sm font-semibold text-slate-600">CV Hanata (Surveying & Mapping Services) — Freelance</p>
-                                </div>
-                                <span class="text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                                    February 2024 – July 2025
-                                </span>
-                            </div>
-
-                            <p class="text-sm text-slate-600 leading-relaxed">
-                                Fully responsible for technical field spatial data collection for infrastructure and mining concession projects over 18 months.
-                            </p>
-
-                            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700">
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
-                                    <span>Conducted geospatial and terrain contour surveys across commercial infrastructure areas and mining concessions.</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
-                                    <span>Processed raw field data into <strong>precision contour maps</strong> and technical reports for civil engineering planning.</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
-                                    <span>Ensured coordinate point and elevation accuracy in compliance with geodesy/mapping regulatory standards.</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="pt-4 border-t border-slate-100 flex flex-wrap gap-2">
-                            <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-600 text-xs font-medium">Field Data Collection</span>
-                            <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-600 text-xs font-medium">Contour Mapping</span>
-                            <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-600 text-xs font-medium">Technical Reporting</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Leadership & Organization Section -->
-        <section id="leadership" class="py-20 bg-white border-b border-slate-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-blue-700 mb-2">Organization & Management</h2>
-                    <p class="text-3xl font-extrabold text-navy-900 sm:text-4xl">Leadership Experience</p>
-                    <div class="w-12 h-1 bg-navy-900 mx-auto mt-4 rounded-full"></div>
-                </div>
-
-                <!-- Leadership Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <!-- Role 1 -->
-                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900 transition-all space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded">2023 – Present</span>
-                            <i data-lucide="shield-check" class="w-5 h-5 text-navy-900"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-navy-900">Vice Secretary</h3>
-                        <p class="text-xs font-semibold text-slate-600">Duta Damai East Kalimantan</p>
-                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside pt-2">
-                            <li>Documented meeting minutes, activity permits, and program proposals.</li>
-                            <li>Led internal meetings and coordinated members as <em>de facto daily chair</em> since 2026.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Role 2 -->
-                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900 transition-all space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded">Jan – Dec 2023</span>
-                            <i data-lucide="award" class="w-5 h-5 text-navy-900"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-navy-900">Chairperson</h3>
-                        <p class="text-xs font-semibold text-slate-600">Student Legislative Body (BLM) UNMUL</p>
-                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside pt-2">
-                            <li>Led governance reform across the entire university-level student body.</li>
-                            <li>Oversaw student executive board (BEM) budget usage and ensured financial transparency.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Role 3 -->
-                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900 transition-all space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded">Jan – Dec 2022</span>
-                            <i data-lucide="users" class="w-5 h-5 text-navy-900"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-navy-900">Vice Chairperson</h3>
-                        <p class="text-xs font-semibold text-slate-600">Student Legislative Body (BLM) UNMUL</p>
-                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside pt-2">
-                            <li>Coordinated the daily leadership team of the legislative body.</li>
-                            <li>Led periodic performance evaluations of the student executive board (BEM).</li>
-                        </ul>
-                    </div>
-
-                    <!-- Role 4 -->
-                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900 transition-all space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded">Jan 2022 – Jul 2023</span>
-                            <i data-lucide="target" class="w-5 h-5 text-navy-900"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-navy-900">Head of Cadre Development Bureau</h3>
-                        <p class="text-xs font-semibold text-slate-600">MP-MBKM Community, Universitas Mulawarman</p>
-                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside pt-2">
-                            <li>Ran capacity-building programs for national education initiatives.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Role 5 -->
-                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900 transition-all space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded">Jan – Dec 2021</span>
-                            <i data-lucide="megaphone" class="w-5 h-5 text-navy-900"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-navy-900">Head of Public Relations Division</h3>
-                        <p class="text-xs font-semibold text-slate-600">Information Systems Student Association (INFORSA)</p>
-                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside pt-2">
-                            <li>Directed public communication strategy and external stakeholder relations.</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills & Certifications Section -->
-        <section id="skills" class="py-20 bg-slateBg border-b border-slate-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-blue-700 mb-2">Technical Competencies</h2>
-                    <p class="text-3xl font-extrabold text-navy-900 sm:text-4xl">Skills & Certifications</p>
-                    <div class="w-12 h-1 bg-navy-900 mx-auto mt-4 rounded-full"></div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                    
-                    <!-- Skills Badges Column -->
-                    <div class="lg:col-span-7 space-y-8">
-                        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-                            <h3 class="text-xl font-bold text-navy-900 flex items-center gap-2">
-                                <i data-lucide="cpu" class="w-5 h-5 text-blue-700"></i>
-                                Technical & Functional Expertise
-                            </h3>
-
-                            <!-- Category 1 -->
-                            <div class="space-y-3">
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Information Systems & ERP</span>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1.5 rounded-lg bg-navy-900 text-white font-medium text-xs sm:text-sm">ERP Configuration</span>
-                                    <span class="px-3 py-1.5 rounded-lg bg-navy-900 text-white font-medium text-xs sm:text-sm">Business Process Mapping</span>
-                                    <span class="px-3 py-1.5 rounded-lg bg-navy-900 text-white font-medium text-xs sm:text-sm">UAT Execution</span>
-                                    <span class="px-3 py-1.5 rounded-lg bg-navy-900 text-white font-medium text-xs sm:text-sm">FRD & CR Documentation</span>
-                                </div>
-                            </div>
-
-                            <!-- Category 2 -->
-                            <div class="space-y-3">
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Research & Data Analysis</span>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1.5 rounded-lg bg-blue-700 text-white font-medium text-xs sm:text-sm">Quantitative Research</span>
-                                    <span class="px-3 py-1.5 rounded-lg bg-blue-700 text-white font-medium text-xs sm:text-sm">Statistical Testing (SPSS)</span>
-                                    <span class="px-3 py-1.5 rounded-lg bg-blue-700 text-white font-medium text-xs sm:text-sm">EUCS Satisfaction Model</span>
-                                </div>
-                            </div>
-
-                            <!-- Category 3 -->
-                            <div class="space-y-3">
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Field & Specialist Tools</span>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-800 border border-slate-200 font-medium text-xs sm:text-sm">Field Data Collection</span>
-                                    <span class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-800 border border-slate-200 font-medium text-xs sm:text-sm">Topography Surveying</span>
-                                    <span class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-800 border border-slate-200 font-medium text-xs sm:text-sm">Contour Mapping</span>
-                                    <span class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-800 border border-slate-200 font-medium text-xs sm:text-sm">Microsoft Office Suite</span>
-                                </div>
-                            </div>
-
-                            <!-- Category 4 Languages -->
-                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs sm:text-sm">
-                                <span class="font-bold text-slate-700">Languages:</span>
-                                <div class="flex gap-3">
-                                    <span class="text-slate-600"><strong>Indonesian</strong> (Native)</span>
-                                    <span class="text-slate-400">•</span>
-                                    <span class="text-slate-600"><strong>English</strong> (Professional Working)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Certifications Column -->
-                    <div class="lg:col-span-5 space-y-6">
-                        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-                            <h3 class="text-xl font-bold text-navy-900 flex items-center gap-2">
-                                <i data-lucide="badge-check" class="w-5 h-5 text-blue-700"></i>
-                                Official Certifications
-                            </h3>
-
-                            <div class="space-y-4">
-                                <!-- Cert 1 -->
-                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
-                                    <span class="text-xs font-bold text-blue-700">Ministry of Communication and Information (Kominfo RI) (2022)</span>
-                                    <h4 class="text-sm font-bold text-navy-900">Basic Cyber Security for the Healthcare Sector</h4>
-                                    <p class="text-xs text-slate-500">Official credential in healthcare sector cybersecurity.</p>
-                                </div>
-
-                                <!-- Cert 2 -->
-                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
-                                    <span class="text-xs font-bold text-blue-700">Universitas Mulawarman (2026)</span>
-                                    <h4 class="text-sm font-bold text-navy-900">TOEFL Equivalent Test</h4>
-                                    <p class="text-xs text-slate-500">Official university English proficiency certification.</p>
-                                </div>
-
-                                <!-- Cert 3: In Progress -->
-                                <div class="p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-1.5">
-                                    <span class="text-xs font-bold text-blue-700">In Progress</span>
-                                    <h4 class="text-sm font-bold text-navy-900">Additional Professional Training</h4>
-                                    <p class="text-xs text-slate-500">Currently pursuing further certification to strengthen ERP and enterprise systems expertise.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-blue-700 mb-2">Let's Connect</h2>
-                    <p class="text-3xl font-extrabold text-navy-900 sm:text-4xl">Contact Me</p>
-                    <p class="text-slate-600 mt-2 text-sm">Open to career opportunities, system implementation consulting, and project discussions across Indonesia.</p>
-                    <div class="w-12 h-1 bg-navy-900 mx-auto mt-4 rounded-full"></div>
-                </div>
-
-                <div class="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    
-                    <!-- Email Card -->
-                    <a href="mailto:daudrioyurdanus@gmail.com" class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900 transition-all flex items-center gap-4 group">
-                        <div class="w-12 h-12 rounded-xl bg-navy-900 text-white flex items-center justify-center shrink-0 group-hover:bg-blue-700 transition-colors">
-                            <i data-lucide="mail" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Primary Email</span>
-                            <p class="text-sm font-bold text-navy-900">daudrioyurdanus@gmail.com</p>
-                        </div>
-                    </a>
-
-                    <!-- Phone Card -->
-                    <a href="https://wa.me/6289516247282" target="_blank" rel="noopener noreferrer" class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900 transition-all flex items-center gap-4 group">
-                        <div class="w-12 h-12 rounded-xl bg-navy-900 text-white flex items-center justify-center shrink-0 group-hover:bg-blue-700 transition-colors">
-                            <i data-lucide="phone" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Phone / WhatsApp</span>
-                            <p class="text-sm font-bold text-navy-900">+62 895-1624-7282</p>
-                        </div>
-                    </a>
-
-                    <!-- LinkedIn Card -->
-                    <a href="https://linkedin.com/in/daudyurdanus-503660229" target="_blank" rel="noopener noreferrer" class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-navy-900 transition-all flex items-center gap-4 group">
-                        <div class="w-12 h-12 rounded-xl bg-navy-900 text-white flex items-center justify-center shrink-0 group-hover:bg-blue-700 transition-colors">
-                            <i data-lucide="linkedin" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">LinkedIn Profile</span>
-                            <p class="text-sm font-bold text-navy-900">linkedin.com/in/daudyurdanus-503660229</p>
-                        </div>
-                    </a>
-
-                    <!-- Location Card -->
-                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-slate-200 text-navy-900 flex items-center justify-center shrink-0">
-                            <i data-lucide="map-pin" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Home Base</span>
-                            <p class="text-sm font-bold text-navy-900">Samarinda, East Kalimantan, Indonesia</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-navy-950 text-white py-12 border-t border-navy-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-blue-700 text-white flex items-center justify-center font-bold text-sm">
-                    DY
-                </div>
-                <span class="text-sm font-semibold tracking-tight">Daud Rio Yurdanus, S.Kom</span>
-            </div>
-
-            <p class="text-xs text-slate-400">
-                &copy; 2026 Daud Rio Yurdanus. All rights reserved.
-            </p>
-
-            <div class="flex gap-4">
-                <a href="https://linkedin.com/in/daudyurdanus-503660229" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition-colors">
-                    <i data-lucide="linkedin" class="w-5 h-5"></i>
-                </a>
-                <a href="mailto:daudrioyurdanus@gmail.com" class="text-slate-400 hover:text-white transition-colors">
-                    <i data-lucide="mail" class="w-5 h-5"></i>
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Script Interaktivitas -->
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        // Mobile Menu Navigation Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-    </script>
 </body>
 </html>
