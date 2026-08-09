@@ -22,6 +22,7 @@
     --navy:#1B4368;
     --navy-deep:#0F2C48;
     --paper:#FDFAF4;
+    --nav-bg:rgba(253,250,244,0.92);
     --surface:#FFFFFF;
     --amber:#F0A94E;
     --amber-deep:#D6873A;
@@ -37,6 +38,7 @@
   }
   html[data-theme="dark"]{
     --paper:#0F1A24;
+    --nav-bg:rgba(15,26,36,0.92);
     --surface:#16232F;
     --amber-deep:#F5C27E;
     --teal:#5FC2B3;
@@ -100,7 +102,7 @@
   /* Nav */
   header.nav{
     position:sticky; top:0; z-index:50;
-    background:rgba(247,245,240,0.92);
+    background:var(--nav-bg);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
@@ -247,12 +249,12 @@
   .cert-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
   @media (max-width:780px){ .cert-grid{grid-template-columns:1fr;} }
   .doc-thumb{
-    width:100%; height:150px; border-radius:10px; overflow:hidden; margin-bottom:16px;
+    width:100%; max-width:220px; aspect-ratio:3/4; border-radius:10px; overflow:hidden; margin:0 auto 16px;
     background:var(--mint); border:1.5px dashed var(--line);
     display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
-    color:var(--muted); font-size:.78rem; text-align:center;
+    color:var(--muted); font-size:.78rem; text-align:center; padding:12px;
   }
-  .doc-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+  .doc-thumb img{width:100%; height:100%; object-fit:contain; display:block; background:var(--mint);}
   .doc-thumb .doc-icon{font-size:1.4rem; opacity:.6;}
   .cert-thumb{
     width:56px; height:56px; border-radius:8px; overflow:hidden; flex-shrink:0;
@@ -284,7 +286,7 @@
 
 <header class="nav">
   <div class="container nav-inner">
-    <div class="brand">DY — Daud Yurdanus</div>
+    <div class="brand">Daud Yurdanus</div>
     <nav class="navlinks">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
