@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <title>Daud Rio Yurdanus, S.Kom | Information Systems & ERP Specialist</title>
 
 <meta name="description" content="Daud Rio Yurdanus - Information Systems graduate specializing in ERP implementation, business process mapping, and data-driven analysis. Open to opportunities in Indonesia's national energy and BUMN sector.">
@@ -107,7 +108,7 @@
     border-bottom:1px solid var(--line);
   }
   .nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px;}
-  .brand{font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; letter-spacing:.01em;}
+  .brand{font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; letter-spacing:.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .navlinks{display:flex; gap:28px; font-size:.9rem; font-weight:500;}
   .navlinks a{color:var(--muted); transition:color .15s;}
   .navlinks a:hover{color:var(--accent-text);}
@@ -115,15 +116,15 @@
   .nav-cta:hover{background:var(--amber-deep); transform:translateY(-1px);}
   .theme-toggle{
     margin-left:14px; width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
-    background:var(--surface); cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center;
+    background:var(--surface); color:var(--accent-text); cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center;
     transition:transform .2s ease, background-color .2s ease;
   }
   .theme-toggle:hover{transform:translateY(-1px) rotate(15deg); background:var(--mint);}
   @media (max-width:720px){ .navlinks{display:none;} }
   @media (max-width:480px){
     .nav-inner{padding:0 4px;}
-    .brand{font-size:.92rem;}
-    .nav-cta{padding:8px 12px; font-size:.78rem;}
+    .brand{font-size:.8rem; max-width:120px;}
+    .nav-cta{padding:8px 10px; font-size:.74rem;}
     .theme-toggle{width:34px; height:34px; margin-left:8px;}
     .hero h1{font-size:1.9rem;}
     .role-line{font-size:.92rem;}
@@ -286,7 +287,7 @@
 
 <header class="nav">
   <div class="container nav-inner">
-    <div class="brand">Daud Yurdanus</div>
+    <div class="brand">Daud Rio Yurdanus</div>
     <nav class="navlinks">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
@@ -295,7 +296,7 @@
       <a href="#contact">Contact</a>
     </nav>
     <a href="#contact" class="nav-cta">Contact Me</a>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle light/dark mode">🌙</button>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle light/dark mode"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
   </div>
 </header>
 
@@ -524,7 +525,7 @@
       <div class="contact-list">
         <div class="contact-item"><span class="ico">@</span> <a href="mailto:daudrioyurdanus@gmail.com">daudrioyurdanus@gmail.com</a></div>
         <div class="contact-item"><span class="ico">☎</span> <a href="https://wa.me/6289516247282">+62 895-1624-7282 (WhatsApp)</a></div>
-        <div class="contact-item"><span class="ico">in</span> <a href="https://linkedin.com/in/daudyurdanus-503660229">linkedin.com/in/daudyurdanus-503660229</a></div>
+        <div class="contact-item"><span class="ico">in</span> <a href="https://www.linkedin.com/in/daud-yurdanus-503660229/">linkedin.com/in/daud-yurdanus-503660229</a></div>
         <div class="contact-item"><span class="ico">📍</span> Samarinda, East Kalimantan, Indonesia</div>
       </div>
     </div>
@@ -546,63 +547,95 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Theme toggle (light/dark)
-    var root = document.documentElement;
-    var toggleBtn = document.getElementById('theme-toggle');
-    var saved = localStorage.getItem('theme');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var initial = saved || (prefersDark ? 'dark' : 'light');
-    if (initial === 'dark') {
-      root.setAttribute('data-theme', 'dark');
-      if (toggleBtn) toggleBtn.textContent = '☀️';
+
+    // 1) SAFETY NET — always reveal all text, no matter what happens below.
+    //    Runs first and independently so a failure elsewhere can never leave
+    //    text permanently invisible (this is what broke on iOS Safari private mode).
+    var revealEls = document.querySelectorAll('.reveal');
+    function revealAll() {
+      revealEls.forEach(function (el) { el.classList.add('in-view'); });
     }
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', function () {
-        var isDark = root.getAttribute('data-theme') === 'dark';
-        if (isDark) {
-          root.removeAttribute('data-theme');
-          localStorage.setItem('theme', 'light');
-          toggleBtn.textContent = '🌙';
-        } else {
-          root.setAttribute('data-theme', 'dark');
-          localStorage.setItem('theme', 'dark');
-          toggleBtn.textContent = '☀️';
-        }
-      });
+    setTimeout(revealAll, 1800); // hard fallback, fires regardless of errors below
+
+    try {
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        revealEls.forEach(function (el) { observer.observe(el); });
+      } else {
+        revealAll();
+      }
+    } catch (err) {
+      revealAll();
     }
 
-    var revealEls = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) {
-      revealEls.forEach(function (el) { el.classList.add('in-view'); });
-    } else {
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            observer.unobserve(entry.target);
+    // 2) Theme toggle (light/dark) — localStorage can throw in Safari Private
+    //    Browsing, so every call is wrapped individually.
+    try {
+      var root = document.documentElement;
+      var toggleBtn = document.getElementById('theme-toggle');
+      var iconSun = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+      var iconMoon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) { saved = null; }
+
+      var prefersDark = false;
+      try { prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; } catch (e) {}
+
+      var initial = saved || (prefersDark ? 'dark' : 'light');
+      if (initial === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+        if (toggleBtn) toggleBtn.innerHTML = iconSun;
+      } else if (toggleBtn) {
+        toggleBtn.innerHTML = iconMoon;
+      }
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', function () {
+          var isDark = root.getAttribute('data-theme') === 'dark';
+          if (isDark) {
+            root.removeAttribute('data-theme');
+            toggleBtn.innerHTML = iconMoon;
+            try { localStorage.setItem('theme', 'light'); } catch (e) {}
+          } else {
+            root.setAttribute('data-theme', 'dark');
+            toggleBtn.innerHTML = iconSun;
+            try { localStorage.setItem('theme', 'dark'); } catch (e) {}
           }
         });
-      }, { threshold: 0.15 });
-      revealEls.forEach(function (el) { observer.observe(el); });
+      }
+    } catch (err) {
+      // Theme toggle failing should never affect the rest of the page.
     }
 
-    // Lightweight 3D tilt-on-hover for cards (skip on touch devices)
-    var isTouch = window.matchMedia('(hover: none)').matches;
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!isTouch && !reduceMotion) {
-      document.querySelectorAll('.tilt').forEach(function (card) {
-        card.addEventListener('mousemove', function (e) {
-          var r = card.getBoundingClientRect();
-          var px = (e.clientX - r.left) / r.width;
-          var py = (e.clientY - r.top) / r.height;
-          var rotateY = (px - 0.5) * 8;
-          var rotateX = (0.5 - py) * 8;
-          card.style.transform = 'perspective(900px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-4px)';
+    // 3) Lightweight 3D tilt-on-hover for cards (skip on touch devices)
+    try {
+      var isTouch = window.matchMedia('(hover: none)').matches;
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!isTouch && !reduceMotion) {
+        document.querySelectorAll('.tilt').forEach(function (card) {
+          card.addEventListener('mousemove', function (e) {
+            var r = card.getBoundingClientRect();
+            var px = (e.clientX - r.left) / r.width;
+            var py = (e.clientY - r.top) / r.height;
+            var rotateY = (px - 0.5) * 8;
+            var rotateX = (0.5 - py) * 8;
+            card.style.transform = 'perspective(900px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-4px)';
+          });
+          card.addEventListener('mouseleave', function () {
+            card.style.transform = '';
+          });
         });
-        card.addEventListener('mouseleave', function () {
-          card.style.transform = '';
-        });
-      });
+      }
+    } catch (err) {
+      // Tilt effect is purely decorative — safe to skip silently.
     }
   });
 </script>
