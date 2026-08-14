@@ -250,12 +250,13 @@
   .cert-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
   @media (max-width:780px){ .cert-grid{grid-template-columns:1fr;} }
   .doc-thumb{
-    width:100%; max-width:220px; aspect-ratio:3/4; border-radius:10px; overflow:hidden; margin:0 auto 16px;
+    width:100%; max-width:220px; aspect-ratio:1/1; border-radius:10px; overflow:hidden; margin:0 auto 16px;
     background:var(--mint); border:1.5px dashed var(--line);
     display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
     color:var(--muted); font-size:.78rem; text-align:center; padding:12px;
   }
-  .doc-thumb img{width:100%; height:100%; object-fit:contain; display:block; background:var(--mint);}
+  .doc-thumb:has(img){border-style:solid; padding:0;}
+  .doc-thumb img{width:100%; height:100%; object-fit:cover; object-position:center; display:block;}
   .doc-thumb .doc-icon{font-size:1.4rem; opacity:.6;}
   .cert-thumb{
     width:84px; height:84px; border-radius:8px; overflow:hidden; flex-shrink:0;
@@ -497,7 +498,7 @@
           <span class="tag">Contour Mapping</span>
           <span class="tag">MS Office Suite</span>
         </div>
-        <div class="lang-line"><strong>Languages:</strong> Indonesian (Native) · English (Passive / Technical Reading)</div>
+        <div class="lang-line"><strong>Languages:</strong> Indonesian (Native) · English (TOEFL Equivalent Score: 400)</div>
       </div>
     </div>
 
@@ -524,17 +525,17 @@
         </div>
       </div>
       <div class="cert-card">
-        <div class="cert-thumb" title="Placeholder for certificate photo"><span class="doc-icon">📄</span></div>
+        <div class="cert-thumb"><img src="assets/cert-kominfo.jpg" alt="Basic Cyber Security for the Healthcare Sector certificate"></div>
         <div>
           <div class="cert-org">Kominfo RI · 2022</div>
           <div class="cert-name">Basic Cyber Security for the Healthcare Sector</div>
         </div>
       </div>
       <div class="cert-card">
-        <div class="cert-thumb" title="Placeholder for certificate photo"><span class="doc-icon">📄</span></div>
+        <div class="cert-thumb"><img src="assets/cert-toefl.jpg" alt="TOEFL Equivalent Test result"></div>
         <div>
           <div class="cert-org">UPT Language Center, Universitas Mulawarman · 2026</div>
-          <div class="cert-name">TOEFL Equivalent Test</div>
+          <div class="cert-name">TOEFL Equivalent Test — Score 400</div>
         </div>
       </div>
     </div>
