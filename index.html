@@ -1,806 +1,271 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="page-title">Daud Rio Yurdanus, S.Kom | Konsep Portofolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --stone:#EFEAE0;
-    --stone-2:#E4DDCB;
-    --ink:#1D2A22;
-    --moss-900:#152219;
-    --moss-800:#1E3226;
-    --moss-700:#2B4636;
-    --brass:#AD7C33;
-    --brass-light:#D6A85F;
-    --slate:#5C6A5F;
-    --line:#CFC6AE;
-    --white:#FBFAF5;
-    --radius:2px;
-    --maxw:1120px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
-  }
-  body{
-    margin:0;
-    background:var(--stone);
-    color:var(--ink);
-    font-family:'IBM Plex Sans',sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:'Newsreader',serif;
-    font-weight:500;
-    margin:0;
-    color:var(--moss-900);
-  }
-  a{color:inherit;}
-  .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--brass);
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:22px;height:1px;background:var(--brass);
-    display:inline-block;
-  }
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
-  .skip-link{
-    position:absolute; left:-999px; top:auto;
-    background:var(--brass); color:var(--white); padding:10px 16px; z-index:200;
-  }
-  .skip-link:focus{ left:16px; top:16px; }
-  :focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
-
-  /* ---------- NAV ---------- */
-  header.nav{
-    position:sticky; top:0; z-index:100;
-    background:rgba(239,234,224,0.88);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{
-    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .brand{
-    font-family:'Newsreader',serif; font-weight:600; font-size:19px;
-    color:var(--moss-900); text-decoration:none; letter-spacing:.01em;
-  }
-  .brand small{display:block; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--brass); font-weight:400; margin-top:2px;}
-  nav.links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
-  nav.links a{
-    text-decoration:none; font-size:14px; color:var(--moss-800);
-    position:relative; padding:4px 0;
-  }
-  nav.links a::after{
-    content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px;
-    background:var(--brass); transform:scaleX(0); transform-origin:left;
-    transition:transform .25s ease;
-  }
-  nav.links a:hover::after, nav.links a.active::after{ transform:scaleX(1); }
-  nav.links a.active{ color:var(--moss-900); font-weight:500; }
-  .nav-cta{
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--moss-900); color:var(--white); text-decoration:none;
-    font-size:13px; font-weight:500; padding:10px 18px; border-radius:var(--radius);
-    transition:background .2s ease;
-  }
-  .nav-cta:hover{ background:var(--brass); }
-  .nav-right{ display:flex; align-items:center; gap:16px; }
-  .burger{ display:none; background:none; border:1px solid var(--line); border-radius:var(--radius); width:40px; height:40px; cursor:pointer; }
-  .burger span{ display:block; width:18px; height:2px; background:var(--moss-900); margin:3px auto; transition:.2s; }
-  #mobile-panel{ display:none; }
-
-  .lang-toggle{ display:flex; border:1px solid var(--line); border-radius:20px; overflow:hidden; font-family:'IBM Plex Mono',monospace; font-size:11px; flex-shrink:0; }
-  .lang-toggle button{ background:none; border:none; padding:7px 13px; cursor:pointer; color:var(--slate); font-family:inherit; font-size:inherit; }
-  .lang-toggle button.active{ background:var(--moss-900); color:var(--white); }
-
-  @media (max-width:860px){
-    nav.links{ display:none; }
-    .burger{ display:block; }
-    .nav-cta.desktop-only{ display:none; }
-    #mobile-panel.open{
-      display:flex; flex-direction:column; gap:2px;
-      background:var(--white); border-top:1px solid var(--line);
-      padding:10px 28px 18px;
-    }
-    #mobile-panel a{ text-decoration:none; color:var(--moss-900); padding:12px 0; border-bottom:1px solid var(--stone-2); font-size:15px; }
-  }
-
-  /* ---------- HERO ---------- */
-  .hero{
-    position:relative; overflow:hidden;
-    padding:78px 0 60px;
-    background:var(--stone);
-  }
-  .hero-grid{
-    display:grid; grid-template-columns:1.25fr 0.75fr; gap:56px; align-items:center;
-    position:relative; z-index:2;
-  }
-  .hero h1{ font-size:44px; line-height:1.12; margin:18px 0 16px; letter-spacing:-.01em; }
-  .hero .role{ font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--slate); margin-bottom:18px; }
-  .hero p.lede{ font-size:16.5px; color:var(--moss-800); max-width:52ch; margin-bottom:30px; }
-  .cta-group{ display:flex; gap:14px; flex-wrap:wrap; }
-  .btn{
-    text-decoration:none; font-size:14px; font-weight:500; padding:13px 22px;
-    border-radius:var(--radius); display:inline-flex; align-items:center; gap:8px;
-    transition:transform .15s ease, background .2s ease, box-shadow .2s ease;
-  }
-  .btn-primary{ background:var(--brass); color:var(--white); }
-  .btn-primary:hover{ background:var(--moss-900); transform:translateY(-1px); }
-  .btn-secondary{ background:transparent; color:var(--moss-900); border:1px solid var(--moss-900); }
-  .btn-secondary:hover{ background:var(--moss-900); color:var(--white); }
-
-  .hero-photo{ position:relative; }
-  .hero-photo img{
-    width:100%; aspect-ratio:4/5; object-fit:cover;
-    border-radius:var(--radius);
-    filter:grayscale(15%) contrast(1.02);
-  }
-  .hero-photo::before{
-    content:""; position:absolute; inset:14px -14px -14px 14px;
-    border:1px solid var(--brass); z-index:-1;
-  }
-  .contour-bg{
-    position:absolute; inset:0; z-index:1; opacity:.5; pointer-events:none;
-  }
-
-  /* ---------- STATS ---------- */
-  .stats{ background:var(--moss-900); padding:0; }
-  .stats-grid{
-    max-width:var(--maxw); margin:0 auto; padding:0 28px;
-    display:grid; grid-template-columns:repeat(3,1fr);
-  }
-  .stat{
-    padding:34px 20px; border-right:1px solid rgba(255,255,255,.12);
-    text-align:left;
-  }
-  .stat:last-child{ border-right:none; }
-  .stat .n{ font-family:'IBM Plex Mono',monospace; font-size:30px; color:var(--brass-light); }
-  .stat .l{ font-size:12.5px; color:rgba(255,255,255,.72); margin-top:6px; }
-  @media (max-width:700px){
-    .stats-grid{ grid-template-columns:repeat(2,1fr); }
-    .stat{ border-bottom:1px solid rgba(255,255,255,.12); }
-  }
-
-  /* ---------- SECTIONS COMMON ---------- */
-  section.block{ padding:80px 0; }
-  section.block.alt{ background:var(--stone-2); }
-  .block-head{ margin-bottom:40px; max-width:620px; }
-  .block-head h2{ font-size:30px; margin-top:10px; }
-
-  /* ---------- ABOUT ---------- */
-  .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:start; }
-  .about-grid p{ color:var(--moss-800); font-size:15.5px; margin:0 0 16px; }
-  .edu-card{
-    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
-    padding:26px;
-  }
-  .edu-card h3{ font-size:17px; margin-bottom:4px; }
-  .edu-card .sub{ font-size:13px; color:var(--slate); margin-bottom:18px; }
-  .edu-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:9px 0; border-top:1px dashed var(--line); }
-  .edu-row span:first-child{ color:var(--slate); }
-  .edu-row span:last-child{ font-family:'IBM Plex Mono',monospace; color:var(--moss-900); text-align:right; }
-  .thesis-note{ margin-top:16px; padding-top:16px; border-top:1px solid var(--line); font-size:13px; color:var(--moss-800); font-style:italic; }
-
-  /* ---------- TIMELINE (Experience) ---------- */
-  .tl-item{
-    display:grid; grid-template-columns:220px 1fr; gap:36px;
-    padding:32px 0; border-top:1px solid var(--moss-900);
-  }
-  .tl-meta img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--radius); margin-bottom:10px; }
-  .tl-meta .date{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--brass); }
-  .tl-body h3{ font-size:19px; margin-bottom:2px; }
-  .tl-body .org{ font-size:13.5px; color:var(--slate); margin-bottom:14px; }
-  .tl-body ul{ margin:0; padding-left:18px; font-size:14.5px; color:var(--moss-800); }
-  .tl-body li{ margin-bottom:7px; }
-  .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
-  .tag{
-    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.03em;
-    background:var(--white); border:1px solid var(--line); color:var(--moss-800);
-    padding:5px 10px; border-radius:20px;
-  }
-  @media (max-width:700px){
-    .tl-item{ grid-template-columns:1fr; }
-    .tl-meta img{ aspect-ratio:16/9; }
-  }
-
-  .lead-compact{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
-  .lead-card{ background:var(--stone); padding:26px; }
-  .lead-card .date{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--brass); }
-  .lead-card h3{ font-size:16.5px; margin:6px 0 2px; }
-  .lead-card .org{ font-size:13px; color:var(--slate); margin-bottom:10px; }
-  .lead-card ul{ margin:0; padding-left:16px; font-size:13.5px; color:var(--moss-800); }
-  .lead-card li{ margin-bottom:5px; }
-  @media (max-width:700px){ .lead-compact{ grid-template-columns:1fr; } }
-
-  /* ---------- SKILLS ---------- */
-  .skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-bottom:56px; }
-  .skill-group h3{ font-size:14px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--brass); margin-bottom:14px; font-weight:500; }
-  .chip-list{ display:flex; flex-wrap:wrap; gap:8px; }
-  .chip{ background:var(--white); border:1px solid var(--line); font-size:13px; padding:7px 12px; border-radius:var(--radius); }
-  @media (max-width:800px){ .skills-grid{ grid-template-columns:1fr; } }
-
-  .cert-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
-  .cert{ background:var(--white); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; cursor:pointer; text-align:left; padding:0; }
-  .cert img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
-  .cert .meta{ padding:12px; }
-  .cert .meta h4{ font-size:12.5px; margin:0 0 3px; font-weight:600; color:var(--moss-900); line-height:1.3; }
-  .cert .meta span{ font-size:11px; color:var(--slate); font-family:'IBM Plex Mono',monospace; }
-  @media (max-width:900px){ .cert-grid{ grid-template-columns:repeat(2,1fr); } }
-
-  /* ---------- CONTACT ---------- */
-  .contact-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; }
-  .contact-list{ list-style:none; padding:0; margin:26px 0 0; }
-  .contact-list li{ display:flex; align-items:center; gap:14px; padding:15px 0; border-top:1px solid var(--line); font-size:15px; }
-  .contact-list a{ text-decoration:none; color:var(--moss-900); font-weight:500; }
-  .contact-list a:hover{ color:var(--brass); }
-  .ic{ width:34px; height:34px; border:1px solid var(--brass); color:var(--brass); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:13px; flex-shrink:0; }
-  .contact-card{ background:var(--moss-900); color:var(--white); border-radius:var(--radius); padding:34px; }
-  .contact-card h3{ color:var(--white); font-size:20px; margin-bottom:12px; }
-  .contact-card p{ color:rgba(255,255,255,.75); font-size:14.5px; margin-bottom:26px; }
-  .contact-card .btn-primary{ width:100%; justify-content:center; }
-  .contact-card .btn-secondary{ width:100%; justify-content:center; margin-top:10px; border-color:rgba(255,255,255,.4); color:var(--white); }
-  .contact-card .btn-secondary:hover{ background:var(--white); color:var(--moss-900); }
-
-  /* ---------- FOOTER ---------- */
-  footer{ padding:30px 0; border-top:1px solid var(--line); font-size:12.5px; color:var(--slate); }
-  #totop{ background:none; border:1px solid var(--line); border-radius:20px; padding:8px 16px; cursor:pointer; font-size:12px; color:var(--moss-900); font-family:'IBM Plex Mono',monospace; }
-  #totop:hover{ border-color:var(--brass); color:var(--brass); }
-
-  /* ---------- LIGHTBOX ---------- */
-  #lightbox{
-    position:fixed; inset:0; background:rgba(21,34,25,.92); z-index:300;
-    display:none; align-items:center; justify-content:center; padding:40px;
-  }
-  #lightbox.open{ display:flex; }
-  #lightbox img{ max-width:90vw; max-height:80vh; border-radius:2px; }
-  #lightbox .cap{ color:var(--white); text-align:center; margin-top:14px; font-size:13px; font-family:'IBM Plex Mono',monospace; }
-  #lightbox-close{ position:absolute; top:24px; right:28px; background:none; border:1px solid rgba(255,255,255,.4); color:var(--white); width:38px; height:38px; border-radius:50%; cursor:pointer; font-size:16px; }
-
-  @media (max-width:860px){
-    .hero-grid{ grid-template-columns:1fr; }
-    .hero-photo{ order:-1; max-width:260px; }
-    .hero h1{ font-size:32px; }
-    .about-grid{ grid-template-columns:1fr; }
-    .contact-grid{ grid-template-columns:1fr; }
-    section.block{ padding:56px 0; }
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="Portfolio profesional Daud Rio Yurdanus, S.Kom. Information Systems, IT Support, ERP Implementation, UAT, dan technical documentation." />
+  <meta property="og:title" content="Daud Rio Yurdanus | IT Support & ERP" />
+  <meta property="og:description" content="Information Systems graduate with hands-on IT support and ERP implementation experience." />
+  <title>Daud Rio Yurdanus | IT Support & ERP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<a class="skip-link" href="#main" data-i18n="nav.skip">Lewati ke konten utama</a>
+  <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="#top">Daud Rio Yurdanus <small data-i18n="nav.brandsmall">SISTEM INFORMASI · SPESIALIS ERP</small></a>
-    <div class="nav-right">
-      <div class="lang-toggle" role="group" aria-label="Language switch">
-        <button id="lang-id" class="active" type="button">ID</button>
-        <button id="lang-en" type="button">EN</button>
-      </div>
-      <nav class="links" id="scrollnav">
-        <a href="#about" data-i18n="nav.profile">Profil</a>
-        <a href="#experience" data-i18n="nav.experience">Pengalaman</a>
-        <a href="#leadership" data-i18n="nav.leadership">Kepemimpinan</a>
-        <a href="#skills" data-i18n="nav.skills">Keahlian</a>
-        <a href="#contact" data-i18n="nav.contact">Kontak</a>
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="Daud Rio Yurdanus home">
+        <span class="brand-mark">DR</span>
+        <span class="brand-text">Daud Rio Yurdanus</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka navigasi" aria-expanded="false">☰</button>
+      <nav class="nav" id="siteNav">
+        <a href="#about">Profil</a>
+        <a href="#experience">Pengalaman</a>
+        <a href="#projects">Proyek</a>
+        <a href="#skills">Keahlian</a>
+        <a href="#contact" class="nav-cta">Hubungi</a>
       </nav>
-      <a class="nav-cta desktop-only" href="#contact" data-i18n="nav.cta">Hubungi Saya</a>
-      <button class="burger" id="burger" data-i18n-aria="nav.burgerAria" aria-label="Buka menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
     </div>
-  </div>
-  <div id="mobile-panel">
-    <a href="#about" data-i18n="nav.profile">Profil</a>
-    <a href="#experience" data-i18n="nav.experience">Pengalaman</a>
-    <a href="#leadership" data-i18n="nav.leadership">Kepemimpinan</a>
-    <a href="#skills" data-i18n="nav.skills">Keahlian</a>
-    <a href="#contact" data-i18n="nav.contact">Kontak</a>
-  </div>
-</header>
+  </header>
 
-<main id="main">
+  <main id="home">
+    <section class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span class="status-dot"></span> Terbuka untuk peluang di seluruh Indonesia</div>
+          <h1>Information Systems <span>Graduate</span> with IT Support & ERP Experience.</h1>
+          <p class="hero-lead">Saya menggabungkan troubleshooting end-user, implementasi ERP, UAT, dokumentasi teknis, dan koordinasi lintas tim untuk membantu sistem berjalan lebih rapi dan pengguna bekerja lebih lancar.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Lihat Portfolio <span>↗</span></a>
+            <a class="btn btn-secondary" href="assets/Daud_Rio_Yurdanus_CV_IT_Support.pdf" download>Unduh CV <span>↓</span></a>
+          </div>
+          <div class="hero-meta">
+            <span>Based in Samarinda</span>
+            <span>Open to relocation</span>
+            <span>IT Support · ERP · Business Systems</span>
+          </div>
+        </div>
 
-  <section class="hero" id="top">
-    <svg class="contour-bg" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
-      <g fill="none" stroke="#AD7C33" stroke-width="1">
-        <path d="M-50 420 C 200 380, 350 460, 600 400 S 950 340, 1250 400" opacity=".18"/>
-        <path d="M-50 450 C 220 410, 380 480, 620 430 S 960 370, 1250 430" opacity=".14"/>
-        <path d="M-50 480 C 240 440, 400 500, 640 460 S 970 400, 1250 460" opacity=".10"/>
-        <path d="M-50 60 C 260 20, 420 90, 680 40 S 1000 -10, 1250 40" opacity=".10"/>
-      </g>
-    </svg>
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow" data-i18n="hero.eyebrow">Tersedia untuk penempatan di seluruh Indonesia</p>
-        <h1>Daud Rio Yurdanus, S.Kom</h1>
-        <p class="role" data-i18n="hero.role">Calon Management Trainee · Mantan Konsultan ERP di Hashmicro · Ketua Organisasi Mahasiswa</p>
-        <p class="lede" data-i18n="hero.lede">Saya lulusan Sistem Informasi Universitas Mulawarman dengan IPK 3.80/4.00. Selama kuliah, saya mengkonfigurasi modul ERP untuk sembilan klien perusahaan dan memimpin organisasi mahasiswa tingkat universitas. Saat ini saya siap bekerja di sektor energi nasional Indonesia sebagai Management Trainee atau IT Engineer.</p>
-        <div class="cta-group">
-          <a class="btn btn-primary" href="https://daudry.github.io/daud/assets/Daud_Rio_Yurdanus_CV.pdf" data-i18n="hero.cta1">↓ Unduh CV (PDF)</a>
-          <a class="btn btn-secondary" href="#contact" data-i18n="hero.cta2">Hubungi Saya</a>
+        <div class="hero-visual reveal reveal-delay">
+          <div class="photo-shell">
+            <div class="photo-glow"></div>
+            <img src="assets/photo.jpg" alt="Daud Rio Yurdanus" onerror="this.style.display='none';document.getElementById('photoFallback').style.display='grid';" />
+            <div class="photo-fallback" id="photoFallback" aria-hidden="true">DR</div>
+            <div class="photo-badge">
+              <strong>3.80</strong>
+              <span>GPA / 4.00</span>
+            </div>
+          </div>
+          <div class="floating-card card-one">
+            <span class="mini-label">ERP Rollouts</span>
+            <strong>09</strong>
+            <small>client implementations</small>
+          </div>
+          <div class="floating-card card-two">
+            <span class="mini-label">Core Modules</span>
+            <strong>05</strong>
+            <small>Sales · Purchase · Inventory · POS · Accounting</small>
+          </div>
         </div>
       </div>
-      <div class="hero-photo">
-        <img src="https://daudry.github.io/daud/assets/photo.jpg" data-i18n-alt="hero.photoAlt" alt="Foto Daud Rio Yurdanus">
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="stats">
-    <div class="stats-grid">
-      <div class="stat"><div class="n">3.80</div><div class="l" data-i18n="stats.gpa">IPK (S.Kom)</div></div>
-      <div class="stat"><div class="n">5+</div><div class="l" data-i18n="stats.modules">Modul ERP Dikonfigurasi</div></div>
-      <div class="stat"><div class="n">9</div><div class="l" data-i18n="stats.projects">Proyek Implementasi ERP</div></div>
-    </div>
-  </section>
-
-  <section class="block" id="about">
-    <div class="wrap">
-      <div class="block-head">
-        <p class="eyebrow" data-i18n="about.eyebrow">Profil profesional</p>
-        <h2 data-i18n="about.h2">Ringkasan</h2>
+    <section class="trust-strip">
+      <div class="container stats-grid">
+        <div class="stat reveal"><strong>9</strong><span>ERP client rollouts</span></div>
+        <div class="stat reveal"><strong>5</strong><span>ERP modules configured</span></div>
+        <div class="stat reveal"><strong>55</strong><span>members led in BLM</span></div>
+        <div class="stat reveal"><strong>70</strong><span>thesis respondents</span></div>
       </div>
-      <div class="about-grid">
+    </section>
+
+    <section class="section" id="about">
+      <div class="container split-grid">
+        <div class="section-heading reveal">
+          <span class="section-kicker">01 · PROFILE</span>
+          <h2>Technical thinking, with an operational mindset.</h2>
+        </div>
+        <div class="about-copy reveal">
+          <p>Saya adalah lulusan Sistem Informasi Universitas Mulawarman dengan IPK 3.80/4.00. Pengalaman profesional saya dibentuk melalui support pengguna dan implementasi ERP secara remote, dari instalasi, pengaturan akses, konfigurasi modul, UAT, sampai dokumentasi issue.</p>
+          <p>Saya nyaman bekerja di titik temu antara kebutuhan pengguna dan kebutuhan teknis: memahami masalah, mendokumentasikan gap, mengeskalasikan defect, lalu memastikan hasilnya dapat digunakan end-user.</p>
+          <div class="pill-row">
+            <span>IT Helpdesk Support</span><span>ERP Implementation</span><span>UAT</span><span>Technical Documentation</span><span>Basic Networking</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="experience">
+      <div class="container">
+        <div class="section-heading centered reveal">
+          <span class="section-kicker">02 · EXPERIENCE</span>
+          <h2>Pengalaman yang relevan untuk dunia kerja nyata.</h2>
+          <p>Bukan sekadar daftar jabatan. Fokusnya pada apa yang dikerjakan, masalah yang dihadapi, dan hasil yang bisa ditunjukkan.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-head">
+              <div><span class="date">Aug 2022 – Dec 2022</span><h3>Software Implementation Consultant, Intern</h3><p>PT Hashmicro Solusi Indonesia</p></div>
+              <span class="tag">ERP / IT Support</span>
+            </div>
+            <div class="timeline-body">
+              <ul>
+                <li>Memberikan remote technical support dan troubleshooting untuk pengguna ERP di <strong>9 client rollouts</strong>, termasuk Motul dan Yokohama.</li>
+                <li>Mengonfigurasi modul <strong>Sales, Purchase, Inventory, POS, dan Accounting</strong> sesuai workflow tiap klien. Semua implementasi selesai sesuai jadwal.</li>
+                <li>Menyusun checklist dan menjalankan <strong>UAT</strong>, menemukan sekitar 1–3 defect per modul dan mengeskalasikannya pada hari yang sama melalui workflow ticketing.</li>
+                <li>Menyusun <strong>FRD / Change Request</strong> untuk menutup gap konfigurasi sebelum go-live serta menyiapkan panduan Accounting Manual untuk end-user.</li>
+              </ul>
+              <div class="skill-row"><span>ERP Configuration</span><span>UAT</span><span>FRD / CR</span><span>TeamViewer</span><span>AnyDesk</span></div>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-head">
+              <div><span class="date">Feb 2024 – Jul 2025</span><h3>Topography Surveyor, Freelance</h3><p>CV Hanata – Surveying & Mapping Services</p></div>
+              <span class="tag">Field Operations</span>
+            </div>
+            <div class="timeline-body">
+              <ul>
+                <li>Melakukan survei topografi pada area konsesi pertambangan dan infrastruktur selama 18 bulan untuk menghasilkan data terrain dan contour.</li>
+                <li>Mengubah data lapangan menjadi contour maps dan technical reports yang dapat langsung digunakan tim engineering untuk tahap perencanaan.</li>
+                <li>Memeriksa koordinat dan elevasi terhadap standar geodesi dan pemetaan sebelum laporan diterbitkan.</li>
+              </ul>
+              <div class="skill-row"><span>Field Data</span><span>Quality Control</span><span>Technical Reporting</span></div>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-head">
+              <div><span class="date">May 2023 – Present</span><h3>Deputy Secretary</h3><p>Duta Damai Kalimantan Timur</p></div>
+              <span class="tag">Leadership</span>
+            </div>
+            <div class="timeline-body">
+              <ul>
+                <li>Menangani dokumentasi notulen rapat, izin kegiatan, dan proposal acara.</li>
+                <li>Mengoordinasikan tim dan memimpin rapat internal berdasarkan konsensus, termasuk tanggung jawab koordinasi harian sejak 2026.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-head">
+              <div><span class="date">Jan 2023 – Dec 2023</span><h3>Chairperson</h3><p>Student Legislative Body (BLM), Universitas Mulawarman</p></div>
+              <span class="tag">Leadership</span>
+            </div>
+            <div class="timeline-body">
+              <ul>
+                <li>Memimpin reformasi tata kelola dengan <strong>15 work programs</strong> dan tim berjumlah <strong>55 anggota</strong>.</li>
+                <li>Mengawasi gabungan anggaran sekitar <strong>IDR 135 juta</strong> dan memimpin <strong>72 rapat/evaluasi</strong> selama satu periode.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-heading centered reveal">
+          <span class="section-kicker">03 · SELECTED WORK</span>
+          <h2>Selected projects & case highlights.</h2>
+          <p>Portfolio ini menampilkan pekerjaan yang paling relevan dengan peran IT Support, ERP, Business Systems, dan entry-level technology roles.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card featured reveal">
+            <div class="project-top"><span class="project-index">01</span><span class="project-label">ERP IMPLEMENTATION</span></div>
+            <h3>Multi-client ERP rollout & end-user support</h3>
+            <p>Mengonfigurasi core ERP modules untuk sembilan klien dengan workflow berbeda, mendukung user access setup, remote troubleshooting, UAT, dan handover documentation.</p>
+            <div class="metric-row"><div><strong>09</strong><span>rollouts</span></div><div><strong>05</strong><span>modules</span></div><div><strong>1–3</strong><span>defects/module found</span></div></div>
+            <div class="card-tags"><span>ERP</span><span>UAT</span><span>Remote Support</span><span>FRD / CR</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top"><span class="project-index">02</span><span class="project-label">RESEARCH</span></div>
+            <h3>E-Office user satisfaction study</h3>
+            <p>Skripsi menggunakan metode End User Computing Satisfaction (EUCS) dengan pengujian statistik menggunakan SPSS terhadap <strong>70 responden</strong>.</p>
+            <div class="project-note">Fokus: user satisfaction · usability · quantitative analysis</div>
+            <div class="card-tags"><span>SPSS</span><span>EUCS</span><span>Research</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="project-top"><span class="project-index">03</span><span class="project-label">TECHNICAL DOCUMENTATION</span></div>
+            <h3>FRD, Change Request & user documentation</h3>
+            <p>Mendokumentasikan configuration gaps dan kebutuhan perubahan agar developer memiliki spesifikasi yang jelas sebelum go-live.</p>
+            <div class="project-note">Output: FRD addenda · Change Request · Accounting Manual Guide</div>
+            <div class="card-tags"><span>FRD</span><span>CR</span><span>Documentation</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="skills">
+      <div class="container skills-layout">
+        <div class="section-heading reveal">
+          <span class="section-kicker inverse">04 · CAPABILITIES</span>
+          <h2>Keahlian yang bisa langsung dipakai.</h2>
+          <p>Fokus saya ada pada pekerjaan operasional yang membutuhkan ketelitian, komunikasi pengguna, troubleshooting, dan dokumentasi yang jelas.</p>
+        </div>
+        <div class="skills-grid reveal">
+          <div class="skill-card"><span class="skill-no">01</span><h3>IT Support</h3><p>Hardware, software, end-user troubleshooting, installation, maintenance, dan remote support.</p></div>
+          <div class="skill-card"><span class="skill-no">02</span><h3>ERP & Business Systems</h3><p>ERP configuration, business process mapping, UAT, user access setup, FRD dan Change Request.</p></div>
+          <div class="skill-card"><span class="skill-no">03</span><h3>Networking Basics</h3><p>Wi-Fi/router troubleshooting, basic operating systems, dan RJ45 crimping.</p></div>
+          <div class="skill-card"><span class="skill-no">04</span><h3>Data & Documentation</h3><p>SPSS, quantitative research, technical reports, ticketing workflows, dan MS Office.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="container education-grid">
+        <div class="edu-card reveal">
+          <span class="section-kicker">05 · EDUCATION</span>
+          <h2>Universitas Mulawarman</h2>
+          <p class="edu-sub">Bachelor of Computer Science (S.Kom), Information Systems</p>
+          <div class="edu-facts"><div><span>GPA</span><strong>3.80 / 4.00</strong></div><div><span>Study</span><strong>Jul 2019 – Sep 2026</strong></div><div><span>Status</span><strong>Degree requirements completed</strong></div></div>
+          <div class="thesis-box"><span>THESIS</span><p><strong>E-OFFICE user satisfaction study</strong> using the EUCS method with SPSS, n=70 respondents.</p></div>
+        </div>
+        <div class="certs reveal">
+          <span class="section-kicker">CERTIFICATIONS</span>
+          <h2>Professional learning</h2>
+          <div class="cert-list">
+            <div class="cert-item"><span class="cert-year">2026</span><div><strong>IT Customer Support Basics</strong><small>Cisco Networking Academy</small></div></div>
+            <div class="cert-item"><span class="cert-year">2026</span><div><strong>Kanban Essentials Certified (KEC)</strong><small>KanbanStudy</small></div></div>
+            <div class="cert-item"><span class="cert-year">2026</span><div><strong>Scrum Fundamentals Certified (SFC)</strong><small>SCRUMstudy</small></div></div>
+            <div class="cert-item"><span class="cert-year">2022</span><div><strong>Basic Cyber Security for the Healthcare Sector</strong><small>Kominfo</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+      <div class="container cta-box reveal">
         <div>
-          <p data-i18n="about.p1">Saya kandidat Sarjana Komputer program Sistem Informasi di Universitas Mulawarman. Sidang skripsi saya berlangsung 25 Mei 2026, dengan target kelulusan September 2026. Latar belakang saya menggabungkan konfigurasi sistem ERP perusahaan dengan riset kuantitatif. Saya membangun keduanya lewat kerja proyek nyata selama magang dan penelitian skripsi.</p>
-          <p data-i18n="about.p2">Di PT Hashmicro Solusi Indonesia, saya mengkonfigurasi modul ERP untuk sembilan implementasi klien, termasuk Motul dan Yokohama. Saya juga menyusun dokumentasi FRD dan Change Request yang menutup celah konfigurasi sebelum go-live. Di kampus, saya memimpin lembaga legislatif mahasiswa Universitas Mulawarman dan mengawasi transparansi anggaran BEM untuk seluruh mahasiswa.</p>
-          <p data-i18n="about.p3">Skripsi saya menerapkan pengujian statistik SPSS dengan metode EUCS pada 70 responden untuk mengukur kepuasan dan usability sistem. Metode kuantitatif ini sama dengan pendekatan yang dipakai untuk mengevaluasi proyek transformasi digital di perusahaan. Saya terbuka untuk penempatan di seluruh Indonesia.</p>
+          <span class="section-kicker">06 · LET'S CONNECT</span>
+          <h2>Open to the next technical challenge.</h2>
+          <p>Terbuka untuk IT Support, ERP / Business Systems, Management Trainee, Officer Development Program, dan posisi entry-level teknologi yang memberi ruang untuk belajar dan berkontribusi.</p>
         </div>
-        <div class="edu-card">
-          <h3>Universitas Mulawarman</h3>
-          <p class="sub" data-i18n="edu.sub">Fakultas Teknik · S.Kom Sistem Informasi</p>
-          <div class="edu-row"><span data-i18n="edu.label1">Mulai Kuliah</span><span data-i18n="edu.val1">Juli 2019</span></div>
-          <div class="edu-row"><span data-i18n="edu.label2">Sidang Skripsi</span><span data-i18n="edu.val2">25 Mei 2026</span></div>
-          <div class="edu-row"><span data-i18n="edu.label3">Target Lulus</span><span data-i18n="edu.val3">September 2026</span></div>
-          <div class="edu-row"><span data-i18n="edu.label4">IPK Kumulatif</span><span>3.80 / 4.00</span></div>
-          <p class="thesis-note" data-i18n="thesis.note">"Measuring the Level of User Satisfaction with the E-Office System at the Faculty of Engineering, Universitas Mulawarman, Using the End User Computing Satisfaction (EUCS) Method." Pengujian statistik SPSS terhadap 70 pengguna aktif sistem.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="mailto:daudrioyurdanus@gmail.com">Kirim Email ↗</a>
+          <a class="btn btn-secondary light" href="https://www.linkedin.com/in/daud-yurdanus-503660229/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="text-link" href="https://wa.me/6289516247282" target="_blank" rel="noopener">WhatsApp <span>→</span></a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <section class="block alt" id="experience">
-    <div class="wrap">
-      <div class="block-head">
-        <p class="eyebrow" data-i18n="experience.eyebrow">Rekam jejak profesional</p>
-        <h2 data-i18n="experience.h2">Pengalaman Kerja</h2>
-      </div>
+  <footer class="footer">
+    <div class="container footer-wrap"><span>© <span id="year"></span> Daud Rio Yurdanus, S.Kom</span><a href="#top">Back to top ↑</a></div>
+  </footer>
 
-      <div class="tl-item">
-        <div class="tl-meta">
-          <img src="https://daudry.github.io/daud/assets/xp-hashmicro.jpg" data-i18n-alt="hashmicro.imgAlt" alt="Dokumentasi dashboard ERP Hashmicro">
-          <div class="date" data-i18n="hashmicro.date">Agu 2022 – Des 2022</div>
-        </div>
-        <div class="tl-body">
-          <h3>Software Implementation Consultant, Intern</h3>
-          <p class="org">PT Hashmicro Solusi Indonesia</p>
-          <ul>
-            <li data-i18n="hashmicro.b1">Mengkonfigurasi 5 modul inti ERP, yaitu Sales, Purchase, Inventory, POS, dan Accounting, untuk 9 klien termasuk Motul dan Yokohama. Semua implementasi selesai tepat waktu.</li>
-            <li data-i18n="hashmicro.b2">Menyusun addendum FRD di 4 modul untuk Jakarta Fruit Market, dan dokumentasi Change Request untuk klien lain.</li>
-            <li data-i18n="hashmicro.b3">Membangun checklist UAT lintas modul dan menjalankannya sendiri, menemukan rata-rata 1 sampai 3 defect per modul untuk eskalasi ke developer pada hari yang sama.</li>
-            <li data-i18n="hashmicro.b4">Menguji fitur HR Training dan Vendor Payment Report untuk TheWokPeople, dan menulis panduan Accounting Manual untuk pelatihan end-user.</li>
-          </ul>
-          <div class="tags">
-            <span class="tag" data-i18n="hashmicro.tag1">Konfigurasi ERP</span>
-            <span class="tag" data-i18n="hashmicro.tag2">Pengujian UAT</span>
-            <span class="tag" data-i18n="hashmicro.tag3">Pemetaan Proses Bisnis</span>
-            <span class="tag" data-i18n="hashmicro.tag4">Dokumentasi FRD</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="leadership">
-    <div class="wrap">
-      <div class="block-head">
-        <p class="eyebrow" data-i18n="leadership.eyebrow">Organisasi dan manajemen</p>
-        <h2 data-i18n="leadership.h2">Pengalaman Kepemimpinan</h2>
-      </div>
-      <div class="lead-compact">
-        <div class="lead-card">
-          <div class="date" data-i18n="lead1.date">Mei 2023 – Sekarang</div>
-          <h3>Deputy Secretary</h3>
-          <p class="org">Duta Damai Kalimantan Timur</p>
-          <ul>
-            <li data-i18n="lead1.b1">Mendokumentasikan notulen rapat, izin kegiatan, dan proposal acara.</li>
-            <li data-i18n="lead1.b2">Mengoordinasikan tim secara informal dan memimpin rapat internal berdasarkan konsensus, dalam peran non-struktural tanpa SK formal.</li>
-          </ul>
-        </div>
-        <div class="lead-card">
-          <div class="date" data-i18n="lead2.date">Jan 2023 – Des 2023</div>
-          <h3>Chairperson</h3>
-          <p class="org">Badan Legislatif Mahasiswa (BLM), Universitas Mulawarman</p>
-          <ul>
-            <li data-i18n="lead2.b1">Memimpin reformasi tata kelola di seluruh organisasi mahasiswa.</li>
-            <li data-i18n="lead2.b2">Mengawasi penggunaan anggaran BEM dan menjaga transparansi keuangan.</li>
-          </ul>
-        </div>
-        <div class="lead-card">
-          <div class="date" data-i18n="lead3.date">Jan 2022 – Des 2022</div>
-          <h3>Deputy Chairperson</h3>
-          <p class="org">BLM, Universitas Mulawarman</p>
-          <ul>
-            <li data-i18n="lead3.b1">Mengoordinasikan tim kepemimpinan harian lembaga legislatif.</li>
-            <li data-i18n="lead3.b2">Memimpin evaluasi kinerja berkala terhadap BEM.</li>
-          </ul>
-        </div>
-        <div class="lead-card">
-          <div class="date" data-i18n="lead4.date">Jan 2022 – Jul 2023</div>
-          <h3>Head of Cadre Development Bureau</h3>
-          <p class="org">MP-MBKM Community, Universitas Mulawarman</p>
-          <ul>
-            <li data-i18n="lead4.b1">Menjalankan program pengembangan kapasitas untuk inisiatif pendidikan nasional.</li>
-          </ul>
-        </div>
-        <div class="lead-card">
-          <div class="date" data-i18n="lead5.date">Jan 2021 – Des 2021</div>
-          <h3>Head of Public Relations Division</h3>
-          <p class="org">INFORSA, Universitas Mulawarman</p>
-          <ul>
-            <li data-i18n="lead5.b1">Mengarahkan strategi komunikasi publik dan hubungan dengan pemangku kepentingan eksternal.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block alt" id="skills">
-    <div class="wrap">
-      <div class="block-head">
-        <p class="eyebrow" data-i18n="skills.eyebrow">Kompetensi teknis</p>
-        <h2 data-i18n="skills.h2">Keahlian dan Sertifikasi</h2>
-      </div>
-
-      <div class="skills-grid">
-        <div class="skill-group">
-          <h3 data-i18n="group1.h3">Sistem Informasi, ERP, dan IT Support</h3>
-          <div class="chip-list">
-            <span class="chip" data-i18n="g1c1">Konfigurasi ERP</span>
-            <span class="chip" data-i18n="g1c2">Pemetaan Proses Bisnis</span>
-            <span class="chip" data-i18n="g1c3">Eksekusi UAT</span>
-            <span class="chip" data-i18n="g1c4">Dokumentasi FRD dan CR</span>
-            <span class="chip" data-i18n="g1c5">IT Helpdesk Support</span>
-            <span class="chip" data-i18n="g1c6">Jaringan dan OS Dasar</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3 data-i18n="group2.h3">Riset dan Analisis Data</h3>
-          <div class="chip-list">
-            <span class="chip" data-i18n="g2c1">Riset Kuantitatif</span>
-            <span class="chip" data-i18n="g2c2">Pengujian Statistik (SPSS)</span>
-            <span class="chip" data-i18n="g2c3">Model Kepuasan EUCS</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3 data-i18n="group3.h3">Bahasa</h3>
-          <div class="chip-list">
-            <span class="chip" data-i18n="g3c1">Bahasa Indonesia (Native)</span>
-            <span class="chip" data-i18n="g3c2">Bahasa Inggris (TOEFL 400)</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="cert-grid" id="cert-grid">
-        <button class="cert"
-          data-title-id="IT Customer Support Basics" data-title-en="IT Customer Support Basics"
-          data-sub-id="Cisco Networking Academy · Agustus 2026" data-sub-en="Cisco Networking Academy · August 2026"
-          data-img="https://daudry.github.io/daud/assets/cert-cisco.jpg">
-          <img src="https://daudry.github.io/daud/assets/cert-cisco.jpg" alt="Sertifikat IT Customer Support Basics">
-          <div class="meta"><h4>IT Customer Support Basics</h4><span>Cisco · 2026</span></div>
-        </button>
-        <button class="cert"
-          data-title-id="Kanban Essentials Certified (KEC)" data-title-en="Kanban Essentials Certified (KEC)"
-          data-sub-id="KanbanStudy · Agustus 2026" data-sub-en="KanbanStudy · August 2026"
-          data-img="https://daudry.github.io/daud/assets/cert-kanban.jpg">
-          <img src="https://daudry.github.io/daud/assets/cert-kanban.jpg" alt="Sertifikat Kanban Essentials Certified">
-          <div class="meta"><h4>Kanban Essentials (KEC)</h4><span>KanbanStudy · 2026</span></div>
-        </button>
-        <button class="cert"
-          data-title-id="Scrum Fundamentals Certified (SFC)" data-title-en="Scrum Fundamentals Certified (SFC)"
-          data-sub-id="SCRUMstudy · Agustus 2026" data-sub-en="SCRUMstudy · August 2026"
-          data-img="https://daudry.github.io/daud/assets/cert-scrum.jpg">
-          <img src="https://daudry.github.io/daud/assets/cert-scrum.jpg" alt="Sertifikat Scrum Fundamentals Certified">
-          <div class="meta"><h4>Scrum Fundamentals (SFC)</h4><span>SCRUMstudy · 2026</span></div>
-        </button>
-        <button class="cert"
-          data-title-id="Dasar Keamanan Siber untuk Sektor Kesehatan" data-title-en="Basic Cyber Security for the Healthcare Sector"
-          data-sub-id="Kominfo RI · 2022" data-sub-en="Kominfo RI · 2022"
-          data-img="https://daudry.github.io/daud/assets/cert-kominfo.jpg">
-          <img src="https://daudry.github.io/daud/assets/cert-kominfo.jpg" alt="Sertifikat Dasar Keamanan Siber untuk Sektor Kesehatan">
-          <div class="meta"><h4>Keamanan Siber Dasar</h4><span>Kominfo RI · 2022</span></div>
-        </button>
-        <button class="cert"
-          data-title-id="Tes Setara TOEFL, Skor 400" data-title-en="TOEFL Equivalent Test, Score 400"
-          data-sub-id="UPT Language Center, Universitas Mulawarman · 2026" data-sub-en="UPT Language Center, Universitas Mulawarman · 2026"
-          data-img="https://daudry.github.io/daud/assets/cert-toefl.jpg">
-          <img src="https://daudry.github.io/daud/assets/cert-toefl.jpg" alt="Sertifikat Tes Setara TOEFL">
-          <div class="meta"><h4>Tes Setara TOEFL, 400</h4><span>UPT Language Center · 2026</span></div>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="contact">
-    <div class="wrap">
-      <div class="contact-grid">
-        <div>
-          <p class="eyebrow" data-i18n="contact.eyebrow">Mari terhubung</p>
-          <h2 data-i18n="contact.h2">Hubungi Saya</h2>
-          <p style="color:var(--moss-800); font-size:15px; max-width:48ch; margin-top:16px;" data-i18n="contact.p">Saya terbuka untuk peluang Management Trainee, Officer Development Program, dan IT Engineer. Saya juga menerima proyek konsultasi implementasi sistem di seluruh Indonesia.</p>
-          <ul class="contact-list">
-            <li><span class="ic">@</span><a href="mailto:daudrioyurdanus@gmail.com">daudrioyurdanus@gmail.com</a></li>
-            <li><span class="ic">wa</span><a href="https://wa.me/6289516247282">+62 895-1624-7282 (WhatsApp)</a></li>
-            <li><span class="ic">in</span><a href="https://www.linkedin.com/in/daud-yurdanus-503660229/">linkedin.com/in/daud-yurdanus</a></li>
-            <li><span class="ic">📍</span><span data-i18n="contact.location">Samarinda, Kalimantan Timur, Indonesia</span></li>
-          </ul>
-        </div>
-        <div class="contact-card">
-          <h3 data-i18n="cc.h3">Aksi Cepat</h3>
-          <p data-i18n="cc.p">Unduh CV lengkap dalam format PDF atau kirim email untuk memulai percakapan.</p>
-          <a class="btn btn-primary" href="https://daudry.github.io/daud/assets/Daud_Rio_Yurdanus_CV.pdf" data-i18n="cc.btn1">↓ Unduh CV (PDF)</a>
-          <a class="btn btn-secondary" href="mailto:daudrioyurdanus@gmail.com" data-i18n="cc.btn2">Kirim Email</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-    <span>Daud Rio Yurdanus, S.Kom · © 2026</span>
-    <button id="totop" data-i18n="footer.totop">↑ Kembali ke atas</button>
-  </div>
-</footer>
-
-<div id="lightbox">
-  <button id="lightbox-close" data-i18n-aria="lightbox.close" aria-label="Tutup">✕</button>
-  <div>
-    <img id="lightbox-img" src="" alt="">
-    <div class="cap" id="lightbox-cap"></div>
-  </div>
-</div>
-
-<script>
-  const I18N = {
-    id: {
-      'meta.title': 'Daud Rio Yurdanus, S.Kom | Konsep Portofolio',
-      'nav.skip': 'Lewati ke konten utama',
-      'nav.brandsmall': 'SISTEM INFORMASI · SPESIALIS ERP',
-      'nav.profile': 'Profil', 'nav.experience': 'Pengalaman', 'nav.leadership': 'Kepemimpinan',
-      'nav.skills': 'Keahlian', 'nav.contact': 'Kontak', 'nav.cta': 'Hubungi Saya',
-      'nav.burgerAria': 'Buka menu',
-      'hero.eyebrow': 'Tersedia untuk penempatan di seluruh Indonesia',
-      'hero.role': 'Calon Management Trainee · Mantan Konsultan ERP di Hashmicro · Ketua Organisasi Mahasiswa',
-      'hero.lede': 'Saya lulusan Sistem Informasi Universitas Mulawarman dengan IPK 3.80/4.00. Selama kuliah, saya mengkonfigurasi modul ERP untuk sembilan klien perusahaan dan memimpin organisasi mahasiswa tingkat universitas. Saat ini saya siap bekerja di sektor energi nasional Indonesia sebagai Management Trainee atau IT Engineer.',
-      'hero.cta1': '↓ Unduh CV (PDF)', 'hero.cta2': 'Hubungi Saya',
-      'hero.photoAlt': 'Foto Daud Rio Yurdanus',
-      'stats.gpa': 'IPK (S.Kom)', 'stats.modules': 'Modul ERP Dikonfigurasi', 'stats.projects': 'Proyek Implementasi ERP',
-      'about.eyebrow': 'Profil profesional', 'about.h2': 'Ringkasan',
-      'about.p1': 'Saya kandidat Sarjana Komputer program Sistem Informasi di Universitas Mulawarman. Sidang skripsi saya berlangsung 25 Mei 2026, dengan target kelulusan September 2026. Latar belakang saya menggabungkan konfigurasi sistem ERP perusahaan dengan riset kuantitatif. Saya membangun keduanya lewat kerja proyek nyata selama magang dan penelitian skripsi.',
-      'about.p2': 'Di PT Hashmicro Solusi Indonesia, saya mengkonfigurasi modul ERP untuk sembilan implementasi klien, termasuk Motul dan Yokohama. Saya juga menyusun dokumentasi FRD dan Change Request yang menutup celah konfigurasi sebelum go-live. Di kampus, saya memimpin lembaga legislatif mahasiswa Universitas Mulawarman dan mengawasi transparansi anggaran BEM untuk seluruh mahasiswa.',
-      'about.p3': 'Skripsi saya menerapkan pengujian statistik SPSS dengan metode EUCS pada 70 responden untuk mengukur kepuasan dan usability sistem. Metode kuantitatif ini sama dengan pendekatan yang dipakai untuk mengevaluasi proyek transformasi digital di perusahaan. Saya terbuka untuk penempatan di seluruh Indonesia.',
-      'edu.sub': 'Fakultas Teknik · S.Kom Sistem Informasi',
-      'edu.label1': 'Mulai Kuliah', 'edu.val1': 'Juli 2019',
-      'edu.label2': 'Sidang Skripsi', 'edu.val2': '25 Mei 2026',
-      'edu.label3': 'Target Lulus', 'edu.val3': 'September 2026',
-      'edu.label4': 'IPK Kumulatif',
-      'thesis.note': '"Measuring the Level of User Satisfaction with the E-Office System at the Faculty of Engineering, Universitas Mulawarman, Using the End User Computing Satisfaction (EUCS) Method." Pengujian statistik SPSS terhadap 70 pengguna aktif sistem.',
-      'experience.eyebrow': 'Rekam jejak profesional', 'experience.h2': 'Pengalaman Kerja',
-      'hashmicro.date': 'Agu 2022 – Des 2022', 'hashmicro.imgAlt': 'Dokumentasi dashboard ERP Hashmicro',
-      'hashmicro.b1': 'Mengkonfigurasi 5 modul inti ERP, yaitu Sales, Purchase, Inventory, POS, dan Accounting, untuk 9 klien termasuk Motul dan Yokohama. Semua implementasi selesai tepat waktu.',
-      'hashmicro.b2': 'Menyusun addendum FRD di 4 modul untuk Jakarta Fruit Market, dan dokumentasi Change Request untuk klien lain.',
-      'hashmicro.b3': 'Membangun checklist UAT lintas modul dan menjalankannya sendiri, menemukan rata-rata 1 sampai 3 defect per modul untuk eskalasi ke developer pada hari yang sama.',
-      'hashmicro.b4': 'Menguji fitur HR Training dan Vendor Payment Report untuk TheWokPeople, dan menulis panduan Accounting Manual untuk pelatihan end-user.',
-      'hashmicro.tag1': 'Konfigurasi ERP', 'hashmicro.tag2': 'Pengujian UAT', 'hashmicro.tag3': 'Pemetaan Proses Bisnis', 'hashmicro.tag4': 'Dokumentasi FRD',
-      'leadership.eyebrow': 'Organisasi dan manajemen', 'leadership.h2': 'Pengalaman Kepemimpinan',
-      'lead1.date': 'Mei 2023 – Sekarang',
-      'lead1.b1': 'Mendokumentasikan notulen rapat, izin kegiatan, dan proposal acara.',
-      'lead1.b2': 'Mengoordinasikan tim secara informal dan memimpin rapat internal berdasarkan konsensus, dalam peran non-struktural tanpa SK formal.',
-      'lead2.date': 'Jan 2023 – Des 2023',
-      'lead2.b1': 'Memimpin reformasi tata kelola di seluruh organisasi mahasiswa.',
-      'lead2.b2': 'Mengawasi penggunaan anggaran BEM dan menjaga transparansi keuangan.',
-      'lead3.date': 'Jan 2022 – Des 2022',
-      'lead3.b1': 'Mengoordinasikan tim kepemimpinan harian lembaga legislatif.',
-      'lead3.b2': 'Memimpin evaluasi kinerja berkala terhadap BEM.',
-      'lead4.date': 'Jan 2022 – Jul 2023',
-      'lead4.b1': 'Menjalankan program pengembangan kapasitas untuk inisiatif pendidikan nasional.',
-      'lead5.date': 'Jan 2021 – Des 2021',
-      'lead5.b1': 'Mengarahkan strategi komunikasi publik dan hubungan dengan pemangku kepentingan eksternal.',
-      'skills.eyebrow': 'Kompetensi teknis', 'skills.h2': 'Keahlian dan Sertifikasi',
-      'group1.h3': 'Sistem Informasi, ERP, dan IT Support',
-      'g1c1': 'Konfigurasi ERP', 'g1c2': 'Pemetaan Proses Bisnis', 'g1c3': 'Eksekusi UAT',
-      'g1c4': 'Dokumentasi FRD dan CR', 'g1c5': 'IT Helpdesk Support', 'g1c6': 'Jaringan dan OS Dasar',
-      'group2.h3': 'Riset dan Analisis Data',
-      'g2c1': 'Riset Kuantitatif', 'g2c2': 'Pengujian Statistik (SPSS)', 'g2c3': 'Model Kepuasan EUCS',
-      'group3.h3': 'Bahasa',
-      'g3c1': 'Bahasa Indonesia (Native)', 'g3c2': 'Bahasa Inggris (TOEFL 400)',
-      'contact.eyebrow': 'Mari terhubung', 'contact.h2': 'Hubungi Saya',
-      'contact.p': 'Saya terbuka untuk peluang Management Trainee, Officer Development Program, dan IT Engineer. Saya juga menerima proyek konsultasi implementasi sistem di seluruh Indonesia.',
-      'contact.location': 'Samarinda, Kalimantan Timur, Indonesia',
-      'cc.h3': 'Aksi Cepat', 'cc.p': 'Unduh CV lengkap dalam format PDF atau kirim email untuk memulai percakapan.',
-      'cc.btn1': '↓ Unduh CV (PDF)', 'cc.btn2': 'Kirim Email',
-      'footer.totop': '↑ Kembali ke atas',
-      'lightbox.close': 'Tutup'
-    },
-    en: {
-      'meta.title': 'Daud Rio Yurdanus, S.Kom | Portfolio Concept',
-      'nav.skip': 'Skip to main content',
-      'nav.brandsmall': 'INFORMATION SYSTEMS · ERP SPECIALIST',
-      'nav.profile': 'Profile', 'nav.experience': 'Experience', 'nav.leadership': 'Leadership',
-      'nav.skills': 'Skills', 'nav.contact': 'Contact', 'nav.cta': 'Contact Me',
-      'nav.burgerAria': 'Open menu',
-      'hero.eyebrow': 'Available for placement across Indonesia',
-      'hero.role': 'Aspiring Management Trainee · Former ERP Consultant Intern at Hashmicro · Student Organization Chairperson',
-      'hero.lede': 'I graduated in Information Systems from Universitas Mulawarman with a 3.80/4.00 GPA. During college, I configured ERP modules for nine corporate clients and led a university-level student organization. I am ready to work in Indonesia\\'s national energy sector as a Management Trainee or IT Engineer.',
-      'hero.cta1': '↓ Download CV (PDF)', 'hero.cta2': 'Contact Me',
-      'hero.photoAlt': 'Photo of Daud Rio Yurdanus',
-      'stats.gpa': 'GPA (S.Kom)', 'stats.modules': 'ERP Modules Configured', 'stats.projects': 'ERP Implementation Projects',
-      'about.eyebrow': 'Professional profile', 'about.h2': 'Summary',
-      'about.p1': 'I am a Bachelor of Computer Science candidate in Information Systems at Universitas Mulawarman. My thesis defense is scheduled for May 25, 2026, with graduation expected in September 2026. My background combines enterprise ERP configuration with quantitative research. I built both through real project work during my internship and thesis research.',
-      'about.p2': 'At PT Hashmicro Solusi Indonesia, I configured ERP modules across nine client implementations, including Motul and Yokohama. I also wrote the FRD and Change Request documentation that closed configuration gaps before go-live. On campus, I chaired Universitas Mulawarman\\'s student legislative body and oversaw BEM budget transparency for the student body.',
-      'about.p3': 'My thesis applies SPSS-based statistical testing under the EUCS method across 70 respondents to measure system satisfaction and usability. This is the same quantitative approach used to evaluate enterprise digital transformation projects. I am open to placement anywhere in Indonesia.',
-      'edu.sub': 'Faculty of Engineering · B.Comp.Sc, Information Systems (S.Kom)',
-      'edu.label1': 'Enrolled', 'edu.val1': 'July 2019',
-      'edu.label2': 'Thesis Defense', 'edu.val2': 'May 25, 2026',
-      'edu.label3': 'Expected Graduation', 'edu.val3': 'September 2026',
-      'edu.label4': 'Cumulative GPA',
-      'thesis.note': '"Measuring the Level of User Satisfaction with the E-Office System at the Faculty of Engineering, Universitas Mulawarman, Using the End User Computing Satisfaction (EUCS) Method." SPSS-based statistical testing across 70 active system users.',
-      'experience.eyebrow': 'Professional track record', 'experience.h2': 'Work Experience',
-      'hashmicro.date': 'Aug 2022 – Dec 2022', 'hashmicro.imgAlt': 'Hashmicro ERP dashboard documentation',
-      'hashmicro.b1': 'Configured 5 core ERP modules, Sales, Purchase, Inventory, POS, and Accounting, for 9 clients including Motul and Yokohama. Every implementation shipped on time.',
-      'hashmicro.b2': 'Wrote FRD addenda across 4 modules for Jakarta Fruit Market, plus Change Request documentation for other clients.',
-      'hashmicro.b3': 'Built and ran cross-module UAT checklists, flagging an average of 1 to 3 defects per module for same-day developer escalation.',
-      'hashmicro.b4': 'Tested HR Training and Vendor Payment Report features for TheWokPeople, and wrote the Accounting Manual Guide for end-user training.',
-      'hashmicro.tag1': 'ERP Configuration', 'hashmicro.tag2': 'UAT Testing', 'hashmicro.tag3': 'Business Process Mapping', 'hashmicro.tag4': 'FRD Documentation',
-      'leadership.eyebrow': 'Organization and management', 'leadership.h2': 'Leadership Experience',
-      'lead1.date': 'May 2023 – Present',
-      'lead1.b1': 'Documented meeting minutes, activity permits, and event proposals.',
-      'lead1.b2': 'Coordinated the team informally and led internal meetings by consensus, in a non-structural role without a formal SK.',
-      'lead2.date': 'Jan 2023 – Dec 2023',
-      'lead2.b1': 'Led governance reform across the student body.',
-      'lead2.b2': 'Oversaw BEM budget utilization and maintained financial transparency.',
-      'lead3.date': 'Jan 2022 – Dec 2022',
-      'lead3.b1': "Coordinated the legislative body's daily leadership team.",
-      'lead3.b2': 'Led periodic performance evaluations of the BEM executive board.',
-      'lead4.date': 'Jan 2022 – Jul 2023',
-      'lead4.b1': 'Ran capacity-building programs for a national education initiative.',
-      'lead5.date': 'Jan 2021 – Dec 2021',
-      'lead5.b1': 'Directed public communication strategy and external stakeholder liaison.',
-      'skills.eyebrow': 'Technical competencies', 'skills.h2': 'Skills and Certifications',
-      'group1.h3': 'Information Systems, ERP & IT Support',
-      'g1c1': 'ERP Configuration', 'g1c2': 'Business Process Mapping', 'g1c3': 'UAT Execution',
-      'g1c4': 'FRD & CR Documentation', 'g1c5': 'IT Helpdesk Support', 'g1c6': 'Basic Networking & OS',
-      'group2.h3': 'Research & Data Analysis',
-      'g2c1': 'Quantitative Research', 'g2c2': 'Statistical Testing (SPSS)', 'g2c3': 'EUCS Satisfaction Model',
-      'group3.h3': 'Languages',
-      'g3c1': 'Indonesian (Native)', 'g3c2': 'English (TOEFL 400)',
-      'contact.eyebrow': "Let's connect", 'contact.h2': 'Contact Me',
-      'contact.p': 'I am open to Management Trainee, Officer Development Program, and IT Engineer roles. I also take on system implementation consulting projects across Indonesia.',
-      'contact.location': 'Samarinda, East Kalimantan, Indonesia',
-      'cc.h3': 'Quick Actions', 'cc.p': 'Download the full CV as a PDF, or send an email to start the conversation.',
-      'cc.btn1': '↓ Download CV (PDF)', 'cc.btn2': 'Send Email',
-      'footer.totop': '↑ Back to top',
-      'lightbox.close': 'Close'
-    }
-  };
-
-  let currentLang = 'id';
-
-  function applyLang(lang){
-    currentLang = lang;
-    document.documentElement.lang = lang;
-    document.getElementById('page-title').textContent = I18N[lang]['meta.title'];
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if(I18N[lang][key] !== undefined) el.textContent = I18N[lang][key];
-    });
-    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
-      const key = el.getAttribute('data-i18n-alt');
-      if(I18N[lang][key] !== undefined) el.alt = I18N[lang][key];
-    });
-    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
-      const key = el.getAttribute('data-i18n-aria');
-      if(I18N[lang][key] !== undefined) el.setAttribute('aria-label', I18N[lang][key]);
-    });
-    document.querySelectorAll('.cert').forEach(btn => {
-      const t = lang === 'id' ? btn.dataset.titleId : btn.dataset.titleEn;
-      const s = lang === 'id' ? btn.dataset.subId : btn.dataset.subEn;
-      btn.querySelector('h4').textContent = t;
-      btn.querySelector('img').alt = t;
-    });
-    document.getElementById('lang-id').classList.toggle('active', lang === 'id');
-    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
-
-    try {
-      localStorage.setItem('daud-portfolio-lang', lang);
-    } catch (e) {
-      // localStorage tidak tersedia (mode privat/incognito, dsb) — lewati saja
-    }
-  }
-
-  // Muat pilihan bahasa tersimpan saat halaman pertama kali dibuka
-  (function initLang(){
-    let saved = 'id';
-    try {
-      saved = localStorage.getItem('daud-portfolio-lang') || 'id';
-    } catch (e) {
-      saved = 'id';
-    }
-    if (saved !== 'en' && saved !== 'id') saved = 'id';
-    applyLang(saved);
-  })();
-
-  document.getElementById('lang-id').addEventListener('click', () => applyLang('id'));
-  document.getElementById('lang-en').addEventListener('click', () => applyLang('en'));
-
-  // Mobile nav toggle
-  const burger = document.getElementById('burger');
-  const panel = document.getElementById('mobile-panel');
-  burger.addEventListener('click', () => {
-    const isOpen = panel.classList.toggle('open');
-    burger.setAttribute('aria-expanded', isOpen);
-  });
-  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    panel.classList.remove('open');
-    burger.setAttribute('aria-expanded', false);
-  }));
-
-  // Scrollspy
-  const navLinks = document.querySelectorAll('#scrollnav a');
-  const sections = ['about','experience','leadership','skills','contact'].map(id => document.getElementById(id));
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        navLinks.forEach(l => l.classList.remove('active'));
-        const link = document.querySelector('#scrollnav a[href="#' + entry.target.id + '"]');
-        if(link) link.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-40% 0px -50% 0px' });
-  sections.forEach(s => s && spy.observe(s));
-
-  // Lightbox
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  const lbCap = document.getElementById('lightbox-cap');
-  document.querySelectorAll('.cert').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const t = currentLang === 'id' ? btn.dataset.titleId : btn.dataset.titleEn;
-      const s = currentLang === 'id' ? btn.dataset.subId : btn.dataset.subEn;
-      lbImg.src = btn.dataset.img;
-      lbImg.alt = t;
-      lbCap.textContent = t + ' · ' + s;
-      lb.classList.add('open');
-    });
-  });
-  document.getElementById('lightbox-close').addEventListener('click', () => lb.classList.remove('open'));
-  lb.addEventListener('click', (e) => { if(e.target === lb) lb.classList.remove('open'); });
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') lb.classList.remove('open'); });
-
-  // Back to top
-  document.getElementById('totop').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
