@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://daudry.github.io/daud/sitemap.xml

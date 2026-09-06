@@ -3,17 +3,55 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07101d">
-  <meta name="description" content="Daud Rio Yurdanus, S.Kom. Information Systems graduate with experience in IT support, ERP implementation, troubleshooting, UAT, and technical documentation.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#07101d" id="themeColorMeta">
+  <meta name="description" content="Daud Rio Yurdanus, S.Kom. Information Systems graduate with hands-on experience in IT support, ERP implementation, troubleshooting, UAT, and technical documentation.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Daud Rio Yurdanus | IT Support & ERP Implementation">
   <meta property="og:description" content="Information Systems graduate with hands-on experience in end-user support, ERP implementation, troubleshooting, UAT, and technical documentation.">
-  <title>Daud Rio Yurdanus | IT Support & ERP Implementation</title>
+  <meta property="og:url" content="https://daudry.github.io/daud/">
+  <meta property="og:image" content="https://daudry.github.io/daud/assets/photo.jpg">
+  <meta property="og:site_name" content="Daud Rio Yurdanus Portfolio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Daud Rio Yurdanus | IT Support & ERP Implementation">
+  <meta name="twitter:description" content="Information Systems graduate with hands-on experience in end-user support, ERP implementation, troubleshooting, UAT, and technical documentation.">
+  <meta name="twitter:image" content="https://daudry.github.io/daud/assets/photo.jpg">
+  <link rel="canonical" href="https://daudry.github.io/daud/">
+  <title>Daud Rio Yurdanus | IT Support &amp; ERP Implementation</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    (() => {
+      try {
+        const stored = localStorage.getItem('portfolio-theme');
+        const theme = stored === 'dark' || stored === 'light'
+          ? stored
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch (_) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Daud Rio Yurdanus",
+    "jobTitle":"IT Support & ERP Implementation",
+    "url":"https://daudry.github.io/daud/",
+    "email":"mailto:daudrioyurdanus@gmail.com",
+    "sameAs":["https://www.linkedin.com/in/daud-yurdanus-503660229/"],
+    "alumniOf":{"@type":"CollegeOrUniversity","name":"Universitas Mulawarman"}
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
 
   <header class="site-header" id="top">
@@ -26,42 +64,48 @@
       <nav class="nav" id="siteNav" aria-label="Primary navigation">
         <a href="#about">About</a>
         <a href="#highlights">Highlights</a>
-        <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
+        <a href="#why-me">Why Me</a>
+        <a href="#education">Education</a>
         <a class="nav-cta" href="#contact">Contact</a>
       </nav>
 
       <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="true">☀</button>
-        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="true">
+          <span aria-hidden="true">☀</span>
+        </button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="siteNav">
+          <span aria-hidden="true">☰</span>
+        </button>
       </div>
     </div>
   </header>
 
-  <main id="home">
-    <section class="hero section">
+  <main id="main-content">
+    <section class="hero section" id="home" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <div class="eyebrow"><span class="status-dot"></span> Open to opportunities across Indonesia</div>
+          <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Open to opportunities across Indonesia</div>
           <p class="hero-kicker">INFORMATION SYSTEMS · ERP IMPLEMENTATION &amp; IT SUPPORT</p>
-          <h1>Information Systems Graduate <span>|</span> IT Support <span>|</span> ERP Implementation</h1>
+          <h1 id="hero-title">Information Systems Graduate <span aria-hidden="true">|</span> IT Support <span aria-hidden="true">|</span> ERP Implementation</h1>
           <p class="hero-lead">Hands-on experience in end-user support, ERP implementation, troubleshooting, UAT, and technical documentation.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">View Portfolio <span>↗</span></a>
-            <a class="btn btn-secondary" href="assets/Daud_Rio_Yurdanus_CV_IT_Support.pdf" download>Download CV <span>↓</span></a>
+            <a class="btn btn-primary" href="#projects">View Portfolio <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="assets/Daud_Rio_Yurdanus_CV_IT_Support.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
           </div>
-          <div class="hero-meta">
+          <div class="hero-meta" aria-label="Profile highlights">
             <span>Based in Samarinda</span>
             <span>Open to relocation</span>
             <span>IT Support · ERP · Business Systems</span>
           </div>
         </div>
 
-        <div class="hero-visual reveal reveal-delay">
+        <div class="hero-visual reveal reveal-delay" aria-label="Profile photo and career highlights">
           <div class="photo-shell">
-            <div class="photo-glow"></div>
-            <img id="profilePhoto" src="assets/photo.jpg" alt="Daud Rio Yurdanus" loading="eager">
+            <div class="photo-glow" aria-hidden="true"></div>
+            <img id="profilePhoto" src="assets/photo.jpg" alt="Daud Rio Yurdanus" width="1080" height="1350" loading="eager" decoding="async">
             <div class="photo-badge">
               <strong>3.80</strong>
               <span>GPA / 4.00</span>
@@ -70,7 +114,7 @@
           <div class="floating-card card-one">
             <span class="mini-label">ERP Rollouts</span>
             <strong>09</strong>
-            <small>client implementations</small>
+            <small>client rollouts supported</small>
           </div>
           <div class="floating-card card-two">
             <span class="mini-label">Core Modules</span>
@@ -81,33 +125,16 @@
       </div>
     </section>
 
-    <section class="trust-strip" id="highlights">
-      <div class="container highlights-head reveal">
-        <div>
-          <span class="section-kicker">02 · CAREER HIGHLIGHTS</span>
-          <h2>A snapshot of the scale and scope of my work.</h2>
-        </div>
-        <p>These figures provide a quick view of the scope of my work and achievements, with each number grounded in my education or hands-on experience.</p>
-      </div>
-      <div class="container stats-grid">
-        <div class="stat reveal"><strong>3.80</strong><span>GPA / 4.00</span></div>
-        <div class="stat reveal"><strong>09</strong><span>ERP client rollouts</span></div>
-        <div class="stat reveal"><strong>05</strong><span>ERP modules configured</span></div>
-        <div class="stat reveal"><strong>55</strong><span>members led in BLM</span></div>
-        <div class="stat reveal"><strong>70</strong><span>thesis respondents</span></div>
-      </div>
-    </section>
-
-    <section class="section" id="about">
+    <section class="section" id="about" aria-labelledby="about-title">
       <div class="container split-grid">
         <div class="section-heading reveal">
           <span class="section-kicker">01 · ABOUT</span>
-          <h2>Technical thinking with an operational mindset.</h2>
+          <h2 id="about-title">Technical thinking with an operational mindset.</h2>
         </div>
         <div class="about-copy reveal">
           <p>I am an Information Systems graduate from Universitas Mulawarman with a 3.80/4.00 GPA. My professional experience includes remote end-user support and ERP implementation, covering system installation, user access setup, module configuration, UAT, and issue documentation.</p>
           <p>I work comfortably at the intersection of user needs and technical requirements: breaking down problems, documenting gaps, escalating defects, and helping ensure solutions work for end users.</p>
-          <div class="pill-row">
+          <div class="pill-row" aria-label="Core capabilities">
             <span>IT Support</span>
             <span>ERP Implementation</span>
             <span>UAT</span>
@@ -118,148 +145,211 @@
       </div>
     </section>
 
-    <section class="section section-muted" id="projects">
+    <section class="trust-strip section-compact" id="highlights" aria-labelledby="highlights-title">
+      <div class="container highlights-head reveal">
+        <div>
+          <span class="section-kicker">02 · CAREER HIGHLIGHTS</span>
+          <h2 id="highlights-title">A snapshot of the scale and scope of my work.</h2>
+        </div>
+        <p>Key figures grounded in my education, hands-on ERP work, research, and leadership experience.</p>
+      </div>
+      <div class="container stats-grid">
+        <div class="stat reveal"><strong>3.80</strong><span>GPA / 4.00</span></div>
+        <div class="stat reveal"><strong>09</strong><span>ERP client rollouts</span></div>
+        <div class="stat reveal"><strong>05</strong><span>ERP modules configured</span></div>
+        <div class="stat reveal"><strong>55</strong><span>members led in BLM</span></div>
+        <div class="stat reveal"><strong>70</strong><span>thesis respondents</span></div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="projects" aria-labelledby="projects-title">
       <div class="container">
         <div class="section-heading centered reveal">
           <span class="section-kicker">03 · FEATURED PROJECTS</span>
-          <h2>Evidence over adjectives.</h2>
-          <p>Selected case studies built from real experience and sanitized for public viewing. No client credentials, internal filenames, transaction data, or proprietary system details are included.</p>
+          <h2 id="projects-title">Evidence over adjectives.</h2>
+          <p>Public-safe case studies based on real experience. Sensitive client data, credentials, internal ticket IDs, transaction details, and proprietary configuration are intentionally excluded.</p>
         </div>
 
         <div class="project-grid">
           <article class="project-card featured reveal">
             <div class="project-top"><span class="project-index">01</span><span class="project-label">ERP IMPLEMENTATION</span></div>
+            <div class="project-media" aria-hidden="true">
+              <img src="assets/xp-hashmicro.jpg" alt="" loading="lazy" decoding="async">
+              <span class="media-label">HashMicro · public-safe context</span>
+            </div>
             <h3>Multi-client ERP rollout &amp; end-user support</h3>
             <p>Supported nine client rollouts across Sales, Purchase, Inventory, POS, and Accounting, including remote access setup, configuration, troubleshooting, UAT, and handover documentation.</p>
-            <div class="metric-row"><div><strong>09</strong><span>rollouts</span></div><div><strong>05</strong><span>modules</span></div><div><strong>1–3</strong><span>defects / module found</span></div></div>
+            <div class="metric-row">
+              <div><strong>09</strong><span>rollouts supported</span></div>
+              <div><strong>05</strong><span>core modules</span></div>
+              <div><strong>1–3</strong><span>defects identified per module</span></div>
+            </div>
             <div class="card-tags"><span>ERP</span><span>UAT</span><span>Remote Support</span><span>FRD / CR</span></div>
-            <button class="case-link" type="button" data-case="erp">View case study →</button>
+            <button class="case-link" type="button" data-case="erp">View case study <span aria-hidden="true">→</span></button>
           </article>
 
           <article class="project-card reveal">
             <div class="project-top"><span class="project-index">02</span><span class="project-label">UAT &amp; QA WORKFLOW</span></div>
+            <div class="evidence-panel" aria-label="Illustrative sanitized UAT defect record">
+              <div class="evidence-top"><span>UAT defect record</span><span>illustrative</span></div>
+              <div class="evidence-row"><span>Module</span><strong>Inventory</strong></div>
+              <div class="evidence-row"><span>Scenario</span><strong>Stock Adjustment</strong></div>
+              <div class="evidence-row"><span>Severity</span><strong>Medium</strong></div>
+              <div class="evidence-status">Status · Resolved</div>
+            </div>
             <h3>From test checklist to same-day defect escalation</h3>
             <p>Built and executed UAT checklists, identified around 1–3 defects per module, and logged each issue through a ticketing workflow on the same day.</p>
-            <div class="workflow-mini"><span>Test</span><i>→</i><span>Log</span><i>→</i><span>Escalate</span><i>→</i><span>Retest</span></div>
+            <div class="workflow-mini" aria-label="UAT workflow">
+              <span>Test</span><i aria-hidden="true">→</i><span>Log</span><i aria-hidden="true">→</i><span>Escalate</span><i aria-hidden="true">→</i><span>Retest</span>
+            </div>
             <div class="card-tags"><span>UAT</span><span>Ticketing</span><span>Defect Tracking</span></div>
-            <button class="case-link" type="button" data-case="uat">View case study →</button>
+            <button class="case-link" type="button" data-case="uat">View case study <span aria-hidden="true">→</span></button>
           </article>
 
           <article class="project-card reveal">
             <div class="project-top"><span class="project-index">03</span><span class="project-label">TECHNICAL DOCUMENTATION</span></div>
+            <div class="evidence-panel document-evidence" aria-label="Illustrative sanitized documentation structure">
+              <div class="doc-tab active">FRD</div><div class="doc-tab">CR</div><div class="doc-tab">GUIDE</div>
+              <div class="doc-lines"><span></span><span></span><span></span><span class="short"></span></div>
+              <div class="doc-note">Business need · gap · requirement · acceptance criteria</div>
+            </div>
             <h3>FRD, Change Request &amp; user documentation</h3>
             <p>Turned configuration gaps and change needs into structured documentation so developers and end users had a clearer handover path before go-live.</p>
-            <div class="document-preview"><span>FRD</span><span>CR</span><span>USER GUIDE</span></div>
-            <div class="card-tags"><span>FRD</span><span>Change Request</span><span>Documentation</span></div>
-            <button class="case-link" type="button" data-case="docs">View case study →</button>
+            <div class="card-tags"><span>FRD</span><span>Change Request</span><span>User Guide</span></div>
+            <button class="case-link" type="button" data-case="docs">View case study <span aria-hidden="true">→</span></button>
           </article>
 
           <article class="project-card reveal">
             <div class="project-top"><span class="project-index">04</span><span class="project-label">RESEARCH</span></div>
+            <div class="evidence-panel research-evidence" aria-label="Research evidence summary">
+              <div><strong>n = 70</strong><span>respondents</span></div>
+              <div><strong>EUCS</strong><span>method</span></div>
+              <div><strong>SPSS</strong><span>analysis</span></div>
+            </div>
             <h3>E-Office user satisfaction study</h3>
             <p>Thesis research using the End User Computing Satisfaction (EUCS) method with SPSS and 70 respondents to evaluate user satisfaction.</p>
-            <div class="research-preview"><strong>n = 70</strong><span>EUCS · SPSS</span></div>
             <div class="card-tags"><span>SPSS</span><span>EUCS</span><span>Quantitative Research</span></div>
-            <button class="case-link" type="button" data-case="research">View case study →</button>
+            <button class="case-link" type="button" data-case="research">View case study <span aria-hidden="true">→</span></button>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="experience">
+    <section class="section" id="experience" aria-labelledby="experience-title">
       <div class="container">
         <div class="section-heading centered reveal">
           <span class="section-kicker">04 · EXPERIENCE</span>
-          <h2>Technical experience first. Leadership as a strength.</h2>
-          <p>I lead with technical experience, supported by field work and leadership roles that strengthened my coordination, accountability, and cross-functional communication.</p>
+          <h2 id="experience-title">Professional experience first. Leadership as a strength.</h2>
+          <p>I lead with technical experience, supported by additional field work and leadership roles that strengthened my coordination, accountability, and communication.</p>
         </div>
 
-        <div class="timeline">
-          <article class="timeline-item reveal primary-role">
-            <div class="timeline-marker"></div>
-            <div class="timeline-head">
-              <div><span class="date">Aug 2022 – Dec 2022</span><h3>Software Implementation Consultant, Intern</h3><p>PT Hashmicro Solusi Indonesia</p></div>
-              <span class="tag">ERP / IT Support</span>
-            </div>
-            <div class="timeline-body">
-              <ul>
-                <li>Provided remote technical support and troubleshooting for ERP users across <strong>9 client rollouts</strong>, including Motul and Yokohama.</li>
-                <li>Configured <strong>Sales, Purchase, Inventory, POS, and Accounting</strong> modules to client-specific workflows; all nine implementations were delivered on schedule.</li>
-                <li>Built and executed <strong>UAT</strong> checklists, identified around 1–3 defects per module, and escalated each issue through the ticketing workflow on the same day.</li>
-                <li>Documented <strong>Functional Requirement Documents (FRD) and Change Requests</strong> to close configuration gaps before go-live and prepared an Accounting Manual Guide for end users.</li>
-              </ul>
-              <div class="skill-row"><span>ERP Configuration</span><span>UAT</span><span>FRD / CR</span><span>TeamViewer</span><span>AnyDesk</span></div>
-            </div>
-          </article>
+        <div class="experience-group">
+          <div class="group-heading reveal"><span>Professional Experience</span><span>Technical track</span></div>
+          <div class="timeline">
+            <article class="timeline-item reveal primary-role">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <div class="timeline-head">
+                <div><span class="date">Aug 2022 – Dec 2022</span><h3>Software Implementation Consultant, Intern</h3><p>PT Hashmicro Solusi Indonesia</p></div>
+                <span class="tag">ERP / IT Support</span>
+              </div>
+              <div class="timeline-body media-timeline">
+                <img src="assets/xp-hashmicro.jpg" alt="HashMicro experience context" loading="lazy" decoding="async">
+                <div>
+                  <ul>
+                    <li>Provided remote technical support and troubleshooting for ERP users across <strong>9 client rollouts</strong>, including Motul and Yokohama.</li>
+                    <li>Configured <strong>Sales, Purchase, Inventory, POS, and Accounting</strong> modules to client-specific workflows; all nine implementations were delivered on schedule.</li>
+                    <li>Built and executed <strong>UAT</strong> checklists, identified around 1–3 defects per module, and escalated each issue through the ticketing workflow on the same day.</li>
+                    <li>Documented <strong>Functional Requirement Documents (FRD) and Change Requests</strong> to close configuration gaps before go-live and prepared an Accounting Manual Guide for end users.</li>
+                  </ul>
+                  <div class="skill-row"><span>ERP Configuration</span><span>UAT</span><span>FRD / CR</span><span>TeamViewer</span><span>AnyDesk</span></div>
+                </div>
+              </div>
+            </article>
 
-          <article class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-head">
-              <div><span class="date">Feb 2024 – Jul 2025</span><h3>Topography Surveyor, Freelance</h3><p>CV Hanata – Surveying &amp; Mapping Services</p></div>
-              <span class="tag">Additional Experience</span>
-            </div>
-            <div class="timeline-body">
-              <ul>
-                <li>Conducted topographic surveys across mining-concession and infrastructure areas over 18 months to produce terrain and contour data.</li>
-                <li>Converted field data into contour maps and technical reports used by engineering teams for planning work.</li>
-                <li>Checked coordinates and elevations against mapping and geodetic standards before reports were issued.</li>
-              </ul>
-              <div class="skill-row"><span>Field Data</span><span>Quality Control</span><span>Technical Reporting</span></div>
-            </div>
-          </article>
+            <article class="timeline-item reveal">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <div class="timeline-head">
+                <div><span class="date">Feb 2024 – Jul 2025</span><h3>Freelance Topography Surveyor</h3><p>CV Hanata – Surveying &amp; Mapping Services</p></div>
+                <span class="tag">Additional Experience</span>
+              </div>
+              <div class="timeline-body media-timeline">
+                <img src="assets/xp-topography.jpg" alt="Topography survey field work" loading="lazy" decoding="async">
+                <div>
+                  <ul>
+                    <li>Conducted topographic surveys across mining-concession and infrastructure areas over 18 months to produce terrain and contour data.</li>
+                    <li>Converted field data into contour maps and technical reports used by engineering teams for planning work.</li>
+                    <li>Checked coordinates and elevations against mapping and geodetic standards before reports were issued.</li>
+                  </ul>
+                  <div class="skill-row"><span>Field Data</span><span>Quality Control</span><span>Technical Reporting</span></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
 
-          <article class="timeline-item reveal leadership-entry">
-            <div class="timeline-marker"></div>
-            <div class="timeline-head">
-              <div><span class="date">May 2023 – Present</span><h3>Deputy Secretary</h3><p>Duta Damai Kalimantan Timur</p></div>
-              <span class="tag">Leadership</span>
-            </div>
-            <div class="timeline-body">
-              <ul>
-                <li>Handled meeting minutes, activity permits, and event proposals to keep recurring documentation current.</li>
-                <li>Coordinated a <strong>60-member team</strong> and took on daily leadership responsibilities from 2026.</li>
-              </ul>
-            </div>
-          </article>
+        <div class="experience-group leadership-group">
+          <div class="group-heading reveal"><span>Leadership Experience</span><span>Coordination track</span></div>
+          <div class="timeline">
+            <article class="timeline-item reveal leadership-entry">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <div class="timeline-head">
+                <div><span class="date">May 2023 – Present</span><h3>Deputy Secretary</h3><p>Duta Damai Kalimantan Timur</p></div>
+                <span class="tag">Leadership</span>
+              </div>
+              <div class="timeline-body">
+                <ul>
+                  <li>Handled meeting minutes, activity permits, and event proposals to keep recurring documentation current.</li>
+                  <li>Coordinated a <strong>60-member team</strong> and took on daily leadership responsibilities from 2026.</li>
+                </ul>
+              </div>
+            </article>
 
-          <article class="timeline-item reveal leadership-entry">
-            <div class="timeline-marker"></div>
-            <div class="timeline-head">
-              <div><span class="date">Jan 2023 – Dec 2023</span><h3>Chairperson</h3><p>Student Legislative Body (BLM), Universitas Mulawarman</p></div>
-              <span class="tag">Leadership</span>
-            </div>
-            <div class="timeline-body">
-              <ul>
-                <li>Led a governance reform initiative covering <strong>15 work programs</strong> and a team of <strong>55 members</strong>.</li>
-                <li>Oversaw a combined budget of about <strong>IDR 135 million</strong> and chaired <strong>72 meetings and evaluations</strong> during the one-year term.</li>
-              </ul>
-            </div>
-          </article>
+            <article class="timeline-item reveal leadership-entry">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <div class="timeline-head">
+                <div><span class="date">Jan 2023 – Dec 2023</span><h3>Chairperson</h3><p>Student Legislative Body (BLM), Universitas Mulawarman</p></div>
+                <span class="tag">Leadership</span>
+              </div>
+              <div class="timeline-body media-timeline">
+                <img src="assets/lead-chairperson.jpg" alt="BLM leadership experience" loading="lazy" decoding="async">
+                <div>
+                  <ul>
+                    <li>Led a governance reform initiative covering <strong>15 work programs</strong> and a team of <strong>55 members</strong>.</li>
+                    <li>Oversaw a combined budget of about <strong>IDR 135 million</strong> and chaired <strong>72 meetings and evaluations</strong> during the one-year term.</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="additional-leadership reveal">
+            <span>Additional leadership</span>
+            <p>Deputy Chairperson, Student Legislative Body (2022) · Head of Cadre Development Bureau, MP-MBKM Community (2022–2023) · Head of Public Relations, Information System Association / INFORSA (2021)</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-dark" id="skills">
+    <section class="section section-dark" id="skills" aria-labelledby="skills-title">
       <div class="container skills-layout">
         <div class="section-heading reveal">
-          <span class="section-kicker inverse">05 · CAPABILITIES</span>
-          <h2>Skills that map to real work.</h2>
+          <span class="section-kicker inverse">05 · SKILLS</span>
+          <h2 id="skills-title">Skills that map to real work.</h2>
           <p>I organize my skills around work I have actually performed, rather than listing technologies I have only encountered.</p>
         </div>
         <div class="skills-grid reveal">
           <div class="skill-card"><span class="skill-no">01</span><h3>IT Support</h3><p>Hardware installation, SSD upgrades, end-user troubleshooting, software setup, maintenance, TeamViewer, and AnyDesk.</p><div class="skill-tags"><span>Hardware</span><span>Software</span><span>Remote Support</span></div></div>
           <div class="skill-card"><span class="skill-no">02</span><h3>ERP &amp; Business Systems</h3><p>ERP configuration, business process understanding, user access setup, UAT, FRD, and Change Requests.</p><div class="skill-tags"><span>Sales</span><span>Purchase</span><span>Inventory</span><span>POS</span><span>Accounting</span></div></div>
-          <div class="skill-card"><span class="skill-no">03</span><h3>Networking &amp; OS Basics</h3><p>Wi-Fi and router troubleshooting, basic operating systems, and RJ45 crimping.</p><div class="skill-tags"><span>Wi-Fi</span><span>Router</span><span>RJ45</span><span>OS</span></div></div>
-          <div class="skill-card"><span class="skill-no">04</span><h3>Documentation &amp; Workflow</h3><p>Technical reports, FRD / CR, ticketing workflows, Kanban, Scrum fundamentals, SPSS, and Microsoft Office.</p><div class="skill-tags"><span>FRD / CR</span><span>Kanban</span><span>SPSS</span><span>MS Office</span></div></div>
+          <div class="skill-card"><span class="skill-no">03</span><h3>Technical Documentation &amp; UAT</h3><p>FRD / CR, user guides, ticketing workflows, defect tracking, acceptance criteria, Kanban, and Scrum fundamentals.</p><div class="skill-tags"><span>FRD / CR</span><span>UAT</span><span>Kanban</span><span>Scrum</span></div></div>
+          <div class="skill-card"><span class="skill-no">04</span><h3>Networking &amp; OS Basics</h3><p>Wi-Fi and router troubleshooting, basic operating systems, RJ45 crimping, SPSS, and Microsoft Office.</p><div class="skill-tags"><span>Wi-Fi</span><span>Router</span><span>RJ45</span><span>OS</span><span>SPSS</span><span>MS Office</span></div></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="why-me">
+    <section class="section" id="why-me" aria-labelledby="why-title">
       <div class="container why-grid">
         <div class="section-heading reveal">
           <span class="section-kicker">06 · WHY ME</span>
-          <h2>A useful bridge between users and systems.</h2>
+          <h2 id="why-title">Why I fit IT Support &amp; ERP roles.</h2>
           <p>My strongest value comes from combining practical technical skills, business-process understanding, user communication, and disciplined documentation.</p>
         </div>
         <div class="why-cards">
@@ -271,11 +361,11 @@
       </div>
     </section>
 
-    <section class="section section-muted" id="education">
+    <section class="section section-muted" id="education" aria-labelledby="education-title">
       <div class="container education-grid">
         <div class="edu-card reveal">
           <span class="section-kicker">07 · EDUCATION</span>
-          <h2>Universitas Mulawarman</h2>
+          <h2 id="education-title">Universitas Mulawarman</h2>
           <p class="edu-sub">Bachelor of Computer Science (S.Kom), Information Systems</p>
           <div class="edu-facts">
             <div><span>GPA</span><strong>3.80 / 4.00</strong></div>
@@ -287,28 +377,36 @@
         <div class="certs reveal">
           <span class="section-kicker">CERTIFICATIONS</span>
           <h2>Professional learning</h2>
-          <div class="cert-list">
-            <div class="cert-item"><span class="cert-year">2026</span><div><strong>IT Customer Support Basics</strong><small>Cisco Networking Academy</small></div></div>
-            <div class="cert-item"><span class="cert-year">2026</span><div><strong>Kanban Essentials Certified (KEC)</strong><small>KanbanStudy</small></div></div>
-            <div class="cert-item"><span class="cert-year">2026</span><div><strong>Scrum Fundamentals Certified (SFC)</strong><small>SCRUMstudy</small></div></div>
-            <div class="cert-item"><span class="cert-year">2022</span><div><strong>Basic Cyber Security for the Healthcare Sector</strong><small>Kominfo</small></div></div>
+          <div class="cert-grid">
+            <a class="cert-card" href="assets/cert-cisco.jpg" target="_blank" rel="noopener" aria-label="View IT Customer Support Basics certificate">
+              <img src="assets/cert-cisco.jpg" alt="IT Customer Support Basics certificate" loading="lazy" decoding="async"><span><small>2026</small><strong>IT Customer Support Basics</strong><em>Cisco Networking Academy</em><b>View certificate ↗</b></span>
+            </a>
+            <a class="cert-card" href="assets/cert-kanban.jpg" target="_blank" rel="noopener" aria-label="View Kanban Essentials Certified certificate">
+              <img src="assets/cert-kanban.jpg" alt="Kanban Essentials Certified certificate" loading="lazy" decoding="async"><span><small>2026</small><strong>Kanban Essentials Certified (KEC)</strong><em>KanbanStudy</em><b>View certificate ↗</b></span>
+            </a>
+            <a class="cert-card" href="assets/cert-scrum.jpg" target="_blank" rel="noopener" aria-label="View Scrum Fundamentals Certified certificate">
+              <img src="assets/cert-scrum.jpg" alt="Scrum Fundamentals Certified certificate" loading="lazy" decoding="async"><span><small>2026</small><strong>Scrum Fundamentals Certified (SFC)</strong><em>SCRUMstudy</em><b>View certificate ↗</b></span>
+            </a>
+            <a class="cert-card" href="assets/cert-kominfo.jpg" target="_blank" rel="noopener" aria-label="View Basic Cyber Security for the Healthcare Sector certificate">
+              <img src="assets/cert-kominfo.jpg" alt="Basic Cyber Security for the Healthcare Sector certificate" loading="lazy" decoding="async"><span><small>2022</small><strong>Basic Cyber Security for the Healthcare Sector</strong><em>Kominfo</em><b>View certificate ↗</b></span>
+            </a>
           </div>
           <div class="language-note"><span>English proficiency</span><strong>Intermediate written communication; basic conversational proficiency.</strong></div>
         </div>
       </div>
     </section>
 
-    <section class="cta-section" id="contact">
+    <section class="cta-section" id="contact" aria-labelledby="contact-title">
       <div class="container cta-box reveal">
         <div>
           <span class="section-kicker inverse">08 · LET'S CONNECT</span>
-          <h2>Open to the next technical opportunity.</h2>
+          <h2 id="contact-title">Open to the next technical opportunity.</h2>
           <p>Open to IT Support, IT Engineer, ERP / Business Systems, and Management Trainee opportunities.</p>
         </div>
         <div class="cta-actions">
-          <a class="btn btn-primary" href="mailto:daudrioyurdanus@gmail.com">Send Email ↗</a>
-          <a class="btn btn-secondary light" href="https://www.linkedin.com/in/daud-yurdanus-503660229/" target="_blank" rel="noopener">LinkedIn ↗</a>
-          <a class="text-link" href="https://wa.me/6289516247282" target="_blank" rel="noopener">WhatsApp →</a>
+          <a class="btn btn-primary" href="mailto:daudrioyurdanus@gmail.com">Send Email <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-secondary light" href="https://www.linkedin.com/in/daud-yurdanus-503660229/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://wa.me/6289516247282" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -323,8 +421,8 @@
 
   <div class="modal" id="caseModal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
-    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalSummary" tabindex="-1">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close case study">×</button>
       <span class="section-kicker" id="modalKicker">CASE STUDY</span>
       <h2 id="modalTitle"></h2>
       <p id="modalSummary" class="modal-summary"></p>
@@ -332,6 +430,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
