@@ -5,6 +5,7 @@ const siteNav = document.getElementById('siteNav');
 const langToggle = document.getElementById('langToggle');
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 
 year.textContent = new Date().getFullYear();
 
@@ -135,6 +136,7 @@ function applyTheme(theme){
     : '<span aria-hidden="true">☾</span>';
   themeToggle.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
   themeToggle.setAttribute('title', next === 'dark' ? 'Light mode' : 'Dark mode');
+  if (themeColorMeta) themeColorMeta.content = next === 'dark' ? '#07101d' : '#ffffff';
 }
 
 const savedLang = localStorage.getItem('portfolioLang') || 'id';
