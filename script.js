@@ -69,12 +69,21 @@ function getPreferredTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
+function syncThemeToggleAppearance(dark) {
+  if (!themeToggle) return;
+  themeToggle.style.setProperty('background-color', dark ? '#0d1728' : '#ffffff', 'important');
+  themeToggle.style.setProperty('color', dark ? '#f6f9fd' : '#0a1322', 'important');
+  themeToggle.style.setProperty('border-color', dark ? '#22344b' : '#dbe4ef', 'important');
+  themeToggle.style.setProperty('box-shadow', 'none', 'important');
+}
+
 function applyTheme(theme) {
   const dark = theme === 'dark';
   html.dataset.theme = theme;
   themeToggle.innerHTML = `<span aria-hidden="true">${dark ? '☀' : '☾'}</span>`;
   themeToggle.setAttribute('aria-pressed', String(dark));
   themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  syncThemeToggleAppearance(dark);
   if (themeColorMeta) themeColorMeta.content = dark ? '#07101d' : '#f7f9fc';
 }
 
@@ -212,8 +221,24 @@ function installProjectVisualFixes() {
   }
 }
 
+function installBackToTop() {
+  const backToTopLinks = [...document.querySelectorAll('a[href="#top"], a[href="#home"]')]
+    .filter(link => link.closest('footer, .site-footer'));
+  if (!backToTopLinks.length) return;
+
+  backToTopLinks.forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, left: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    });
+  });
+}
+
 applyTheme(getPreferredTheme());
 installProjectVisualFixes();
+installBackToTop();
 
 if (themeToggle) {
   themeToggle.addEventListener('click', () => {
