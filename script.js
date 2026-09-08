@@ -77,17 +77,29 @@ function syncThemeToggleAppearance(dark) {
   themeToggle.style.setProperty('box-shadow', 'none', 'important');
 }
 
+function syncNavCtaAppearance(dark) {
+  const cta = siteNav?.querySelector('.nav-cta');
+  if (!cta) return;
+  cta.style.setProperty('background-color', dark ? '#f6f9fd' : '#0a1322', 'important');
+  cta.style.setProperty('color', dark ? '#07101d' : '#f7fbff', 'important');
+  cta.style.setProperty('border-color', 'transparent', 'important');
+}
+
 function applyTheme(theme) {
   const dark = theme === 'dark';
   html.dataset.theme = theme;
-  themeToggle.innerHTML = `<span aria-hidden="true">${dark ? '☀' : '☾'}</span>`;
-  themeToggle.setAttribute('aria-pressed', String(dark));
-  themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  if (themeToggle) {
+    themeToggle.innerHTML = `<span aria-hidden="true">${dark ? '☀' : '☾'}</span>`;
+    themeToggle.setAttribute('aria-pressed', String(dark));
+    themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
   syncThemeToggleAppearance(dark);
+  syncNavCtaAppearance(dark);
   if (themeColorMeta) themeColorMeta.content = dark ? '#07101d' : '#f7f9fc';
 }
 
 function closeMenu() {
+  if (!siteNav || !menuToggle) return;
   siteNav.classList.remove('open');
   menuToggle.setAttribute('aria-expanded', 'false');
   menuToggle.setAttribute('aria-label', 'Open navigation');
@@ -96,7 +108,7 @@ function closeMenu() {
 function updateProgress() {
   const doc = document.documentElement;
   const max = doc.scrollHeight - doc.clientHeight;
-  progressBar.style.width = max > 0 ? `${(doc.scrollTop / max) * 100}%` : '0%';
+  if (progressBar) progressBar.style.width = max > 0 ? `${(doc.scrollTop / max) * 100}%` : '0%';
 }
 
 function createBlock([heading, body]) {
@@ -131,6 +143,7 @@ function createBlock([heading, body]) {
 }
 
 function openCase(type, trigger) {
+  if (!modal) return;
   const item = caseStudies[type];
   if (!item) return;
 
@@ -143,7 +156,7 @@ function openCase(type, trigger) {
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
-  modalDialog.focus();
+  modalDialog?.focus();
 }
 
 function getFocusableElements() {
@@ -153,6 +166,7 @@ function getFocusableElements() {
 }
 
 function closeCase() {
+  if (!modal) return;
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
@@ -222,11 +236,10 @@ function installProjectVisualFixes() {
 }
 
 function installBackToTop() {
-  const backToTopLinks = [...document.querySelectorAll('a[href="#top"], a[href="#home"]')]
-    .filter(link => link.closest('footer, .site-footer'));
-  if (!backToTopLinks.length) return;
+  const links = [...document.querySelectorAll('a[href="#top"], a[href="#home"]')];
+  if (!links.length) return;
 
-  backToTopLinks.forEach(link => {
+  links.forEach(link => {
     link.addEventListener('click', event => {
       event.preventDefault();
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -248,13 +261,15 @@ if (themeToggle) {
   });
 }
 
-menuToggle.addEventListener('click', () => {
-  const open = siteNav.classList.toggle('open');
-  menuToggle.setAttribute('aria-expanded', String(open));
-  menuToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-});
+if (menuToggle && siteNav) {
+  menuToggle.addEventListener('click', () => {
+    const open = siteNav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  });
 
-siteNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  siteNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+}
 
 window.addEventListener('scroll', updateProgress, { passive: true });
 window.addEventListener('resize', () => {
@@ -278,14 +293,14 @@ document.querySelectorAll('[data-case]').forEach(button => {
   button.addEventListener('click', () => openCase(button.dataset.case, button));
 });
 
-modalClose.addEventListener('click', closeCase);
-modal.addEventListener('click', event => {
+modalClose?.addEventListener('click', closeCase);
+modal?.addEventListener('click', event => {
   if (event.target.matches('[data-close-modal]')) closeCase();
 });
 
 document.addEventListener('keydown', event => {
-  if (!modal.classList.contains('open')) {
-    if (event.key === 'Escape' && siteNav.classList.contains('open')) closeMenu();
+  if (!modal?.classList.contains('open')) {
+    if (event.key === 'Escape' && siteNav?.classList.contains('open')) closeMenu();
     return;
   }
 
@@ -310,14 +325,14 @@ document.addEventListener('keydown', event => {
 });
 
 const sections = [...document.querySelectorAll('main section[id]')];
-const navLinks = [...siteNav.querySelectorAll('a[href^="#"]')];
+const navLinks = [...(siteNav?.querySelectorAll('a[href^="#"]') || [])];
 const sectionObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     navLinks.forEach(link => {
       const active = link.getAttribute('href') === `#${entry.target.id}`;
       link.classList.toggle('active', active);
-      if (active) link.setAttribute('aria-current', 'page');
+      if (active) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
   });
