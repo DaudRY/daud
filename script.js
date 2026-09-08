@@ -169,22 +169,28 @@ function installProjectVisualFixes() {
 
     const media = document.createElement('div');
     media.className = 'project-media';
+
+    const link = document.createElement('a');
+    link.className = 'project-visual-link';
+    link.href = visuals[index][0];
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.setAttribute('aria-label', `Open full-size project visual ${index + 1}`);
+
     const img = document.createElement('img');
     img.src = visuals[index][0];
     img.alt = visuals[index][1];
     img.loading = 'lazy';
     img.decoding = 'async';
-    media.appendChild(img);
+
+    const label = document.createElement('span');
+    label.className = 'media-label';
+    label.textContent = 'View full visual ↗';
+
+    link.append(img, label);
+    media.appendChild(link);
     existing.replaceWith(media);
   });
-
-  const experienceImage = document.querySelector('#experience .primary-role .media-timeline img');
-  if (experienceImage) {
-    experienceImage.src = 'assets/01-erp-implementation-sanitized.svg';
-    experienceImage.alt = 'Sanitized ERP implementation workflow visual';
-    experienceImage.style.objectFit = 'contain';
-    experienceImage.style.background = '#eef5fb';
-  }
 
   if (!document.getElementById('projectVisualOverrides')) {
     const style = document.createElement('style');
@@ -193,8 +199,14 @@ function installProjectVisualFixes() {
       #projects .project-grid{grid-template-columns:1fr 1fr}
       #projects .project-card.featured{grid-row:auto}
       #projects .project-media{aspect-ratio:16/9;height:auto;min-height:0}
-      #projects .project-media img{width:100%;height:100%;object-fit:contain;display:block;background:#eef5fb}
+      #projects .project-visual-link{display:block;position:relative;width:100%;height:100%;color:inherit;text-decoration:none;cursor:zoom-in;outline:none;overflow:hidden}
+      #projects .project-visual-link:focus-visible{box-shadow:0 0 0 3px var(--accent)}
+      #projects .project-visual-link img{width:100%;height:100%;object-fit:contain;display:block;background:#eef5fb;transition:transform .28s ease,filter .28s ease}
+      #projects .project-visual-link:hover img,#projects .project-visual-link:focus-visible img{transform:scale(1.025);filter:saturate(1)}
+      #projects .project-visual-link .media-label{opacity:1;transition:transform .2s ease,background .2s ease}
+      #projects .project-visual-link:hover .media-label,#projects .project-visual-link:focus-visible .media-label{transform:translateY(-2px)}
       @media (max-width:680px){#projects .project-grid{grid-template-columns:1fr}}
+      @media (prefers-reduced-motion:reduce){#projects .project-visual-link img,#projects .project-visual-link .media-label{transition:none}}
     `;
     document.head.appendChild(style);
   }
