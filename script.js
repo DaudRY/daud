@@ -153,7 +153,55 @@ function closeCase() {
   if (target instanceof HTMLElement) target.focus();
 }
 
+function installProjectVisualFixes() {
+  const cards = [...document.querySelectorAll('#projects .project-card')];
+  const visuals = [
+    ['assets/01-erp-implementation-sanitized.svg', 'Sanitized ERP implementation workflow showing five core modules and the configuration, UAT, defect tracking, retest, and handover flow.'],
+    ['assets/02-uat-inventory-sanitized.svg', 'Sanitized Inventory UAT test case showing internal transfer validation and QA steps.'],
+    ['assets/03-frd-change-request-sanitized.svg', 'Sanitized FRD and Change Request examples derived from documented Purchase and POS requirements.'],
+    ['assets/04-eoffice-research-sanitized.svg', 'Sanitized research visual showing the EUCS method, 70 respondents, and SPSS analysis workflow.']
+  ];
+
+  cards.forEach((card, index) => {
+    card.classList.remove('featured');
+    const existing = card.querySelector('.project-media, .evidence-panel');
+    if (!existing || !visuals[index]) return;
+
+    const media = document.createElement('div');
+    media.className = 'project-media';
+    const img = document.createElement('img');
+    img.src = visuals[index][0];
+    img.alt = visuals[index][1];
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    media.appendChild(img);
+    existing.replaceWith(media);
+  });
+
+  const experienceImage = document.querySelector('#experience .primary-role .media-timeline img');
+  if (experienceImage) {
+    experienceImage.src = 'assets/01-erp-implementation-sanitized.svg';
+    experienceImage.alt = 'Sanitized ERP implementation workflow visual';
+    experienceImage.style.objectFit = 'contain';
+    experienceImage.style.background = '#eef5fb';
+  }
+
+  if (!document.getElementById('projectVisualOverrides')) {
+    const style = document.createElement('style');
+    style.id = 'projectVisualOverrides';
+    style.textContent = `
+      #projects .project-grid{grid-template-columns:1fr 1fr}
+      #projects .project-card.featured{grid-row:auto}
+      #projects .project-media{aspect-ratio:16/9;height:auto;min-height:0}
+      #projects .project-media img{width:100%;height:100%;object-fit:contain;display:block;background:#eef5fb}
+      @media (max-width:680px){#projects .project-grid{grid-template-columns:1fr}}
+    `;
+    document.head.appendChild(style);
+  }
+}
+
 applyTheme(getPreferredTheme());
+installProjectVisualFixes();
 
 if (themeToggle) {
   themeToggle.addEventListener('click', () => {
