@@ -1,0 +1,104 @@
+:root{
+  --corporate-radius:18px;
+  --corporate-radius-sm:12px;
+  --corporate-shadow:0 12px 32px rgba(9,26,48,.06);
+  --corporate-shadow-dark:0 16px 40px rgba(0,0,0,.22);
+}
+
+html{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{background:var(--bg);color:var(--ink)}
+
+.site-header{background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(10px)}
+.nav-wrap{min-height:74px}
+.brand-mark{width:42px;height:42px;border-radius:12px}
+.nav{gap:22px}
+.nav a{font-size:12px}
+.nav-cta{border-radius:12px!important;padding:10px 16px!important}
+.theme-toggle,.menu-toggle{width:42px;height:42px;border-radius:12px}
+
+.section{padding:100px 0}
+.section-compact{padding:82px 0}
+.hero{padding:72px 0 84px;min-height:calc(100svh - 74px)}
+.hero-grid{gap:54px}
+.hero h1{font-size:clamp(48px,5.55vw,76px);line-height:1.01;letter-spacing:-.055em;max-width:760px}
+.hero-lead{font-size:18px;max-width:670px}
+.eyebrow{border-radius:12px;padding:7px 11px}
+.hero-kicker,.section-kicker{letter-spacing:.13em}
+.btn{border-radius:12px;min-height:48px;padding:0 19px}
+.hero-meta{font-size:11px}
+
+.hero-visual{min-height:550px}
+.photo-shell{inset:18px 8% 18px 9%;border-radius:28px;box-shadow:var(--corporate-shadow)}
+.photo-glow{display:none}
+.photo-badge,.floating-card{box-shadow:var(--corporate-shadow);backdrop-filter:blur(8px)}
+.photo-badge{border-radius:14px}
+.floating-card{border-radius:14px;padding:15px 16px}
+
+.section-heading h2{font-size:clamp(36px,4.1vw,58px);letter-spacing:-.05em}
+.about-copy p{font-size:16px}
+.pill-row span,.card-tags span,.skill-row span{border-radius:8px;padding:6px 9px}
+
+.section-muted{background:color-mix(in srgb,var(--surface) 28%,var(--bg))}
+.highlights-head{gap:48px}
+.stats-grid{margin-top:42px}
+.stat{padding:26px 16px}
+
+.project-grid{gap:18px}
+.project-card{padding:24px;border-radius:18px;box-shadow:var(--corporate-shadow)}
+.project-card:hover{transform:translateY(-2px);box-shadow:var(--corporate-shadow);border-color:color-mix(in srgb,var(--accent) 24%,var(--line))}
+.project-card h3{font-size:clamp(22px,2vw,29px);letter-spacing:-.035em}
+.project-media{border-radius:14px;margin-top:20px;background:var(--surface-2)}
+.project-media img{filter:none}
+.media-label{left:10px;bottom:10px;border-radius:8px;padding:6px 8px;font-size:9px}
+.metric-row div{padding:14px;border-radius:12px}
+.workflow-mini span{border-radius:8px;padding:7px 10px}
+.evidence-panel{border-radius:14px}
+.document-evidence,.research-evidence{gap:7px}
+.doc-tab,.research-evidence div{border-radius:10px}
+
+.group-heading{margin-bottom:26px}
+.timeline-head h3{font-size:23px}
+.tag{border-radius:8px}
+
+.section-dark{background:var(--dark)}
+.skills-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.skill-card{border-radius:18px;box-shadow:none}
+.skill-card:last-child{grid-column:span 1}
+
+.why-card,.edu-card,.cert-card{border-radius:18px;box-shadow:none}
+.cert-card img{border-radius:10px}
+
+.cta-box{border-radius:22px;box-shadow:none}
+.cta-actions .btn{border-radius:12px}
+.text-link{font-weight:800}
+
+.footer{border-top:1px solid var(--line)}
+
+/* Keep theme controls visually calm in both modes. */
+.theme-toggle{background:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important;box-shadow:none!important}
+
+@media (min-width:1021px){
+  .project-grid{grid-template-columns:1fr 1fr}
+  .project-card.featured{grid-row:auto}
+  .skills-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+@media (max-width:1020px){
+  .section{padding:88px 0}
+  .hero{padding:62px 0 72px}
+  .skills-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (max-width:680px){
+  .container{width:min(calc(100% - 32px),var(--container))}
+  .section{padding:72px 0}
+  .section-compact{padding:64px 0}
+  .hero{padding:54px 0 64px}
+  .hero-grid{gap:38px}
+  .hero h1{font-size:clamp(42px,12vw,58px)}
+  .hero-lead{font-size:17px}
+  .photo-shell{border-radius:22px}
+  .project-card{padding:20px;border-radius:16px}
+  .skills-grid{grid-template-columns:1fr}
+  .skills-grid .skill-card{grid-column:auto}
+}
