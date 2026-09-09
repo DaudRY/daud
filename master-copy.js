@@ -18,9 +18,9 @@
     setText('#why-title', 'Why I fit entry-level IT Support & ERP roles.');
     setText('#why-title + p', 'I bring practical technical skills, business-process understanding, user communication, and disciplined documentation to entry-level IT roles.');
     setText('#contact-title', 'Open to my next IT opportunity.');
-    setText('#education .edu-facts > div:nth-child(2) strong', 'Jul 2019 – May 2026');
-    setText('#education .edu-facts > div:nth-child(3) strong', 'Graduated: 25 May 2026');
-    setText('.thesis-box small', 'Degree requirements completed; graduation recorded on 25 May 2026.');
+    setText('#education .edu-facts > div:nth-child(2) strong', 'Jul 2019 – Sep 2026');
+    setText('#education .edu-facts > div:nth-child(3) strong', 'Graduation: September 2026');
+    setText('.thesis-box small', 'Degree requirements completed; formal graduation scheduled for September 2026.');
     setText('.skill-card:nth-child(3) h3', 'UAT & Technical Documentation');
     setText('.skill-card:nth-child(4) h3', 'Networking & OS Basics');
     setText('.skill-card:nth-child(5) h3', 'Tools & Productivity');
