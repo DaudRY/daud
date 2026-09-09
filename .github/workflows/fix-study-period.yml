@@ -1,4 +1,4 @@
-name: Fix study period to May 2026
+name: Apply final study period
 
 on:
   push:
@@ -9,28 +9,36 @@ permissions:
 
 jobs:
   update-copy:
-    if: ${{ !contains(github.event.head_commit.message, 'Fix study period to May 2026') }}
+    if: ${{ !contains(github.event.head_commit.message, 'Apply final study period') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Update study period only
+      - name: Set study period and keep September graduation
         run: |
           python - <<'PY'
           from pathlib import Path
           files = [Path('index.html'), Path('master-copy.js')]
-          old = 'Jul 2019 – Sep 2026'
-          new = 'Jul 2019 – May 2026'
           changed = False
+          replacements = {
+              'Jul 2019 – Sep 2026': 'Jul 2019 – May 2026',
+              'Jul 2019 – May 2026': 'Jul 2019 – May 2026',
+              'Graduated: 25 May 2026': 'Graduation: September 2026',
+              'Graduation: September 2026': 'Graduation: September 2026',
+              'Degree requirements completed; graduation recorded on 25 May 2026.': 'Degree requirements completed; formal graduation scheduled for September 2026.',
+              'Degree requirements completed; formal graduation scheduled for September 2026.': 'Degree requirements completed; formal graduation scheduled for September 2026.'
+          }
           for path in files:
               text = path.read_text(encoding='utf-8')
-              updated = text.replace(old, new)
+              updated = text
+              for old, new in replacements.items():
+                  updated = updated.replace(old, new)
               if updated != text:
-                  changed = True
                   path.write_text(updated, encoding='utf-8')
+                  changed = True
                   print(f'Updated {path}')
           if not changed:
-              raise SystemExit('Expected study period text was not found.')
+              raise SystemExit('No graduation/study-period changes were needed.')
           PY
       - name: Commit and remove temporary workflow
         run: |
@@ -38,5 +46,5 @@ jobs:
           git config user.email "311488221+DaudRY@users.noreply.github.com"
           rm -f .github/workflows/fix-study-period.yml
           git add index.html master-copy.js .github/workflows/fix-study-period.yml
-          git commit -m "Fix study period to May 2026"
+          git commit -m "Apply final study period"
           git push
