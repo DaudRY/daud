@@ -61,11 +61,41 @@ const caseStudies = {
   }
 };
 
-year.textContent = new Date().getFullYear();
+function text(selector, value) {
+  const element = document.querySelector(selector);
+  if (element) element.textContent = value;
+}
+
+function applyCopyPolish() {
+  text('.eyebrow', 'Open to entry-level IT opportunities across Indonesia');
+  text('#highlights-title', 'A snapshot of my experience and track record.');
+  text('#highlights-title + p', 'Key figures grounded in my education, hands-on ERP experience, research, and leadership roles.');
+  text('#projects-title + p', 'Selected case studies based on documented experience. Sensitive client data, credentials, internal ticket IDs, transaction details, and proprietary configuration are intentionally excluded.');
+  text('#experience-title', 'Technical experience first, supported by leadership experience.');
+  text('#experience-title + p', 'My technical experience comes first, supported by field and leadership experience that strengthened my coordination, accountability, and communication.');
+  text('#skills-title + p', 'My skills focus on areas where I have direct hands-on experience.');
+  text('#why-title', 'Why I fit entry-level IT Support & ERP roles.');
+  text('#why-title + p', 'I bring practical technical skills, business-process understanding, user communication, and disciplined documentation to entry-level IT roles.');
+  text('#contact-title', 'Open to my next IT opportunity.');
+  text('#education .edu-facts > div:nth-child(2) strong', 'Jul 2019 – May 2026');
+  text('#education .edu-facts > div:nth-child(3) strong', 'Graduated: 25 May 2026');
+  text('.thesis-box small', 'Degree completed; graduation recorded on 25 May 2026.');
+  text('.skill-card:nth-child(3) h3', 'UAT & Technical Documentation');
+  text('.skill-card:nth-child(4) h3', 'Networking & OS Basics');
+  text('.skill-card:nth-child(5) h3', 'Tools & Productivity');
+
+  const description = document.querySelector('meta[name="description"]');
+  const ogDescription = document.querySelector('meta[property="og:description"]');
+  const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+  const polished = 'Daud Rio Yurdanus, S.Kom. Information Systems graduate with hands-on experience in IT support, ERP implementation, troubleshooting, UAT, and technical documentation.';
+  [description, ogDescription, twitterDescription].forEach(meta => { if (meta) meta.setAttribute('content', polished); });
+}
 
 function getPreferredTheme() {
-  const stored = localStorage.getItem('portfolio-theme');
-  if (stored === 'dark' || stored === 'light') return stored;
+  try {
+    const stored = localStorage.getItem('portfolio-theme');
+    if (stored === 'dark' || stored === 'light') return stored;
+  } catch (_) {}
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
@@ -77,14 +107,6 @@ function syncThemeToggleAppearance(dark) {
   themeToggle.style.setProperty('box-shadow', 'none', 'important');
 }
 
-function syncNavCtaAppearance(dark) {
-  const cta = siteNav?.querySelector('.nav-cta');
-  if (!cta) return;
-  cta.style.setProperty('background-color', dark ? '#f6f9fd' : '#0a1322', 'important');
-  cta.style.setProperty('color', dark ? '#07101d' : '#f7fbff', 'important');
-  cta.style.setProperty('border-color', 'transparent', 'important');
-}
-
 function applyTheme(theme) {
   const dark = theme === 'dark';
   html.dataset.theme = theme;
@@ -92,9 +114,8 @@ function applyTheme(theme) {
     themeToggle.innerHTML = `<span aria-hidden="true">${dark ? '☀' : '☾'}</span>`;
     themeToggle.setAttribute('aria-pressed', String(dark));
     themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    syncThemeToggleAppearance(dark);
   }
-  syncThemeToggleAppearance(dark);
-  syncNavCtaAppearance(dark);
   if (themeColorMeta) themeColorMeta.content = dark ? '#07101d' : '#f7f9fc';
 }
 
@@ -106,19 +127,18 @@ function closeMenu() {
 }
 
 function updateProgress() {
+  if (!progressBar) return;
   const doc = document.documentElement;
   const max = doc.scrollHeight - doc.clientHeight;
-  if (progressBar) progressBar.style.width = max > 0 ? `${(doc.scrollTop / max) * 100}%` : '0%';
+  progressBar.style.width = max > 0 ? `${(doc.scrollTop / max) * 100}%` : '0%';
 }
 
 function createBlock([heading, body]) {
   const section = document.createElement('section');
   section.className = 'modal-block';
-
   const h3 = document.createElement('h3');
   h3.textContent = heading;
   section.appendChild(h3);
-
   if (Array.isArray(body)) {
     const grid = document.createElement('div');
     grid.className = 'sample-grid';
@@ -138,17 +158,13 @@ function createBlock([heading, body]) {
     p.textContent = body;
     section.appendChild(p);
   }
-
   return section;
 }
 
 function openCase(type, trigger) {
-  if (!modal) return;
   const item = caseStudies[type];
-  if (!item) return;
-
+  if (!item || !modal || !modalDialog) return;
   lastModalTrigger = trigger || document.activeElement;
-  modal.dataset.caseType = type;
   modalKicker.textContent = item.kicker;
   modalTitle.textContent = item.title;
   modalSummary.textContent = item.summary;
@@ -156,13 +172,13 @@ function openCase(type, trigger) {
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
-  modalDialog?.focus();
+  modalDialog.focus();
 }
 
 function getFocusableElements() {
   if (!modalDialog) return [];
   return [...modalDialog.querySelectorAll('button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])')]
-    .filter(el => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+    .filter(el => !el.disabled && el.getAttribute('aria-hidden') !== 'true');
 }
 
 function closeCase() {
@@ -170,7 +186,6 @@ function closeCase() {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
-  delete modal.dataset.caseType;
   const target = lastModalTrigger;
   lastModalTrigger = null;
   if (target instanceof HTMLElement) target.focus();
@@ -179,67 +194,39 @@ function closeCase() {
 function installProjectVisualFixes() {
   const cards = [...document.querySelectorAll('#projects .project-card')];
   const visuals = [
-    ['assets/01-erp-implementation-sanitized.svg', 'Sanitized ERP implementation workflow showing five core modules and the configuration, UAT, defect tracking, retest, and handover flow.'],
+    ['assets/01-erp-implementation-sanitized.svg', 'Sanitized ERP implementation workflow showing rollout scope, core modules, configuration, UAT, defect tracking, retest, and handover.'],
     ['assets/02-uat-inventory-sanitized.svg', 'Sanitized Inventory UAT test case showing internal transfer validation and QA steps.'],
     ['assets/03-frd-change-request-sanitized.svg', 'Sanitized FRD and Change Request examples derived from documented Purchase and POS requirements.'],
     ['assets/04-eoffice-research-sanitized.svg', 'Sanitized research visual showing the EUCS method, 70 respondents, and SPSS analysis workflow.']
   ];
-
   cards.forEach((card, index) => {
     card.classList.remove('featured');
     const existing = card.querySelector('.project-media, .evidence-panel');
     if (!existing || !visuals[index]) return;
-
     const media = document.createElement('div');
     media.className = 'project-media';
-
     const link = document.createElement('a');
     link.className = 'project-visual-link';
     link.href = visuals[index][0];
     link.target = '_blank';
     link.rel = 'noopener';
     link.setAttribute('aria-label', `Open full-size project visual ${index + 1}`);
-
     const img = document.createElement('img');
     img.src = visuals[index][0];
     img.alt = visuals[index][1];
     img.loading = 'lazy';
     img.decoding = 'async';
-
     const label = document.createElement('span');
     label.className = 'media-label';
     label.textContent = 'View full visual ↗';
-
     link.append(img, label);
     media.appendChild(link);
     existing.replaceWith(media);
   });
-
-  if (!document.getElementById('projectVisualOverrides')) {
-    const style = document.createElement('style');
-    style.id = 'projectVisualOverrides';
-    style.textContent = `
-      #projects .project-grid{grid-template-columns:1fr 1fr}
-      #projects .project-card.featured{grid-row:auto}
-      #projects .project-media{aspect-ratio:16/9;height:auto;min-height:0}
-      #projects .project-visual-link{display:block;position:relative;width:100%;height:100%;color:inherit;text-decoration:none;cursor:zoom-in;outline:none;overflow:hidden}
-      #projects .project-visual-link:focus-visible{box-shadow:0 0 0 3px var(--accent)}
-      #projects .project-visual-link img{width:100%;height:100%;object-fit:contain;display:block;background:#eef5fb;transition:transform .28s ease,filter .28s ease}
-      #projects .project-visual-link:hover img,#projects .project-visual-link:focus-visible img{transform:scale(1.025);filter:saturate(1)}
-      #projects .project-visual-link .media-label{opacity:1;transition:transform .2s ease,background .2s ease}
-      #projects .project-visual-link:hover .media-label,#projects .project-visual-link:focus-visible .media-label{transform:translateY(-2px)}
-      @media (max-width:680px){#projects .project-grid{grid-template-columns:1fr}}
-      @media (prefers-reduced-motion:reduce){#projects .project-visual-link img,#projects .project-visual-link .media-label{transition:none}}
-    `;
-    document.head.appendChild(style);
-  }
 }
 
 function installBackToTop() {
-  const links = [...document.querySelectorAll('a[href="#top"], a[href="#home"]')];
-  if (!links.length) return;
-
-  links.forEach(link => {
+  document.querySelectorAll('a[href="#top"]').forEach(link => {
     link.addEventListener('click', event => {
       event.preventDefault();
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -250,77 +237,58 @@ function installBackToTop() {
 }
 
 applyTheme(getPreferredTheme());
+applyCopyPolish();
 installProjectVisualFixes();
 installBackToTop();
 
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    const nextTheme = html.dataset.theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('portfolio-theme', nextTheme);
-    applyTheme(nextTheme);
-  });
-}
+year && (year.textContent = new Date().getFullYear());
 
-if (menuToggle && siteNav) {
-  menuToggle.addEventListener('click', () => {
-    const open = siteNav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', String(open));
-    menuToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-  });
-
-  siteNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-}
-
-window.addEventListener('scroll', updateProgress, { passive: true });
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 1020) closeMenu();
-  updateProgress();
+themeToggle?.addEventListener('click', () => {
+  const nextTheme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('portfolio-theme', nextTheme); } catch (_) {}
+  applyTheme(nextTheme);
 });
+
+menuToggle?.addEventListener('click', () => {
+  const open = siteNav?.classList.toggle('open') || false;
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+});
+
+siteNav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+window.addEventListener('scroll', updateProgress, { passive: true });
+window.addEventListener('resize', () => { if (window.innerWidth > 1020) closeMenu(); updateProgress(); });
 updateProgress();
 
-const observer = new IntersectionObserver(entries => {
+const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
+      revealObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
 
 document.querySelectorAll('[data-case]').forEach(button => {
   button.addEventListener('click', () => openCase(button.dataset.case, button));
 });
-
 modalClose?.addEventListener('click', closeCase);
-modal?.addEventListener('click', event => {
-  if (event.target.matches('[data-close-modal]')) closeCase();
-});
+modal?.addEventListener('click', event => { if (event.target.matches('[data-close-modal]')) closeCase(); });
 
 document.addEventListener('keydown', event => {
   if (!modal?.classList.contains('open')) {
     if (event.key === 'Escape' && siteNav?.classList.contains('open')) closeMenu();
     return;
   }
-
-  if (event.key === 'Escape') {
-    closeCase();
-    return;
-  }
-
+  if (event.key === 'Escape') { closeCase(); return; }
   if (event.key === 'Tab') {
     const focusables = getFocusableElements();
     if (!focusables.length) return;
     const first = focusables[0];
     const last = focusables[focusables.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   }
 });
 
