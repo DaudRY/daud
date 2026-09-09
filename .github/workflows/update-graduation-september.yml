@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   update-copy:
-    if: ${{ !contains(github.event.head_commit.message, 'Update graduation status to September 2026') }}
+    if: ${{ !contains(github.event.head_commit.message, 'Apply September graduation copy') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,10 +32,7 @@ jobs:
               for a, b in replacements.items():
                   text = text.replace(a, b)
               path.write_text(text, encoding='utf-8')
-              if text != old:
-                  print(f'Updated {path}')
-              else:
-                  print(f'No matching graduation text changed in {path}')
+              print(f'Updated {path}' if text != old else f'No matching text changed in {path}')
           PY
       - name: Commit and remove temporary workflow
         run: |
@@ -44,5 +41,5 @@ jobs:
           rm -f .github/workflows/update-graduation-september.yml
           git add index.html master-copy.js .github/workflows/update-graduation-september.yml
           git diff --cached --quiet && exit 0
-          git commit -m "Update graduation status to September 2026"
+          git commit -m "Apply September graduation copy"
           git push
