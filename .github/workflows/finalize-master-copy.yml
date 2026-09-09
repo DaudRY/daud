@@ -39,19 +39,14 @@ jobs:
             '<span class="project-index">04</span><span class="project-label">RESEARCH</span>': '<span class="project-index">04</span><span class="project-label">ACADEMIC RESEARCH</span>',
             '<p>Thesis research using the End User Computing Satisfaction (EUCS) framework with SPSS and 70 respondents to evaluate user satisfaction.</p>': '<p>Bachelor’s thesis research using the End User Computing Satisfaction (EUCS) framework with SPSS and 70 respondents to evaluate user satisfaction.</p>',
             '<h2 id="experience-title">Professional experience first. Leadership as a strength.</h2>': '<h2 id="experience-title">Technical experience first, supported by broader experience.</h2>',
-            '<p>My technical experience comes first, supported by field and leadership experience that strengthened my coordination, accountability, and communication.</p>': '<p>My technical experience comes first, supported by field and leadership experience that strengthened my coordination, accountability, and communication.</p>',
             '<h2 id="skills-title">Skills grounded in real work.</h2>': '<h2 id="skills-title">Skills grounded in hands-on experience.</h2>',
             '<h3>Tools &amp; Methods</h3>': '<h3>Tools &amp; Productivity</h3>',
             '<p>Microsoft Office, Kanban, Scrum fundamentals, and SPSS for quantitative analysis.</p>': '<p>Microsoft Office, Kanban and Scrum fundamentals, and SPSS for quantitative analysis.</p>',
             '<h2 id="contact-title">Open to the next technical opportunity.</h2>': '<h2 id="contact-title">Open to my next IT opportunity.</h2>',
-            '<p>Open to IT Support, IT Engineer, ERP / Business Systems, and Management Trainee opportunities.</p>': '<p>Open to IT Support, IT Engineer, ERP / Business Systems, and Management Trainee opportunities.</p>',
             '<strong>Jul 2019 – Sep 2026</strong>': '<strong>Jul 2019 – May 2026</strong>',
             '<span>Status</span><strong>Degree requirements completed</strong>': '<span>Status</span><strong>Graduated: 25 May 2026</strong>',
-            '<small>All degree requirements completed; thesis defense passed. Formal conferral expected in September 2026.</small>': '<small>Degree requirements completed; graduation recorded on 25 May 2026.</small>',
-            '<span class="section-kicker">CERTIFICATIONS</span>': '<span class="section-kicker">CERTIFICATIONS</span>',
-            '<span>English proficiency</span><strong>Intermediate written communication; basic conversational proficiency.</strong>': '<span>English proficiency</span><strong>Intermediate written communication; basic conversational proficiency.</strong>'
+            '<small>All degree requirements completed; thesis defense passed. Formal conferral expected in September 2026.</small>': '<small>Degree requirements completed; graduation recorded on 25 May 2026.</small>'
           }
-
           for old, new in replacements_html.items():
               if old not in html:
                   raise SystemExit(f'Missing expected HTML text: {old[:100]}')
@@ -63,12 +58,18 @@ jobs:
               raise SystemExit('Missing expected Career Highlights stats block')
           html = html.replace(old_stats, new_stats, 1)
 
+          # Keep the visible HTML and dynamic copy in agreement for Why Me and other editorial labels.
           replacements_js = {
+            "text('.eyebrow', 'Open to entry-level IT opportunities across Indonesia');": "text('.eyebrow', 'Open to entry-level IT opportunities across Indonesia');",
+            "text('#highlights-title', 'A snapshot of my experience and track record.');": "text('#highlights-title', 'A snapshot of my experience and track record.');",
             "text('#highlights-title + p', 'Key figures grounded in my education, hands-on ERP experience, research, and leadership roles.');": "text('#highlights-title + p', 'Selected figures from my education and hands-on experience.');",
             "text('#projects-title', 'Evidence over adjectives.');": "text('#projects-title', 'Selected work and academic projects.');",
             "text('#projects-title + p', 'Public-safe case studies based on documented experience. Sensitive client data, credentials, internal ticket IDs, transaction details, and proprietary configuration are intentionally excluded.');": "text('#projects-title + p', 'Selected case studies based on documented experience. Client-specific information and internal materials are omitted.');",
             "text('#experience-title', 'Professional experience first. Leadership as a strength.');": "text('#experience-title', 'Technical experience first, supported by broader experience.');",
+            "text('#experience-title + p', 'My technical experience comes first, supported by field and leadership experience that strengthened my coordination, accountability, and communication.');": "text('#experience-title + p', 'My technical experience comes first, supported by field and leadership experience that strengthened my coordination, accountability, and communication.');",
+            "text('#skills-title + p', 'My skills focus on areas where I have direct hands-on experience.');": "text('#skills-title + p', 'My skills focus on areas where I have direct hands-on experience.');",
             "text('#why-title', 'Why I fit entry-level IT Support & ERP roles.');": "text('#why-title', 'Why I fit entry-level IT Support & ERP roles.');",
+            "text('#why-title + p', 'I bring practical technical skills, business-process understanding, user communication, and disciplined documentation to entry-level IT roles.');": "text('#why-title + p', 'I bring practical technical skills, business-process understanding, user communication, and disciplined documentation to entry-level IT roles.');",
             "text('#contact-title', 'Open to my next IT opportunity.');": "text('#contact-title', 'Open to my next IT opportunity.');",
             "text('#education .edu-facts > div:nth-child(2) strong', 'Jul 2019 – May 2026');": "text('#education .edu-facts > div:nth-child(2) strong', 'Jul 2019 – May 2026');",
             "text('#education .edu-facts > div:nth-child(3) strong', 'Graduated: 25 May 2026');": "text('#education .edu-facts > div:nth-child(3) strong', 'Graduated: 25 May 2026');",
@@ -79,7 +80,6 @@ jobs:
               if old in js:
                   js = js.replace(old, new, 1)
 
-          # Reduce repeated sanitization language inside case-study modals.
           js = js.replace("summary: 'A public-safe view of the workflow, responsibilities, and measurable scope of the work without exposing client data or internal documents.'", "summary: 'A concise view of the workflow, responsibilities, and measurable scope without exposing client information.'")
           js = js.replace("summary: 'A sanitized workflow example that demonstrates how a test issue can be recorded and followed through without using internal project data.'", "summary: 'A representative UAT workflow showing how a test issue is recorded, escalated, and retested.'")
           js = js.replace("['Public-safe boundary', 'Internal filenames, transaction data, credentials, client-system screenshots, proprietary configuration, and other sensitive information are intentionally excluded.']", "['Data boundary', 'Internal filenames, transaction data, credentials, client-system screenshots, and proprietary configuration are excluded.']")
