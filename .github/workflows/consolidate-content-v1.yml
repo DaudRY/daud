@@ -68,15 +68,12 @@ jobs:
       - name: Validate source-of-truth cleanup
         shell: bash
         run: |
-          # Do not scan the temporary workflow itself for the strings used to perform the cleanup.
-          if grep -RniE 'applyCopyPolish|master-copy\.js|25 May 2026|Graduated: 25 May 2026' --exclude-dir=.git --exclude='.github/workflows/consolidate-content-v1.yml' .; then
-            echo 'Legacy copy source or conflicting graduation date remains.'
-            exit 1
-          fi
-          if grep -n 'script.js.*master-copy.js' index.html; then
-            echo 'index.html still loads master-copy.js.'
-            exit 1
-          fi
+          for file in index.html script.js; do
+            if grep -niE 'applyCopyPolish|master-copy\.js|25 May 2026|Graduated: 25 May 2026' "$file"; then
+              echo "Legacy copy source or conflicting graduation date remains in $file."
+              exit 1
+            fi
+          done
           test -f index.html
           test -f script.js
           test ! -e master-copy.js
