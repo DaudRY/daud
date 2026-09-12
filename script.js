@@ -18,45 +18,45 @@ const caseStudies = {
   erp: {
     kicker: 'CASE STUDY · ERP',
     title: 'Multi-client ERP rollout & end-user support',
-    summary: 'A public-safe view of the workflow, responsibilities, and measurable scope of the work without exposing client data or internal documents.',
+    summary: 'A concise view of the workflow, responsibilities, and measurable scope of the work.',
     blocks: [
       ['Context', 'Supported nine client rollouts through remote support and ERP configuration across five core modules.'],
       ['My role', ['Set up user access', 'Configured Sales, Purchase, Inventory, POS, and Accounting', 'Executed UAT and troubleshooting', 'Documented configuration gaps and Change Requests', 'Supported end-user handover']],
-      ['Sanitized evidence', '<div class="evidence-table"><div><span>Scope</span><strong>9 client rollouts</strong></div><div><span>Modules</span><strong>5 core modules</strong></div><div><span>Testing</span><strong>UAT + defect escalation</strong></div><div><span>Handover</span><strong>User documentation</strong></div></div>'],
-      ['Public-safe boundary', 'Internal filenames, transaction data, credentials, client-system screenshots, proprietary configuration, and other sensitive information are intentionally excluded.']
+      ['Evidence', '<div class="evidence-table"><div><span>Scope</span><strong>9 client rollouts</strong></div><div><span>Modules</span><strong>5 core modules</strong></div><div><span>Testing</span><strong>UAT + defect escalation</strong></div><div><span>Handover</span><strong>User documentation</strong></div></div>'],
+      ['Scope note', 'Client-specific records and internal materials are not reproduced.']
     ]
   },
   uat: {
     kicker: 'CASE STUDY · UAT',
     title: 'UAT & defect tracking workflow',
-    summary: 'A sanitized workflow example that demonstrates how a test issue can be recorded and followed through without using internal project data.',
+    summary: 'A representative workflow example showing how a test issue can be recorded and followed through.',
     blocks: [
       ['Workflow', ['Prepare test scenario', 'Execute UAT', 'Record defect', 'Escalate through ticketing', 'Retest after fix']],
-      ['Sanitized defect example', '<div class="evidence-table"><div><span>Module</span><strong>Inventory</strong></div><div><span>Scenario</span><strong>Stock Adjustment</strong></div><div><span>Expected</span><strong>Adjustment saved</strong></div><div><span>Actual</span><strong>Validation error</strong></div><div><span>Severity</span><strong>Medium</strong></div><div><span>Status</span><strong>Resolved</strong></div></div>'],
-      ['Public-safe evidence', 'Around 1–3 defects per module were identified and escalated on the same day.'],
-      ['Boundary', 'Client names, issue screenshots, user accounts, server details, release branches, and internal ticket IDs are omitted.']
+      ['Representative defect example', '<div class="evidence-table"><div><span>Module</span><strong>Inventory</strong></div><div><span>Scenario</span><strong>Stock Adjustment</strong></div><div><span>Expected</span><strong>Adjustment saved</strong></div><div><span>Actual</span><strong>Validation error</strong></div><div><span>Severity</span><strong>Medium</strong></div><div><span>Status</span><strong>Resolved</strong></div></div>'],
+      ['Evidence', 'Around 1–3 defects per module were identified and escalated on the same day.'],
+      ['Boundary', 'Client-specific details and internal ticket IDs are omitted.']
     ]
   },
   docs: {
     kicker: 'CASE STUDY · DOCUMENTATION',
     title: 'FRD, Change Request & user documentation',
-    summary: 'A representative documentation structure that demonstrates how requirements and changes can be made traceable without copying company documents.',
+    summary: 'A representative documentation structure showing how requirements and changes can be made traceable.',
     blocks: [
       ['FRD sample structure', ['Business need', 'Current process', 'Gap / problem', 'Functional requirement', 'Acceptance criteria']],
       ['Change Request sample', ['Requested change', 'Reason', 'Impact area', 'Priority', 'Validation / UAT notes']],
       ['User guide sample', 'Step-by-step instructions, prerequisites, expected screen behavior, and common troubleshooting notes.'],
-      ['Public-safe evidence', '<div class="evidence-table"><div><span>Input</span><strong>Configuration gap / change need</strong></div><div><span>Output</span><strong>FRD / CR / user guide</strong></div><div><span>Purpose</span><strong>Clearer developer handover</strong></div><div><span>Timing</span><strong>Before go-live</strong></div></div>']
+      ['Evidence', '<div class="evidence-table"><div><span>Input</span><strong>Configuration gap / change need</strong></div><div><span>Output</span><strong>FRD / CR / user guide</strong></div><div><span>Purpose</span><strong>Clearer developer handover</strong></div><div><span>Timing</span><strong>Before go-live</strong></div></div>']
     ]
   },
   research: {
     kicker: 'CASE STUDY · RESEARCH',
     title: 'E-Office user satisfaction study',
-    summary: 'A thesis summary focused on the research method, sample, and analytical workflow rather than personal respondent data.',
+    summary: 'A thesis summary focused on the research method, sample, and analytical workflow.',
     blocks: [
       ['Research focus', 'Evaluating e-office user satisfaction using the End User Computing Satisfaction (EUCS) framework.'],
       ['Method', ['Questionnaire-based research', '70 respondents', 'Quantitative analysis with SPSS']],
       ['Portfolio evidence', '<div class="evidence-table"><div><span>Framework</span><strong>EUCS</strong></div><div><span>Sample</span><strong>n = 70</strong></div><div><span>Tool</span><strong>SPSS</strong></div><div><span>Output</span><strong>Statistical analysis + interpretation</strong></div></div>'],
-      ['Public-safe boundary', 'Personal respondent data and institution-specific sensitive information are intentionally excluded.']
+      ['Scope note', 'Personal respondent data and sensitive institution-specific information are not reproduced.']
     ]
   }
 };
@@ -64,31 +64,6 @@ const caseStudies = {
 function text(selector, value) {
   const element = document.querySelector(selector);
   if (element) element.textContent = value;
-}
-
-function applyCopyPolish() {
-  text('.eyebrow', 'Open to entry-level IT opportunities across Indonesia');
-  text('#highlights-title', 'A snapshot of my experience and track record.');
-  text('#highlights-title + p', 'Key figures grounded in my education, hands-on ERP experience, research, and leadership roles.');
-  text('#projects-title + p', 'Selected case studies based on documented experience. Sensitive client data, credentials, internal ticket IDs, transaction details, and proprietary configuration are intentionally excluded.');
-  text('#experience-title', 'Technical experience first, supported by leadership experience.');
-  text('#experience-title + p', 'My technical experience comes first, supported by field and leadership experience that strengthened my coordination, accountability, and communication.');
-  text('#skills-title + p', 'My skills focus on areas where I have direct hands-on experience.');
-  text('#why-title', 'Why I fit entry-level IT Support & ERP roles.');
-  text('#why-title + p', 'I bring practical technical skills, business-process understanding, user communication, and disciplined documentation to entry-level IT roles.');
-  text('#contact-title', 'Open to my next IT opportunity.');
-  text('#education .edu-facts > div:nth-child(2) strong', 'Jul 2019 – May 2026');
-  text('#education .edu-facts > div:nth-child(3) strong', 'Graduated: 25 May 2026');
-  text('.thesis-box small', 'Degree completed; graduation recorded on 25 May 2026.');
-  text('.skill-card:nth-child(3) h3', 'UAT & Technical Documentation');
-  text('.skill-card:nth-child(4) h3', 'Networking & OS Basics');
-  text('.skill-card:nth-child(5) h3', 'Tools & Productivity');
-
-  const description = document.querySelector('meta[name="description"]');
-  const ogDescription = document.querySelector('meta[property="og:description"]');
-  const twitterDescription = document.querySelector('meta[name="twitter:description"]');
-  const polished = 'Daud Rio Yurdanus, S.Kom. Information Systems graduate with hands-on experience in IT support, ERP implementation, troubleshooting, UAT, and technical documentation.';
-  [description, ogDescription, twitterDescription].forEach(meta => { if (meta) meta.setAttribute('content', polished); });
 }
 
 function getPreferredTheme() {
@@ -237,7 +212,6 @@ function installBackToTop() {
 }
 
 applyTheme(getPreferredTheme());
-applyCopyPolish();
 installProjectVisualFixes();
 installBackToTop();
 
