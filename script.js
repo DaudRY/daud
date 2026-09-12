@@ -34,7 +34,7 @@ const caseStudies = {
       ['Workflow', ['Prepare test scenario', 'Execute UAT', 'Record defect', 'Escalate through ticketing', 'Retest after fix']],
       ['Representative defect example', '<div class="evidence-table"><div><span>Module</span><strong>Inventory</strong></div><div><span>Scenario</span><strong>Stock Adjustment</strong></div><div><span>Expected</span><strong>Adjustment saved</strong></div><div><span>Actual</span><strong>Validation error</strong></div><div><span>Severity</span><strong>Medium</strong></div><div><span>Status</span><strong>Resolved</strong></div></div>'],
       ['Evidence', 'Around 1–3 defects per module were identified and escalated on the same day.'],
-      ['Boundary', 'Client-specific details and internal ticket IDs are omitted.']
+      ['Scope note', 'Client-specific details and internal ticket IDs are omitted.']
     ]
   },
   docs: {
@@ -55,16 +55,11 @@ const caseStudies = {
     blocks: [
       ['Research focus', 'Evaluating e-office user satisfaction using the End User Computing Satisfaction (EUCS) framework.'],
       ['Method', ['Questionnaire-based research', '70 respondents', 'Quantitative analysis with SPSS']],
-      ['Portfolio evidence', '<div class="evidence-table"><div><span>Framework</span><strong>EUCS</strong></div><div><span>Sample</span><strong>n = 70</strong></div><div><span>Tool</span><strong>SPSS</strong></div><div><span>Output</span><strong>Statistical analysis + interpretation</strong></div></div>'],
+      ['Evidence', '<div class="evidence-table"><div><span>Framework</span><strong>EUCS</strong></div><div><span>Sample</span><strong>n = 70</strong></div><div><span>Tool</span><strong>SPSS</strong></div><div><span>Output</span><strong>Statistical analysis + interpretation</strong></div></div>'],
       ['Scope note', 'Personal respondent data and sensitive institution-specific information are not reproduced.']
     ]
   }
 };
-
-function text(selector, value) {
-  const element = document.querySelector(selector);
-  if (element) element.textContent = value;
-}
 
 function getPreferredTheme() {
   try {
